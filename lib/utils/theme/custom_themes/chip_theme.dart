@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class MagicChipTheme {
   MagicChipTheme ._ ();
 
+  // Light Theme
   static ChipThemeData lightChipTheme = ChipThemeData(
     disabledColor: Colors.grey..withValues(alpha: 0.4),
     labelStyle: const TextStyle(color: Colors.black),
@@ -11,6 +12,7 @@ class MagicChipTheme {
     checkmarkColor: Colors.white,
   );
 
+  // Dark Theme
   static ChipThemeData darkChipTheme = const ChipThemeData(
     disabledColor: Colors.grey,
     labelStyle: TextStyle(color: Colors.white),

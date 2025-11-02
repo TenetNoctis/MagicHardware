@@ -11,6 +11,7 @@ import 'custom_themes/outlined_button_theme.dart';
 class MagicAppTheme {
   MagicAppTheme._();
 
+  // Light Theme
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     fontFamily: 'Poppins',
@@ -27,6 +28,7 @@ class MagicAppTheme {
     inputDecorationTheme: MagicTextFormFieldTheme.lightInputDecorationTheme,
   );
 
+  // Dark Theme
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     fontFamily: 'Poppins',

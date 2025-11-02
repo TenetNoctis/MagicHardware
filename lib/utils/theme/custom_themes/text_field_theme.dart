@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class MagicTextFormFieldTheme {
   MagicTextFormFieldTheme ._ ();
 
+  // Light Theme
   static InputDecorationTheme lightInputDecorationTheme = InputDecorationTheme(
       errorMaxLines: 3,
       prefixIconColor: Colors.grey,
@@ -34,6 +35,7 @@ class MagicTextFormFieldTheme {
         ),
       );
 
+  // Dark Theme
   static InputDecorationTheme darkInputDecorationTheme = InputDecorationTheme(
       errorMaxLines: 3,
       prefixIconColor: Colors.grey,

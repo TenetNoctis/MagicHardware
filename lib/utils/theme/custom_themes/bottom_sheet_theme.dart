@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class MagicBottomSheetTheme {
   MagicBottomSheetTheme._();
 
+  // Light Theme
   static BottomSheetThemeData lightBottomSheetTheme = BottomSheetThemeData(
     showDragHandle: true,
     backgroundColor: Colors.white,
@@ -11,6 +12,7 @@ class MagicBottomSheetTheme {
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
   );
 
+  // Dark Theme
   static BottomSheetThemeData darkBottomSheetTheme = BottomSheetThemeData(
     showDragHandle: true,
     backgroundColor: Colors.black,
