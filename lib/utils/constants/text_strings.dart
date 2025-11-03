@@ -22,6 +22,7 @@ class MagicTexts {
   static const String phoneNo = "Phone Number";
   static const String rememberMe = "Remember Me";
   static const String forgetPassword = "Forget Password?";
+  static const String submit = "Submit";
   static const String signIn = "Sign In";
   static const String createAccount = "Create Account";
   static const String orSignInWith = "or sign in with";
@@ -29,8 +30,10 @@ class MagicTexts {
   static const String iAgreeTo = "I agree to";
   static const String privacyPolicy = "Privacy Policy";
   static const String and = "and";
+  static const String done = "Done";
   static const String termsOfUse = "Terms of use";
   static const String verificationCode = "verificationCode";
+  static const String mContinue = "Continue";
   static const String resendEmail = "Resend Email";
   static const String resendEmailIn = "Resend email in";
 

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:magic_hardware/features/authentication/screens/signup/widgets/terms_conditions_checkbox.dart';
 
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/text_strings.dart';
+import '../verify_email.dart';
 
 class MagicSignupForm extends StatelessWidget {
   const MagicSignupForm({super.key});
@@ -87,7 +89,7 @@ class MagicSignupForm extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () => Get.to(() => const VerifyEmailScreen()),
               child: const Text(MagicTexts.createAccount),
             ),
           ),

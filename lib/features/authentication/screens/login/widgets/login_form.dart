@@ -5,6 +5,7 @@ import 'package:magic_hardware/features/authentication/screens/signup/signup.dar
 
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/text_strings.dart';
+import '../../password_configuration/forgot_password.dart';
 
 class MagicLoginForm extends StatelessWidget {
   const MagicLoginForm({super.key});
@@ -51,7 +52,7 @@ class MagicLoginForm extends StatelessWidget {
                 ),
                 // Forget Password
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () => Get.to(() => const ForgotPassword()),
                   child: const Text(MagicTexts.forgetPassword),
                 ),
               ],
