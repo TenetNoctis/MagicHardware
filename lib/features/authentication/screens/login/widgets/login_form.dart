@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:magic_hardware/features/authentication/screens/signup/signup.dart';
 
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/text_strings.dart';
 
 class MagicLoginForm extends StatelessWidget {
-  const MagicLoginForm({
-    super.key,
-  });
+  const MagicLoginForm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +36,7 @@ class MagicLoginForm extends StatelessWidget {
               ),
               obscureText: true,
             ),
-            const SizedBox(
-              height: MagicSizes.spaceBtwInputFields / 2,
-            ),
+            const SizedBox(height: MagicSizes.spaceBtwInputFields / 2),
 
             // Remember Me & Forget Password
             Row(
@@ -74,7 +72,7 @@ class MagicLoginForm extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
-                onPressed: () {},
+                onPressed: () => Get.to(() => const SignupScreen()),
                 child: const Text(MagicTexts.createAccount),
               ),
             ),
