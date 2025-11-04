@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:magic_hardware/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:magic_hardware/features/shop/screens/home/widgets/home_categories.dart';
+import 'package:magic_hardware/features/shop/screens/home/widgets/promo_slider.dart';
 import 'package:magic_hardware/utils/constants/colors.dart';
+import 'package:magic_hardware/utils/constants/image_strings.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 
 import '../../../../common/widgets/custom_shapes/containers/primary_header_container.dart';
@@ -13,11 +15,11 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            MagicPrimaryHeaderContainer(
+            const MagicPrimaryHeaderContainer(
               child: Column(
                 children: [
                   //Appbar
@@ -43,10 +45,21 @@ class HomeScreen extends StatelessWidget {
 
                         // Categories
                         MagicHomeCategories(),
-
                       ],
                     ),
                   ),
+                ],
+              ),
+            ),
+
+            // Body
+            Padding(
+              padding: const EdgeInsets.all(MagicSizes.defaultSpace),
+              child: MagicPromoSlider(
+                banners: [
+                  MagicImages.promoBanner1,
+                  MagicImages.promoBanner2,
+                  MagicImages.promoBanner3,
                 ],
               ),
             ),
@@ -56,4 +69,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
