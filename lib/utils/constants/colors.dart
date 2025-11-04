@@ -51,6 +51,7 @@ class MagicColors {
 
   // Neutral Shades
   static const Color black = Color(0xFF000000);
+  static const Color darkestGrey = Color(0xFF1F1F1F);
   static const Color darkerGrey = Color(0xFF4F4F4F);
   static const Color darkGrey = Color(0xFF939393);
   static const Color grey = Color(0xFFE0E0E0);

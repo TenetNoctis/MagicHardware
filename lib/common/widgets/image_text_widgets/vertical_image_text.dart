@@ -35,7 +35,9 @@ class MagicVerticalImageText extends StatelessWidget {
               height: 56,
               padding: const EdgeInsets.all(MagicSizes.sm),
               decoration: BoxDecoration(
-                color: backgroundColor ?? (dark ? MagicColors.black : MagicColors.white),
+                color:
+                    backgroundColor ??
+                    (dark ? MagicColors.black : MagicColors.white),
                 borderRadius: BorderRadius.circular(100),
               ),
               child: Center(
@@ -49,15 +51,17 @@ class MagicVerticalImageText extends StatelessWidget {
 
             //Text
             const SizedBox(height: MagicSizes.spaceBtwItems / 2),
-            SizedBox(
-              width: 55,
-              child: Text(
-                title,
-                style: Theme.of(
-                  context,
-                ).textTheme.labelMedium!.apply(color: textColor),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+            Expanded(
+              child: SizedBox(
+                width: 55,
+                child: Text(
+                  title,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.labelMedium!.apply(color: textColor),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ),
           ],

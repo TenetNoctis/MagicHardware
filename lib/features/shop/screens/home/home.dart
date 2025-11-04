@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:magic_hardware/common/widgets/layouts/grid_layout.dart';
+import 'package:magic_hardware/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:magic_hardware/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:magic_hardware/features/shop/screens/home/widgets/home_categories.dart';
 import 'package:magic_hardware/features/shop/screens/home/widgets/promo_slider.dart';
@@ -55,11 +57,19 @@ class HomeScreen extends StatelessWidget {
             // Body
             Padding(
               padding: const EdgeInsets.all(MagicSizes.defaultSpace),
-              child: MagicPromoSlider(
-                banners: [
-                  MagicImages.promoBanner1,
-                  MagicImages.promoBanner2,
-                  MagicImages.promoBanner3,
+              child: Column(
+                // Promo Slider
+                children: [
+                  const MagicPromoSlider(
+                    banners: [
+                      MagicImages.promoBanner1,
+                      MagicImages.promoBanner2,
+                      MagicImages.promoBanner3,
+                    ],
+                  ),
+                  const SizedBox(height: MagicSizes.spaceBtwSections),
+
+                  MagicGridLayout(itemCount: 6, itemBuilder: (_, index) => const MagicProductCardVertical())
                 ],
               ),
             ),

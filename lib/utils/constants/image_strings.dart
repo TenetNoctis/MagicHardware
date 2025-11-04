@@ -27,6 +27,9 @@ class MagicImages {
   // Categories
   static const String weldingIcon = "assets/icons/categories/welding.png";
 
+  // Products
+  static const String weldingGlove = "assets/images/products/welding-glove.png";
+
   // Banners
   static const String promoBanner1 = "assets/images/banners/welding-machine.jpg";
   static const String promoBanner2 = "assets/images/banners/welding-rod.jpg";

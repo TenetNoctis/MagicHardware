@@ -31,7 +31,7 @@ class VerifyEmailScreen extends StatelessWidget {
             children: [
               // Image
               Image(
-                image: const AssetImage(MagicImages.deliveredEmailIllustration),
+                image: AssetImage(MagicHelperFunctions.isDarkMode(context) ? MagicImages.darkAppLogo : MagicImages.lightAppLogo),
                 width: MagicHelperFunctions.screenWidth() * 0.6,
               ),
               const SizedBox(height: MagicSizes.spaceBtwSections),
@@ -64,7 +64,7 @@ class VerifyEmailScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () => Get.offAll(
                     () => SuccessScreen(
-                      image: MagicImages.staticSuccessIllustration,
+                      image: MagicHelperFunctions.isDarkMode(context) ? MagicImages.darkAppLogo : MagicImages.lightAppLogo,
                       title: MagicTexts.yourAccountCreatedTitle,
                       subTitle: MagicTexts.yourAccountCreatedSubTitle,
                       onPressed: () => Get.offAll(() => const LoginScreen()),
