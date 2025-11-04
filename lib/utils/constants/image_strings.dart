@@ -23,4 +23,7 @@ class MagicImages {
   static const String deliveredInPlaneIllustration = "assets/images/animations/delivered.png";
   static const String deliveredEmailIllustration = "assets/images/animations/delivered-email.png";
   static const String verifyIllustration = "assets/images/animations/verify.gif";
+
+  // Categories
+  static const String weldingIcon = "assets/icons/categories/welding.png";
 }
