@@ -1,0 +1,164 @@
+import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:get/get.dart';
+import 'package:magic_hardware/common/widgets/appbar/appbar.dart';
+import 'package:magic_hardware/common/widgets/custom_shapes/containers/primary_header_container.dart';
+import 'package:magic_hardware/common/widgets/list_tiles/settings_menu_tile.dart';
+import 'package:magic_hardware/common/widgets/texts/section_heading.dart';
+import 'package:magic_hardware/utils/constants/sizes.dart';
+
+import '../../../../common/widgets/list_tiles/user_profile_tile.dart';
+import '../profile/profile.dart';
+
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Header
+            MagicPrimaryHeaderContainer(
+              child: Column(
+                children: [
+                  // AppBar
+                  MagicAppBar(
+                    title: Text(
+                      'Account',
+                      style: Theme.of(
+                        context,
+                      ).textTheme.headlineMedium!.apply(color: Colors.white),
+                    ),
+                  ),
+
+                  // User Profile
+                  MagicUserProfileTile(onPressed: () => Get.to(() => const ProfileScreen())),
+                  const SizedBox(height: MagicSizes.spaceBtwSections),
+                ],
+              ),
+            ),
+            // Body
+            Padding(
+              padding: const EdgeInsets.all(MagicSizes.defaultSpace),
+              child: Column(
+                children: [
+                  // Account Settings
+                  MagicSectionHeading(
+                    title: 'Account Settings',
+                    showActionButton: false,
+                  ),
+
+                  SizedBox(height: MagicSizes.spaceBtwItems),
+                  MagicSettingsMenuTile(
+                    icon: Iconsax.safe_home,
+                    title: 'My Addresses',
+                    subtitle: 'Set shopping delivery address',
+                    onTap: () {},
+                  ),
+
+                  MagicSettingsMenuTile(
+                    icon: Iconsax.shopping_cart,
+                    title: 'My Cart',
+                    subtitle: 'Add, remove products and move to checkout',
+                    onTap: () {},
+                  ),
+
+                  MagicSettingsMenuTile(
+                    icon: Iconsax.bag_tick,
+                    title: 'My Orders',
+                    subtitle: 'In-progress and completed orders',
+                    onTap: () {},
+                  ),
+
+                  MagicSettingsMenuTile(
+                    icon: Iconsax.bank,
+                    title: 'Payment Methods',
+                    subtitle: 'Add, remove and update payment methods',
+                    onTap: () {},
+                  ),
+
+                  MagicSettingsMenuTile(
+                    icon: Iconsax.discount_shape,
+                    title: 'My Coupons',
+                    subtitle: 'List of all coupons',
+                    onTap: () {},
+                  ),
+
+                  MagicSettingsMenuTile(
+                    icon: Iconsax.notification,
+                    title: 'Notifications',
+                    subtitle: 'Set notifications',
+                    onTap: () {},
+                  ),
+
+                  MagicSettingsMenuTile(
+                    icon: Iconsax.security_card,
+                    title: 'Account Privacy',
+                    subtitle: 'Manage data usage and connected accounts',
+                    onTap: () {},
+                  ),
+
+                  // App Settings
+                  SizedBox(height: MagicSizes.spaceBtwSections),
+
+                  MagicSectionHeading(
+                    title: 'App Settings',
+                    showActionButton: false,
+                  ),
+
+                  SizedBox(height: MagicSizes.spaceBtwItems),
+
+                  MagicSettingsMenuTile(
+                    icon: Iconsax.document_upload,
+                    title: 'Load Data',
+                    subtitle: 'Upload Data to your Cloud Firebase',
+                    onTap: () {},
+                  ),
+
+                  MagicSettingsMenuTile(
+                    icon: Iconsax.location,
+                    title: 'Geolocation',
+                    subtitle: 'Set recommendations based on location',
+                    onTap: () {},
+                    trailing: Switch(value: true, onChanged: (value) {}),
+                  ),
+
+                  MagicSettingsMenuTile(
+                    icon: Iconsax.security_user,
+                    title: 'Safe Mode',
+                    subtitle: 'Search results are safe for all ages',
+                    onTap: () {},
+                    trailing: Switch(value: false, onChanged: (value) {}),
+                  ),
+
+                  MagicSettingsMenuTile(
+                    icon: Iconsax.image,
+                    title: 'HD Image Quality',
+                    subtitle: 'Set image quality to maximum',
+                    onTap: () {},
+                    trailing: Switch(value: false, onChanged: (value) {}),
+                  ),
+
+                  // Logout Button
+                  const SizedBox(height: MagicSizes.spaceBtwSections),
+
+                  SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton(
+                      onPressed: () {},
+                      child: const Text('Logout'),
+                    ),
+                  ),
+
+                  const SizedBox(height: MagicSizes.spaceBtwSections * 2),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

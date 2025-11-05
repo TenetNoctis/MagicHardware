@@ -83,6 +83,7 @@ flutter:
     - assets/icons/
     - assets/images/on_boarding_images/
     - assets/images/banners/
+    - assets/images/user/
     - assets/images/products/
     - assets/icons/categories/
     - assets/images/animations/

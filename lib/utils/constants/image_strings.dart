@@ -30,6 +30,9 @@ class MagicImages {
   // Products
   static const String weldingGlove = "assets/images/products/welding-glove.png";
 
+  // User
+  static const String user = "assets/images/user/user.png";
+
   // Banners
   static const String promoBanner1 = "assets/images/banners/welding-machine.jpg";
   static const String promoBanner2 = "assets/images/banners/welding-rod.jpg";
