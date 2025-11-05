@@ -9,16 +9,8 @@ class MagicColors {
   static const Color secondary = Color(0xFFFFE24B);
   static const Color accent = Color(0xFFb0c7ff);
 
-  // Gradient Colors
-  static const Gradient linearGradient = LinearGradient(
-    begin: Alignment(0.0, 0.0),
-    end: Alignment(0.707, -0.707),
-    colors: [
-      Color(0xFFFF9A9E),
-      Color(0xFFFAD0C4),
-      Color(0xFFFAD0C4),
-    ],
-  );
+  // Dashboard Specific Colors
+  static const Color dashboardAppbarBackground = Color(0xFF4b68ff);
 
   // Text Colors
   static const Color textPrimary = Color(0xFF333333);

@@ -17,8 +17,7 @@ class MagicProductPriceText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Text(
+    return Text(
         currencySign + price,
         maxLines: maxLines,
         overflow: TextOverflow.ellipsis,
@@ -28,7 +27,6 @@ class MagicProductPriceText extends StatelessWidget {
             .headlineMedium!
             .apply(decoration: lineThrough ? TextDecoration.lineThrough : null)
             : Theme.of(context).textTheme.titleLarge!.apply(decoration: lineThrough ? TextDecoration.lineThrough : null),
-      ),
     );
   }
 }

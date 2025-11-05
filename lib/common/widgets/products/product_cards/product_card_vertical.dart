@@ -3,6 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:magic_hardware/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:magic_hardware/common/widgets/images/magic_rounded_image.dart';
 import 'package:magic_hardware/common/widgets/texts/product_title_text.dart';
+import 'package:magic_hardware/utils/constants/enums.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 import 'package:magic_hardware/utils/helpers/helper_functions.dart';
 
@@ -10,6 +11,7 @@ import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/image_strings.dart';
 import '../../../styles/shadows.dart';
 import '../../icons/magic_circular_icon.dart';
+import '../../texts/brand_title_text_with_verified_icon.dart';
 import '../../texts/product_price_text.dart';
 
 class MagicProductCardVertical extends StatelessWidget {
@@ -23,7 +25,7 @@ class MagicProductCardVertical extends StatelessWidget {
       onTap: () {},
       child: Container(
         width: 180,
-        padding: const EdgeInsets.all(1),
+        padding: const EdgeInsets.all(0),
         decoration: BoxDecoration(
           boxShadow: [MagicShadowStyle.verticalProductShadow],
           borderRadius: BorderRadius.circular(MagicSizes.productImageRadius),
@@ -33,53 +35,57 @@ class MagicProductCardVertical extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             // Thumbnail
-            Expanded(
-              child: MagicRoundedContainer(
-                width: 180,
-                padding: const EdgeInsets.all(0),
-                backgroundColor: dark
-                    ? MagicColors.darkerGrey
-                    : MagicColors.light,
-                child: Stack(
-                  children: [
-                    // Thumbnail Image
-                    Center(child: MagicRoundedImage(imageUrl: MagicImages.weldingGlove, applyImageRadius: true,)),
+            MagicRoundedContainer(
+              width: 180,
+              padding: const EdgeInsets.all(0),
+              backgroundColor: dark
+                  ? MagicColors.darkerGrey
+                  : MagicColors.light,
+              child: Stack(
+                children: [
+                  // Thumbnail Image
+                  MagicRoundedImage(
+                    imageUrl: MagicImages.weldingGlove,
+                    applyImageRadius: true,
+                    backgroundColor: MagicHelperFunctions.isDarkMode(context)
+                        ? MagicColors.darkestGrey
+                        : MagicColors.light,
+                  ),
 
-                    // Sale Tag
-                    Positioned(
-                      top: 16,
-                      left: 2,
-                      child: MagicRoundedContainer(
-                        radius: MagicSizes.sm,
-                        backgroundColor: MagicColors.secondary.withValues(
-                          alpha: 0.8,
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: MagicSizes.xs,
-                          vertical: MagicSizes.xs,
-                        ),
-                        child: Text(
-                          '-25%',
-                          style: Theme.of(
-                            context,
-                          ).textTheme.labelLarge!.apply(color: MagicColors.black),
-                        ),
+                  // Sale Tag
+                  Positioned(
+                    top: 5,
+                    left: 0,
+                    child: MagicRoundedContainer(
+                      radius: MagicSizes.sm,
+                      backgroundColor: MagicColors.secondary.withValues(
+                        alpha: 0.8,
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: MagicSizes.xs,
+                        vertical: MagicSizes.xs,
+                      ),
+                      child: Text(
+                        '-25%',
+                        style: Theme.of(
+                          context,
+                        ).textTheme.labelLarge!.apply(color: MagicColors.black),
                       ),
                     ),
+                  ),
 
-                    // Favorite Icon Button
-                    Positioned(
-                      top: 5,
-                      right: -10,
-                      child: const MagicCircularIcon(
-                        icon: Iconsax.heart5,
-                        size: MagicSizes.md,
-                        color: Colors.red,
-                        backgroundColor: Colors.transparent,
-                      ),
+                  // Favorite Icon Button
+                  Positioned(
+                    top: 1,
+                    right: 1,
+                    child: const MagicCircularIcon(
+                      width: 40,
+                      height: 40,
+                      icon: Iconsax.heart5,
+                      color: Colors.red,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: MagicSizes.spaceBtwItems / 2),
@@ -90,59 +96,49 @@ class MagicProductCardVertical extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MagicProductTitleText(
-                    title: 'Welding Gloves',
-                    smallSize: true,
-                  ),
+                  MagicProductTitleText(title: 'Welding Gloves', smallSize: true,),
                   SizedBox(height: MagicSizes.spaceBtwItems / 2),
-                  Row(
-                    children: [
-                      Text(
-                        'Vaultex',
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: Theme.of(context).textTheme.labelMedium,
-                      ),
-                      const SizedBox(width: MagicSizes.xs),
-                      const Icon(
-                        Iconsax.verify5,
-                        color: MagicColors.primary,
-                        size: MagicSizes.iconXs,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const MagicProductPriceText(
-                        price: '95.00',
-                        isLarge: false,
-                      ),
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: MagicColors.darkestGrey,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(MagicSizes.cardRadiusMd),
-                            bottomRight: Radius.circular(
-                              MagicSizes.productImageRadius,
-                            ),
-                          ),
-                        ),
-                        child: SizedBox(
-                          width: MagicSizes.iconLg * 1.2,
-                          height: MagicSizes.iconLg * 1.2,
-                          child: Center(
-                            child: const Icon(
-                              Iconsax.add,
-                              color: MagicColors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  MagicBrandTitleWithVerifiedIcon(title: 'Vaultex', brandTextSize: TextSizes.small),
                 ],
               ),
+            ),
+
+            const Spacer(),
+
+            // Price Row
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+              // Price
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: MagicSizes.sm),
+                  child: const MagicProductPriceText(
+                    price: '95.00',
+                    isLarge: false,
+                  ),
+                ),
+
+                // Add to Cart
+                Container(
+                  decoration: const BoxDecoration(
+                    color: MagicColors.darkestGrey,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(MagicSizes.cardRadiusMd),
+                      bottomRight: Radius.circular(
+                        MagicSizes.productImageRadius,
+                      ),
+                    ),
+                  ),
+                  child: SizedBox(
+                    width: MagicSizes.iconLg * 1.2,
+                    height: MagicSizes.iconLg * 1.2,
+                    child: Center(
+                      child: const Icon(Iconsax.add, color: MagicColors.white),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

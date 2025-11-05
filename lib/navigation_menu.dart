@@ -5,6 +5,7 @@ import 'package:magic_hardware/utils/constants/colors.dart';
 import 'package:magic_hardware/utils/helpers/helper_functions.dart';
 
 import 'features/shop/screens/home/home.dart';
+import 'features/shop/screens/store/store.dart';
 
 class NavigationMenu extends StatelessWidget {
   const NavigationMenu({super.key});
@@ -22,7 +23,7 @@ class NavigationMenu extends StatelessWidget {
           selectedIndex: controller.selectedIndex.value,
           onDestinationSelected: (index) =>
               controller.selectedIndex.value = index,
-          backgroundColor: darkMode ? MagicColors.darkerGrey : Colors.white,
+          backgroundColor: darkMode ? MagicColors.darkestGrey : Colors.white,
           indicatorColor: darkMode ? MagicColors.white.withValues(alpha: 0.1) :MagicColors.black.withValues(alpha: 0.1) ,
           destinations: const [
             NavigationDestination(icon: Icon(Iconsax.home), label: 'Home'),
@@ -42,10 +43,9 @@ class NavigationController extends GetxController {
 
   final screens = [
     const HomeScreen(),
-    //const ShopScreen(),
+    const StoreScreen(),
     //const WishlistScreen(),
     //const ProfileScreen(),
-    Container(color: Colors.purple),
     Container(color: Colors.orange),
     Container(color: Colors.pink),
   ];

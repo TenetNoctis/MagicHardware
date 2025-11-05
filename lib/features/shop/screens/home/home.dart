@@ -69,6 +69,14 @@ class HomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: MagicSizes.spaceBtwSections),
 
+                  // Heading
+                  MagicSectionHeading(
+                    title: 'Popular Products',
+                    onPressed: (){},
+                  ),
+                  const SizedBox(height: MagicSizes.spaceBtwItems),
+
+                  // Popular Products
                   MagicGridLayout(itemCount: 6, itemBuilder: (_, index) => const MagicProductCardVertical())
                 ],
               ),

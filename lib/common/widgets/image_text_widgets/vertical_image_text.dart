@@ -37,7 +37,7 @@ class MagicVerticalImageText extends StatelessWidget {
               decoration: BoxDecoration(
                 color:
                     backgroundColor ??
-                    (dark ? MagicColors.black : MagicColors.white),
+                    (dark ? MagicColors.darkestGrey : MagicColors.white),
                 borderRadius: BorderRadius.circular(100),
               ),
               child: Center(
@@ -50,7 +50,7 @@ class MagicVerticalImageText extends StatelessWidget {
             ),
 
             //Text
-            const SizedBox(height: MagicSizes.spaceBtwItems / 2),
+            const SizedBox(height: MagicSizes.spaceBtwItems / 3),
             Expanded(
               child: SizedBox(
                 width: 55,
