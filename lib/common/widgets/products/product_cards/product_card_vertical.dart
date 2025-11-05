@@ -54,8 +54,7 @@ class MagicProductCardVertical extends StatelessWidget {
 
                   // Sale Tag
                   Positioned(
-                    top: 5,
-                    left: 0,
+                    top: 12,
                     child: MagicRoundedContainer(
                       radius: MagicSizes.sm,
                       backgroundColor: MagicColors.secondary.withValues(
