@@ -51,17 +51,17 @@ class MagicVerticalImageText extends StatelessWidget {
 
             //Text
             const SizedBox(height: MagicSizes.spaceBtwItems / 3),
-            Expanded(
-              child: SizedBox(
-                width: 55,
-                child: Text(
-                  title,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.labelMedium!.apply(color: textColor),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
+            Container(
+              width: 65,
+              alignment: Alignment.center,
+              child: Text(
+                title,
+                style: Theme.of(
+                  context,
+                ).textTheme.labelMedium!.apply(color: textColor),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
               ),
             ),
           ],

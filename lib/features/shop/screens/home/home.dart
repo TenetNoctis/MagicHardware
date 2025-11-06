@@ -25,7 +25,10 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   //Appbar
-                  MagicHomeAppBar(),
+                  Padding(
+                    padding: EdgeInsets.only(right: MagicSizes.defaultSpace / 2),
+                    child: MagicHomeAppBar(),
+                  ),
                   SizedBox(height: MagicSizes.spaceBtwSections),
 
                   // Searchbar
@@ -57,20 +60,23 @@ class HomeScreen extends StatelessWidget {
             ),
 
             // Body
+
+            // Promo Slider
+            Padding(
+              padding: const EdgeInsets.only(top: MagicSizes.defaultSpace),
+              child: const MagicPromoSlider(
+                banners: [
+                  MagicImages.promoBanner1,
+                  MagicImages.promoBanner2,
+                  MagicImages.promoBanner3,
+                ],
+              ),
+            ),
+
             Padding(
               padding: const EdgeInsets.all(MagicSizes.defaultSpace),
               child: Column(
-                // Promo Slider
                 children: [
-                  const MagicPromoSlider(
-                    banners: [
-                      MagicImages.promoBanner1,
-                      MagicImages.promoBanner2,
-                      MagicImages.promoBanner3,
-                    ],
-                  ),
-                  const SizedBox(height: MagicSizes.spaceBtwSections),
-
                   // Heading
                   MagicSectionHeading(
                     title: 'Popular Products',

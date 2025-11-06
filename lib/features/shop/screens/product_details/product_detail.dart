@@ -64,7 +64,7 @@ class ProductDetailScreen extends StatelessWidget {
                     'the extreme hazards encountered in welding operations while maintaining the dexterity and comfort necessary for precision work.',
                     trimLines: 2,
                     trimMode: TrimMode.Line,
-                    trimCollapsedText: ' Shore More',
+                    trimCollapsedText: ' Show More',
                     trimExpandedText: ' Show Less',
                     moreStyle: const TextStyle(
                       fontSize: 14,

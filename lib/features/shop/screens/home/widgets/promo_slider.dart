@@ -20,12 +20,12 @@ class MagicPromoSlider extends StatelessWidget {
       children: [
         CarouselSlider(
           options: CarouselOptions(
-            viewportFraction: 0.7,
+            viewportFraction: 0.65,
             onPageChanged: (index, _) => controller.updatePageIndicator(index),
           ),
           items: banners.map((url) => MagicRoundedImage(imageUrl: url)).toList()
         ),
-        const SizedBox(height: MagicSizes.spaceBtwItems),
+        const SizedBox(height: MagicSizes.spaceBtwItems * 2),
         Center(
           child: Obx(
             () => Row(

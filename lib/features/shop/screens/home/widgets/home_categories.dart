@@ -15,7 +15,7 @@ class MagicHomeCategories extends StatelessWidget {
       height: 80,
       child: ListView.builder(
         shrinkWrap: true,
-        itemCount: 6,
+        itemCount: 9,
         scrollDirection: Axis.horizontal,
         itemBuilder: (_, index) {
           return MagicVerticalImageText(

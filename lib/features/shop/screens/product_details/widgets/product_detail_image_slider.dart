@@ -61,11 +61,14 @@ class MagicProductImageSlider extends StatelessWidget {
             ),
 
             // Appbar Icons
-            MagicAppBar(
-              showBackArrow: true,
-              actions: [
-                MagicCircularIcon(icon: Iconsax.heart5, color: Colors.red),
-              ],
+            Padding(
+              padding: EdgeInsets.only(right: MagicSizes.defaultSpace / 2),
+              child: MagicAppBar(
+                showBackArrow: true,
+                actions: [
+                  MagicCircularIcon(icon: Iconsax.heart5, color: Colors.red),
+                ],
+              ),
             ),
           ],
         ),
