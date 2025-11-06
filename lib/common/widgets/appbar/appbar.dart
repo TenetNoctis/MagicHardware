@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:magic_hardware/utils/device/device_utility.dart';
-
-import '../../../utils/constants/sizes.dart';
+import 'package:magic_hardware/utils/helpers/helper_functions.dart';
 
 class MagicAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MagicAppBar({
@@ -23,14 +22,16 @@ class MagicAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = MagicHelperFunctions.isDarkMode(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: MagicSizes.md),
+      padding: const EdgeInsets.symmetric(horizontal: 0),
       child: AppBar(
         automaticallyImplyLeading: false,
         leading: showBackArrow
             ? IconButton(
                 onPressed: () => Get.back(),
                 icon: const Icon(Iconsax.arrow_left),
+                color: dark ? Colors.white : Colors.black,
               )
             : leadingIcon != null
             ? IconButton(onPressed: leadingOnPressed, icon: Icon(leadingIcon))

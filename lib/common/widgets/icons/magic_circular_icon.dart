@@ -32,7 +32,7 @@ class MagicCircularIcon extends StatelessWidget {
         color: backgroundColor != null
             ? backgroundColor!
             : dark
-            ? MagicColors.darkerGrey.withValues(alpha: 0.9)
+            ? MagicColors.darkestGrey.withValues(alpha: 0.9)
             : MagicColors.white.withValues(alpha: 0.9),
       ),
       child: IconButton(

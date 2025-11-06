@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:magic_hardware/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:magic_hardware/common/widgets/images/magic_rounded_image.dart';
@@ -7,6 +8,7 @@ import 'package:magic_hardware/utils/constants/enums.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 import 'package:magic_hardware/utils/helpers/helper_functions.dart';
 
+import '../../../../features/shop/screens/product_details/product_detail.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/image_strings.dart';
 import '../../../styles/shadows.dart';
@@ -22,7 +24,7 @@ class MagicProductCardVertical extends StatelessWidget {
     final dark = MagicHelperFunctions.isDarkMode(context);
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Get.to(() => const ProductDetailScreen()),
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(0),
@@ -36,7 +38,6 @@ class MagicProductCardVertical extends StatelessWidget {
           children: [
             // Thumbnail
             MagicRoundedContainer(
-              width: 180,
               padding: const EdgeInsets.all(0),
               backgroundColor: dark
                   ? MagicColors.darkerGrey
