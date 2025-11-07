@@ -5,6 +5,7 @@ import 'package:magic_hardware/common/widgets/appbar/appbar.dart';
 import 'package:magic_hardware/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:magic_hardware/common/widgets/list_tiles/settings_menu_tile.dart';
 import 'package:magic_hardware/common/widgets/texts/section_heading.dart';
+import 'package:magic_hardware/features/personalization/screens/address/address.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 
 import '../../../../common/widgets/list_tiles/user_profile_tile.dart';
@@ -55,7 +56,7 @@ class SettingsScreen extends StatelessWidget {
                     icon: Iconsax.safe_home,
                     title: 'My Addresses',
                     subtitle: 'Set shopping delivery address',
-                    onTap: () {},
+                    onTap: () => Get.to(UserAddressScreen()),
                   ),
 
                   MagicSettingsMenuTile(
