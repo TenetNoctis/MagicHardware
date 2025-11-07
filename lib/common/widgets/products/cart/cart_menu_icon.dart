@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:magic_hardware/utils/helpers/helper_functions.dart';
+import 'package:get/get.dart';
 
+import '../../../../features/shop/screens/cart/cart.dart';
 import '../../../../utils/constants/colors.dart';
 
 class MagicCartCounterIcon extends StatelessWidget {
@@ -24,7 +26,7 @@ class MagicCartCounterIcon extends StatelessWidget {
     return Stack(
       children: [
         IconButton(
-          onPressed: onPressed,
+          onPressed: () => Get.to(const CartScreen()),
           icon: Icon(Iconsax.shopping_bag),
           color: iconColor ?? (dark ? MagicColors.white : MagicColors.black),
         ),
