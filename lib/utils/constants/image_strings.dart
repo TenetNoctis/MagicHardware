@@ -24,6 +24,16 @@ class MagicImages {
   static const String deliveredEmailIllustration = "assets/images/animations/delivered-email.png";
   static const String verifyIllustration = "assets/images/animations/verify.gif";
 
+  // Payment Methods
+  static const String visa = "assets/icons/payment_methods/visa.png";
+  static const String bml = "assets/icons/payment_methods/bml.png";
+  static const String creditCard = "assets/icons/payment_methods/credit-card.png";
+  static const String masterCard = "assets/icons/payment_methods/master-card.png";
+  static const String paypal = "assets/icons/payment_methods/paypal.png";
+  static const String googlePay = "assets/icons/payment_methods/google-pay.png";
+  static const String applePay = "assets/icons/payment_methods/apple-pay.png";
+  static const String successfulPaymentIcon = "assets/icons/payment_methods/successful_payment_icon.png";
+
   // Categories
   static const String weldingIcon = "assets/icons/categories/welding.png";
 

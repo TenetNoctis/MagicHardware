@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:magic_hardware/common/widgets/appbar/appbar.dart';
-import 'package:magic_hardware/common/widgets/texts/product_price_text.dart';
+import 'package:magic_hardware/features/shop/screens/cart/widgets/cart_items.dart';
+import 'package:magic_hardware/features/shop/screens/checkout/checkout.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
-
-import '../../../../common/widgets/products/cart/add_remove_button.dart';
-import '../../../../common/widgets/products/cart/cart_item.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -18,37 +17,18 @@ class CartScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.all(MagicSizes.defaultSpace),
-        child: ListView.separated(
-          shrinkWrap: true,
-          itemCount: 10,
-          separatorBuilder: (_, _) =>
-              const SizedBox(height: MagicSizes.spaceBtwSections),
-          itemBuilder: (_, index) => Column(
-            children: [
-              MagicCartItem(),
-              SizedBox(height: MagicSizes.spaceBtwItems),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      // Spacer
-                      SizedBox(width: 70),
-                      // Add/Remove Buttons
-                      MagicProductQuantityWithAddRemoveButton(),
-                    ],
-                  ),
-                  MagicProductPriceText(price: '71.25'),
-                ],
-              ),
-            ],
-          ),
-        ),
+        // Items in Cart
+        child: MagicAllCartItems(),
       ),
+
+      // Checkout Button
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(MagicSizes.defaultSpace),
-        child: ElevatedButton(onPressed: (){}, child: Text('Checkout MVR 71.25')),
+        child: ElevatedButton(
+          onPressed: () => Get.to(() => const CheckoutScreen()),
+          child: Text('Checkout MVR 71.25'),
+        ),
       ),
     );
   }
