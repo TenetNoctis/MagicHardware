@@ -35,6 +35,7 @@ class MagicProductCardVertical extends StatelessWidget {
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Thumbnail
             MagicRoundedContainer(
@@ -59,7 +60,7 @@ class MagicProductCardVertical extends StatelessWidget {
                     child: MagicRoundedContainer(
                       radius: MagicSizes.sm,
                       backgroundColor: MagicColors.secondary.withValues(
-                        alpha: 0.8,
+                        alpha: 0.5,
                       ),
                       padding: const EdgeInsets.symmetric(
                         horizontal: MagicSizes.xs,
@@ -76,7 +77,7 @@ class MagicProductCardVertical extends StatelessWidget {
 
                   // Favorite Icon Button
                   Positioned(
-                    top: 1,
+                    top: 6,
                     right: 1,
                     child: const MagicCircularIcon(
                       width: 40,
@@ -96,7 +97,7 @@ class MagicProductCardVertical extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MagicProductTitleText(title: 'Welding Gloves', smallSize: true,),
+                  MagicProductTitleText(title: 'Welding Gloves', smallSize: true),
                   SizedBox(height: MagicSizes.spaceBtwItems / 2),
                   MagicBrandTitleWithVerifiedIcon(title: 'Vaultex', brandTextSize: TextSizes.small),
                 ],
