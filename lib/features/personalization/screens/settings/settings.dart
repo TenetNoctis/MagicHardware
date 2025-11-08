@@ -6,6 +6,8 @@ import 'package:magic_hardware/common/widgets/custom_shapes/containers/primary_h
 import 'package:magic_hardware/common/widgets/list_tiles/settings_menu_tile.dart';
 import 'package:magic_hardware/common/widgets/texts/section_heading.dart';
 import 'package:magic_hardware/features/personalization/screens/address/address.dart';
+import 'package:magic_hardware/features/shop/screens/cart/cart.dart';
+import 'package:magic_hardware/features/shop/screens/order/order.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 
 import '../../../../common/widgets/list_tiles/user_profile_tile.dart';
@@ -56,21 +58,21 @@ class SettingsScreen extends StatelessWidget {
                     icon: Iconsax.safe_home,
                     title: 'My Addresses',
                     subtitle: 'Set shopping delivery address',
-                    onTap: () => Get.to(UserAddressScreen()),
+                    onTap: () => Get.to(() => const UserAddressScreen()),
                   ),
 
                   MagicSettingsMenuTile(
                     icon: Iconsax.shopping_cart,
                     title: 'My Cart',
                     subtitle: 'Add, remove products and move to checkout',
-                    onTap: () {},
+                    onTap: ()  => Get.to(() => const CartScreen()),
                   ),
 
                   MagicSettingsMenuTile(
                     icon: Iconsax.bag_tick,
                     title: 'My Orders',
                     subtitle: 'In-progress and completed orders',
-                    onTap: () {},
+                    onTap: ()  => Get.to(() => const OrderScreen()),
                   ),
 
                   MagicSettingsMenuTile(
