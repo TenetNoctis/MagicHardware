@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:magic_hardware/features/shop/screens/product_reviews/widgets/progress_indicator_and%20rating.dart';
+import 'package:magic_hardware/features/shop/screens/product_reviews/widgets/progress_indicator_and_rating.dart';
 
 class MagicOverallProductRating extends StatelessWidget {
   const MagicOverallProductRating({
