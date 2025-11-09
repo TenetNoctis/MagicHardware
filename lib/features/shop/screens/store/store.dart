@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:magic_hardware/common/widgets/appbar/appbar.dart';
 import 'package:magic_hardware/common/widgets/appbar/tabbar.dart';
 import 'package:magic_hardware/common/widgets/custom_shapes/containers/search_container.dart';
 import 'package:magic_hardware/common/widgets/layouts/grid_layout.dart';
 import 'package:magic_hardware/common/widgets/products/cart/cart_menu_icon.dart';
 import 'package:magic_hardware/common/widgets/texts/section_heading.dart';
+import 'package:magic_hardware/features/shop/screens/brand/all_brands.dart';
 import 'package:magic_hardware/features/shop/screens/store/widgets/category_tab.dart';
 import 'package:magic_hardware/utils/constants/colors.dart';
 import 'package:magic_hardware/utils/constants/image_strings.dart';
@@ -62,7 +64,7 @@ class StoreScreen extends StatelessWidget {
                       // Featured Brands
                       MagicSectionHeading(
                         title: 'Featured Brands',
-                        onPressed: () {},
+                        onPressed: () => Get.to(() => const AllBrandsScreen()),
                       ),
                       const SizedBox(height: MagicSizes.spaceBtwItems / 1.5),
 
@@ -75,7 +77,7 @@ class StoreScreen extends StatelessWidget {
                             showBorder: true,
                             brand: BrandModel(
                               image: MagicImages.weldingIcon,
-                              name: 'Welding',
+                              name: 'Vaultex',
                               productsCount: 256,
                             ),
                           );
