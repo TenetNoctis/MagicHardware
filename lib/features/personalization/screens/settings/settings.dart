@@ -11,6 +11,7 @@ import 'package:magic_hardware/features/shop/screens/order/order.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 
 import '../../../../common/widgets/list_tiles/user_profile_tile.dart';
+import '../../../../data/repositories/authentication/authentication_repository.dart';
 import '../profile/profile.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -150,7 +151,7 @@ class SettingsScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () => AuthenticationRepository.instance.logout(),
                       child: const Text('Logout'),
                     ),
                   ),

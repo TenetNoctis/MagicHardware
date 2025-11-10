@@ -133,7 +133,7 @@ class MagicValidator {
 
   static String? validatePhoneNumberFormat(String? value) {
     if (value == null || value.isEmpty) {
-      return null;
+      return 'Phone number is required.';
     }
 
     // Regular expression for phone number validation
