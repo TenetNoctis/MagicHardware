@@ -7,6 +7,7 @@ import 'package:magic_hardware/utils/popups/loaders.dart';
 import '../../../../utils/constants/image_strings.dart';
 import '../../../../utils/helpers/network_manager.dart';
 import '../../../../utils/popups/full_screen_loader.dart';
+import '../../../personalization/controllers/user_controller.dart';
 
 class LoginController extends GetxController{
 
@@ -17,6 +18,7 @@ class LoginController extends GetxController{
   final email = TextEditingController();
   final password = TextEditingController();
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+  final userController = Get.put(UserController());
 
   @override
   void onInit() {
@@ -68,6 +70,39 @@ class LoginController extends GetxController{
     } catch (e) {
       // Hide loader
       MagicFullScreenLoader.stopLoading();
+      MagicLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
+    }
+  }
+
+  // Google SignIn Authentication
+  Future<void> googleSignIn() async {
+    try {
+      // Start Loading
+      MagicFullScreenLoader.openLoadingDialog(
+        'Logging you in...',
+        MagicImages.processingAnimation,
+      );
+
+      // Check Internet Connectivity
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        // Hide loader
+        MagicFullScreenLoader.stopLoading();
+        return;
+      }
+
+      // Google Authentication
+      final userCredentials = await AuthenticationRepository.instance.signInWithGoogle();
+
+      // Save User Record
+      await userController.saveUserRecord(userCredentials);
+
+      // Hide loader
+      MagicFullScreenLoader.stopLoading();
+
+      // Redirect
+      AuthenticationRepository.instance.screenRedirect();
+    } catch (e) {
       MagicLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
     }
   }

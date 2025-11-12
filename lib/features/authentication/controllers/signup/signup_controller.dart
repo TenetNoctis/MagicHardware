@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:magic_hardware/data/repositories/authentication/authentication_repository.dart';
-import 'package:magic_hardware/features/authentication/screens/signup/verify_email.dart';
 import 'package:magic_hardware/utils/popups/full_screen_loader.dart';
 import 'package:magic_hardware/utils/popups/loaders.dart';
 
@@ -90,7 +89,7 @@ class SignupController extends GetxController {
       );
 
       // Move to Verify Email Screen
-      Get.to(() => VerifyEmailScreen(email: email.text.trim()));
+      AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
       // Hide loader
       MagicFullScreenLoader.stopLoading();
