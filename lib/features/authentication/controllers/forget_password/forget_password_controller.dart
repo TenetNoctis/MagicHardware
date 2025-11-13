@@ -60,7 +60,7 @@ class ForgetPasswordController extends GetxController {
     }
   }
 
-  resendPasswordResetEmail(String email) async {
+  Future<void> resendPasswordResetEmail(String email) async {
     try {
       // Start Loading
       MagicFullScreenLoader.openLoadingDialog(

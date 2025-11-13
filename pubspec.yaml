@@ -43,6 +43,7 @@ dependencies:
   flutter_native_splash: ^2.4.7
   smooth_page_indicator: ^1.2.1
   lottie: ^3.3.2
+  shimmer: ^3.0.0
 
   # Icons
   iconsax: ^0.0.8

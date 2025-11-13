@@ -11,17 +11,17 @@ class OnBoardingController extends GetxController {
   Rx<int> currentPageIndex = 0.obs;
 
   // Update Index when Scroll
-  void updatePageIndicator(index) => currentPageIndex.value = index;
+  void updatePageIndicator(int index) => currentPageIndex.value = index;
 
   // Jump to the specific dot
-  void dotNavigationClick(index) {
-    currentPageIndex.value = index.toInt();
+  void dotNavigationClick(int index) {
+    currentPageIndex.value = index;
     pageController.jumpTo(index.toDouble());
   }
 
   // Update Index and go to next page
   void nextPage() {
-    if (currentPageIndex == 2) {
+    if (currentPageIndex.value == 2) {
       final storage = GetStorage();
       storage.write('IsFirstTime', false);
       Get.offAll(() => LoginScreen());

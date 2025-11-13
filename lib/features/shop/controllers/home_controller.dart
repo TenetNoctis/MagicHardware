@@ -5,7 +5,7 @@ class HomeController extends GetxController {
 
   final carouselCurrentIndex = 0.obs;
 
-  void updatePageIndicator(index) {
+  void updatePageIndicator(int index) {
     carouselCurrentIndex.value = index;
   }
 }

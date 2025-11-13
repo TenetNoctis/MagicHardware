@@ -8,7 +8,7 @@ import '../helpers/helper_functions.dart';
 class MagicLoaders {
   static void hideSnackBar() => ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();
 
-  static void customToast({required message}) {
+  static void customToast({required String message}) {
     ScaffoldMessenger.of(Get.context!).showSnackBar(
       SnackBar(
         elevation: 0,
@@ -27,7 +27,7 @@ class MagicLoaders {
     );
   }
 
-  static void successSnackBar({required title, message = '', duration = 3}) {
+  static void successSnackBar({required String title, String message = '', duration = 3}) {
     Get.snackbar(
       title,
       message,
@@ -42,7 +42,7 @@ class MagicLoaders {
     );
   }
 
-  static void warningSnackBar({required title, message = ''}) {
+  static void warningSnackBar({required String title, String message = ''}) {
     Get.snackbar(
       title,
       message,
@@ -57,7 +57,7 @@ class MagicLoaders {
     );
   }
 
-  static void errorSnackBar({required title, message = ''}) {
+  static void errorSnackBar({required String title, String message = ''}) {
     Get.snackbar(
       title,
       message,
