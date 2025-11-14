@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:magic_hardware/data/repositories/authentication/authentication_repository.dart';
 import 'package:magic_hardware/features/authentication/screens/login/login.dart';
 import 'package:magic_hardware/features/personalization/screens/profile/widgets/re_authenticate_user_login_form.dart';
@@ -20,6 +21,7 @@ class UserController extends GetxController {
   Rx<UserModel?> user = UserModel.empty().obs;
 
   final hidePassword = false.obs;
+  final imageUploading = false.obs;
   final verifyEmail = TextEditingController();
   final verifyPassword = TextEditingController();
   final userRepository = Get.put(UserRepository());
@@ -31,6 +33,7 @@ class UserController extends GetxController {
     fetchUserRecord();
   }
 
+  // Fetch User Record
   Future<void> fetchUserRecord() async {
     try {
       profileLoading.value = true;
@@ -46,28 +49,36 @@ class UserController extends GetxController {
   // Save user record from any registration provider
   Future<void> saveUserRecord(UserCredential? userCredentials) async {
     try {
-      if (userCredentials != null) {
-        // Convert Name to First and Last Name
-        final nameparts = UserModel.nameParts(
-          userCredentials.user!.displayName ?? '',
-        );
-        final username = UserModel.generateUsername(
-          userCredentials.user!.displayName ?? '',
-        );
+      // Refresh User Record
+      await fetchUserRecord();
 
-        // Map Data
-        final user = UserModel(
-          id: userCredentials.user!.uid,
-          firstName: nameparts[0],
-          lastName: nameparts.length > 1 ? nameparts.sublist(1).join(' ') : '',
-          username: username,
-          email: userCredentials.user!.email ?? '',
-          phoneNumber: userCredentials.user!.phoneNumber ?? '',
-          profilePicture: userCredentials.user!.photoURL ?? '',
-        );
+      // If no user record exists
+      if (user.value!.id.isEmpty) {
+        if (userCredentials != null) {
+          // Convert Name to First and Last Name
+          final nameparts = UserModel.nameParts(
+            userCredentials.user!.displayName ?? '',
+          );
+          final username = UserModel.generateUsername(
+            userCredentials.user!.displayName ?? '',
+          );
 
-        // Save user data
-        await userRepository.saveUserRecord(user);
+          // Map Data
+          final user = UserModel(
+            id: userCredentials.user!.uid,
+            firstName: nameparts[0],
+            lastName: nameparts.length > 1
+                ? nameparts.sublist(1).join(' ')
+                : '',
+            username: username,
+            email: userCredentials.user!.email ?? '',
+            phoneNumber: userCredentials.user!.phoneNumber ?? '',
+            profilePicture: userCredentials.user!.photoURL ?? '',
+          );
+
+          // Save user data
+          await userRepository.saveUserRecord(user);
+        }
       }
     } catch (e) {
       MagicLoaders.warningSnackBar(
@@ -166,6 +177,51 @@ class UserController extends GetxController {
     } catch (e) {
       MagicFullScreenLoader.stopLoading();
       MagicLoaders.warningSnackBar(title: 'Oh Snap!', message: e.toString());
+    }
+  }
+
+  // Upload Profile Image
+  Future<void> uploadUserProfilePicture() async {
+    try {
+      final image = await ImagePicker().pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 70,
+        maxHeight: 512,
+        maxWidth: 512,
+      );
+      if (image != null) {
+        imageUploading.value = true;
+
+        // Upload Image
+        final imageUrl = await userRepository.uploadImage(
+          ('Users/Images/Profile'),
+          image,
+        );
+
+        // Update User Image Record
+        Map<String, dynamic> json = {'ProfilePicture': imageUrl};
+        await userRepository.updateSingleField(json);
+
+        // Update Image Locally
+        user.update((val) {
+          val?.profilePicture = imageUrl;
+        });
+
+        // Refresh User Locally
+        user.refresh();
+
+        MagicLoaders.successSnackBar(
+          title: 'Congratulations',
+          message: 'Your Profile Image has been updated!',
+        );
+      }
+    } catch (e) {
+      MagicLoaders.warningSnackBar(
+        title: 'Oh Snap!',
+        message: 'Something went wrong: $e',
+      );
+    } finally {
+      imageUploading.value = false;
     }
   }
 }

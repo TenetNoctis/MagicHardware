@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:magic_hardware/common/widgets/appbar/appbar.dart';
 import 'package:magic_hardware/common/widgets/images/magic_circular_image.dart';
+import 'package:magic_hardware/common/widgets/shimmers/shimmer.dart';
 import 'package:magic_hardware/common/widgets/texts/section_heading.dart';
 import 'package:magic_hardware/features/personalization/controllers/user_controller.dart';
 import 'package:magic_hardware/features/personalization/screens/profile/widgets/change_name.dart';
@@ -21,20 +22,32 @@ class ProfileScreen extends StatelessWidget {
       // Body
       body: SingleChildScrollView(
         padding: EdgeInsets.all(MagicSizes.defaultSpace),
-        child: Obx(() => Column(
+        child: Obx(
+          () => Column(
             children: [
               // Profile Picture
               SizedBox(
                 width: double.infinity,
                 child: Column(
                   children: [
-                    MagicCircularImage(
-                      image: MagicImages.user,
-                      width: 80,
-                      height: 80,
-                    ),
+                    Obx(() {
+                      if (controller.imageUploading.value) {
+                        return const MagicShimmerEffect(width: 60, height: 60, radius: 60);
+                      }
+                      final networkImage =
+                          controller.user.value!.profilePicture;
+                      final image = networkImage.isNotEmpty
+                          ? networkImage
+                          : MagicImages.user;
+                      return MagicCircularImage(
+                        image: image,
+                        width: 80,
+                        height: 80,
+                        isNetworkImage: networkImage.isNotEmpty,
+                      );
+                    }),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () => controller.uploadUserProfilePicture(),
                       child: const Text('Change Profile Picture'),
                     ),
                   ],
@@ -56,7 +69,7 @@ class ProfileScreen extends StatelessWidget {
               MagicProfileMenu(
                 title: 'Name',
                 value: controller.user.value!.fullName,
-                onPressed: () => Get.to(() => const ChangeName())
+                onPressed: () => Get.to(() => const ChangeName()),
               ),
 
               MagicProfileMenu(
@@ -92,7 +105,11 @@ class ProfileScreen extends StatelessWidget {
                 value: controller.user.value!.phoneNumber,
                 onPressed: () {},
               ),
-              MagicProfileMenu(title: 'Gender', value: 'Male', onPressed: () {}),
+              MagicProfileMenu(
+                title: 'Gender',
+                value: 'Male',
+                onPressed: () {},
+              ),
               MagicProfileMenu(
                 title: 'Date of Birth',
                 value: '26 Sept, 1999',

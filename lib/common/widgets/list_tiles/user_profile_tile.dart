@@ -15,34 +15,36 @@ class MagicUserProfileTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = UserController.instance;
-    return Obx(() => ListTile(
 
+    return Obx(() {
+      final networkImage = controller.user.value!.profilePicture;
+      final image = networkImage.isNotEmpty ? networkImage : MagicImages.user;
+
+      return ListTile(
         leading: MagicCircularImage(
-          image: MagicImages.user,
+          image: image,
           width: 50,
           height: 50,
           padding: 0,
+          isNetworkImage: networkImage.isNotEmpty,
         ),
-
         title: Text(
           controller.user.value!.fullName,
           style: Theme.of(
             context,
           ).textTheme.headlineSmall!.apply(color: MagicColors.white),
         ),
-
         subtitle: Text(
           controller.user.value!.email,
           style: Theme.of(
             context,
           ).textTheme.bodyMedium!.apply(color: MagicColors.white),
         ),
-
         trailing: IconButton(
           onPressed: onPressed,
-          icon: Icon(Iconsax.edit, color: MagicColors.white),
+          icon: const Icon(Iconsax.edit, color: MagicColors.white),
         ),
-      ),
-    );
+      );
+    });
   }
 }
