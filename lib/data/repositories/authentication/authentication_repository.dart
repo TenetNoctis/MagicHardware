@@ -21,6 +21,8 @@ class AuthenticationRepository extends GetxController {
 
   final deviceStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
+  final _googleSignIn = GoogleSignIn.instance;
+  bool _isGoogleSignInInitialized = false;
 
   User? get authUser => _auth.currentUser;
 
@@ -30,6 +32,7 @@ class AuthenticationRepository extends GetxController {
     screenRedirect();
   }
 
+  // Function to redirect user to the proper screen
   Future<void> screenRedirect() async {
     User? user = _auth.currentUser;
 
@@ -51,10 +54,7 @@ class AuthenticationRepository extends GetxController {
   /* ----------------------------------- Email & Password sign-in ----------------------------------- */
 
   // [EmailAuthentication] - SignIn
-  Future<UserCredential> signInWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
+  Future<UserCredential> signInWithEmailAndPassword(String email, String password) async {
     try {
       return await _auth.signInWithEmailAndPassword(
         email: email,
@@ -74,10 +74,7 @@ class AuthenticationRepository extends GetxController {
   }
 
   // [EmailAuthentication] - Register
-  Future<UserCredential> registerWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
+  Future<UserCredential> registerWithEmailAndPassword(String email, String password) async {
     try {
       return await _auth.createUserWithEmailAndPassword(
         email: email,
@@ -97,10 +94,7 @@ class AuthenticationRepository extends GetxController {
   }
 
   // [ReAuthenticate] - ReAuthenticate User
-  Future<void> reAuthenticateWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
+  Future<void> reAuthenticateWithEmailAndPassword(String email, String password) async {
     try {
       AuthCredential credential = EmailAuthProvider.credential(
         email: email,
@@ -157,34 +151,20 @@ class AuthenticationRepository extends GetxController {
   /* ----------------------------------- Federated identity & Social sign-in ----------------------------------- */
 
   // [GoogleAuthentication] - Google
-  final _googleSignIn = GoogleSignIn.instance;
-  bool _isGoogleSignInInitialized = false;
-
-  void authService() {
-    _initializeGoogleSignIn();
-  }
-
-  Future<void> _initializeGoogleSignIn() async {
-    try {
-      await _googleSignIn.initialize();
-      _isGoogleSignInInitialized = true;
-    } catch (e) {
-      if (kDebugMode) {
-        print('Failed to initialize Google Sign-In: $e');
-      }
-    }
-  }
-
-  /// Always check Google sign in initialization before use
-  Future<void> _ensureGoogleSignInInitialized() async {
-    if (!_isGoogleSignInInitialized) {
-      await _initializeGoogleSignIn();
-    }
-  }
-
   Future<UserCredential?> signInWithGoogle() async {
     try {
-      await _ensureGoogleSignInInitialized();
+
+      // Initialize Google Sign In
+      if (!_isGoogleSignInInitialized) {
+        try {
+          await _googleSignIn.initialize();
+          _isGoogleSignInInitialized = true;
+        } catch (e) {
+          if (kDebugMode) {
+            print('Failed to initialize Google Sign-In: $e');
+          }
+        }
+      }
 
       // Authenticate with Google
       final GoogleSignInAccount googleUser = await _googleSignIn.authenticate(

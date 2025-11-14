@@ -8,7 +8,9 @@ import 'package:magic_hardware/common/widgets/texts/section_heading.dart';
 import 'package:magic_hardware/features/personalization/screens/address/address.dart';
 import 'package:magic_hardware/features/shop/screens/cart/cart.dart';
 import 'package:magic_hardware/features/shop/screens/order/order.dart';
+import 'package:magic_hardware/utils/constants/colors.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
+import 'package:magic_hardware/utils/helpers/helper_functions.dart';
 
 import '../../../../common/widgets/list_tiles/user_profile_tile.dart';
 import '../../../../data/repositories/authentication/authentication_repository.dart';
@@ -19,6 +21,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = MagicHelperFunctions.isDarkMode(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -38,7 +41,9 @@ class SettingsScreen extends StatelessWidget {
                   ),
 
                   // User Profile
-                  MagicUserProfileTile(onPressed: () => Get.to(() => const ProfileScreen())),
+                  MagicUserProfileTile(
+                    onPressed: () => Get.to(() => const ProfileScreen()),
+                  ),
                   const SizedBox(height: MagicSizes.spaceBtwSections),
                 ],
               ),
@@ -66,14 +71,14 @@ class SettingsScreen extends StatelessWidget {
                     icon: Iconsax.shopping_cart,
                     title: 'My Cart',
                     subtitle: 'Add, remove products and move to checkout',
-                    onTap: ()  => Get.to(() => const CartScreen()),
+                    onTap: () => Get.to(() => const CartScreen()),
                   ),
 
                   MagicSettingsMenuTile(
                     icon: Iconsax.bag_tick,
                     title: 'My Orders',
                     subtitle: 'In-progress and completed orders',
-                    onTap: ()  => Get.to(() => const OrderScreen()),
+                    onTap: () => Get.to(() => const OrderScreen()),
                   ),
 
                   MagicSettingsMenuTile(
@@ -126,7 +131,10 @@ class SettingsScreen extends StatelessWidget {
                     title: 'Geolocation',
                     subtitle: 'Set recommendations based on location',
                     onTap: () {},
-                    trailing: Switch(value: true, onChanged: (value) {}),
+                    trailing: Switch(value: true,
+                        activeTrackColor: MagicColors.primary,
+                        activeThumbColor: dark ? MagicColors.black : MagicColors.white,
+                        onChanged: (value) {}),
                   ),
 
                   MagicSettingsMenuTile(
@@ -151,7 +159,11 @@ class SettingsScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                      onPressed: () => AuthenticationRepository.instance.logout(),
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: MagicColors.primary),
+                      ),
+                      onPressed: () =>
+                          AuthenticationRepository.instance.logout(),
                       child: const Text('Logout'),
                     ),
                   ),

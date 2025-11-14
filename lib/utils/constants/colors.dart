@@ -4,8 +4,8 @@ class MagicColors {
   MagicColors._();
   static const Color white = Color(0xFFFFFFFF);
 
-  // App Basic Colors
-  static const Color primary = Color(0xFF4b68ff);
+  // App Basic Colors 0xFF4b68ff
+  static const Color primary = Color(0xFFF38331);
   static const Color secondary = Color(0xFFFFE24B);
   static const Color accent = Color(0xFFb0c7ff);
 

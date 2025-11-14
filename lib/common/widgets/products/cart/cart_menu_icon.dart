@@ -43,7 +43,7 @@ class MagicCartCounterIcon extends StatelessWidget {
               child: Text(
                 '2',
                 style: Theme.of(context).textTheme.labelLarge!.apply(
-                  color: textColor ?? (dark ? MagicColors.black : MagicColors.white),
+                  color: MagicColors.black,
                   fontSizeFactor: 0.8,
                 ),
               ),

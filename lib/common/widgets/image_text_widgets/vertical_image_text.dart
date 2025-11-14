@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magic_hardware/common/widgets/images/magic_circular_image.dart';
 
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
@@ -7,16 +8,18 @@ import '../../../utils/helpers/helper_functions.dart';
 class MagicVerticalImageText extends StatelessWidget {
   const MagicVerticalImageText({
     super.key,
+    this.onTap,
     required this.image,
     required this.title,
     this.textColor = MagicColors.white,
+    this.isNetworkImage = true,
     this.backgroundColor,
-    this.onTap,
   });
 
   final String image, title;
   final Color textColor;
   final Color? backgroundColor;
+  final bool isNetworkImage;
   final void Function()? onTap;
 
   @override
@@ -30,26 +33,16 @@ class MagicVerticalImageText extends StatelessWidget {
         child: Column(
           children: [
             // Circular Icon
-            Container(
-              width: 56,
-              height: 56,
-              padding: const EdgeInsets.all(MagicSizes.sm),
-              decoration: BoxDecoration(
-                color:
-                    backgroundColor ??
-                    (dark ? MagicColors.darkestGrey : MagicColors.white),
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Center(
-                child: Image(
-                  image: AssetImage(image),
-                  fit: BoxFit.cover,
-                  color: dark ? MagicColors.light : MagicColors.dark,
-                ),
-              ),
+            MagicCircularImage(
+              image: image,
+              fit: BoxFit.fitWidth,
+              padding: MagicSizes.sm * 1.4,
+              isNetworkImage: isNetworkImage,
+              backgroundColor: backgroundColor,
+              overlayColor: dark ? MagicColors.light : MagicColors.dark,
             ),
 
-            //Text
+            // Text
             const SizedBox(height: MagicSizes.spaceBtwItems / 3),
             Container(
               width: 65,
