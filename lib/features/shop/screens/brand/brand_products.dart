@@ -22,6 +22,7 @@ class BrandProducts extends StatelessWidget {
               // Brand Detail
               MagicBrandCard(
                 brand: BrandModel(
+                  id: '1',
                   image: MagicImages.weldingIcon,
                   name: 'Vaultex',
                   productsCount: 256,

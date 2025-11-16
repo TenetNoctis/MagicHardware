@@ -78,6 +78,7 @@ class StoreScreen extends StatelessWidget {
                           return MagicBrandCard(
                             showBorder: true,
                             brand: BrandModel(
+                              id: '1',
                               image: MagicImages.weldingIcon,
                               name: 'Vaultex',
                               productsCount: 256,

@@ -11,11 +11,14 @@ import 'package:magic_hardware/features/shop/screens/cart/cart.dart';
 import 'package:magic_hardware/features/shop/screens/checkout/checkout.dart';
 import 'package:magic_hardware/features/shop/screens/home/home.dart';
 import 'package:magic_hardware/features/shop/screens/order/order.dart';
-import 'package:magic_hardware/features/shop/screens/product_details/product_detail.dart';
 import 'package:magic_hardware/features/shop/screens/product_reviews/product_reviews.dart';
 import 'package:magic_hardware/features/shop/screens/store/store.dart';
 import 'package:magic_hardware/features/shop/screens/wishlist/wishlist.dart';
 import 'package:magic_hardware/routes/routes.dart';
+
+import '../features/shop/models/product_model.dart';
+import '../features/shop/screens/product_details/product_detail.dart';
+
 
 class AppRoutes {
   static final pages = [
@@ -24,7 +27,7 @@ class AppRoutes {
     GetPage(name: MagicRoutes.wishlist, page: () => const WishlistScreen()),
     GetPage(name: MagicRoutes.settings, page: () => const SettingsScreen()),
     GetPage(name: MagicRoutes.productReviews, page: () => const ProductReviewsScreen()),
-    GetPage(name: MagicRoutes.productDetails, page: () => const ProductDetailScreen()),
+    GetPage(name: MagicRoutes.productDetails, page: () => ProductDetailScreen(product: ProductModel.empty())),
     GetPage(name: MagicRoutes.order, page: () => const OrderScreen()),
     GetPage(name: MagicRoutes.checkout, page: () => const CheckoutScreen()),
     GetPage(name: MagicRoutes.cart, page: () => const CartScreen()),

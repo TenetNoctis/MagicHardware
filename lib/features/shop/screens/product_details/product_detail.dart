@@ -11,8 +11,12 @@ import 'package:magic_hardware/features/shop/screens/product_details/widgets/rat
 import 'package:magic_hardware/utils/constants/sizes.dart';
 import 'package:readmore/readmore.dart';
 
+import '../../models/product_model.dart';
+
 class ProductDetailScreen extends StatelessWidget {
-  const ProductDetailScreen({super.key});
+  const ProductDetailScreen({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {

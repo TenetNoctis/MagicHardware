@@ -4,9 +4,12 @@ import 'package:iconsax/iconsax.dart';
 import 'package:magic_hardware/common/widgets/appbar/appbar.dart';
 import 'package:magic_hardware/common/widgets/icons/magic_circular_icon.dart';
 import 'package:magic_hardware/common/widgets/layouts/grid_layout.dart';
-import 'package:magic_hardware/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:magic_hardware/features/shop/screens/home/home.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
+
+import '../../../../common/widgets/products/product_cards/product_card_vertical.dart';
+import '../../models/product_model.dart';
+
 
 class WishlistScreen extends StatelessWidget {
   const WishlistScreen({super.key});
@@ -34,7 +37,7 @@ class WishlistScreen extends StatelessWidget {
             children: [
               MagicGridLayout(
                 itemCount: 8,
-                itemBuilder: (_, index) => const MagicProductCardVertical(),
+                itemBuilder: (_, index) => MagicProductCardVertical(product: ProductModel.empty()),
               ),
             ],
           ),

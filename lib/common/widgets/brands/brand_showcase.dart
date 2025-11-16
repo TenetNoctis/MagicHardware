@@ -26,6 +26,7 @@ class MagicBrandShowcase extends StatelessWidget {
           // Brand with products count
           MagicBrandCard(
             brand: BrandModel(
+              id: '1',
               image: MagicImages.weldingIcon,
               name: 'Welding',
               productsCount: 256,

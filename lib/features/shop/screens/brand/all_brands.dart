@@ -33,6 +33,7 @@ class AllBrandsScreen extends StatelessWidget {
                 itemBuilder: (context, _) => MagicBrandCard(
                   showBorder: true,
                   brand: BrandModel(
+                    id: '1',
                     image: MagicImages.weldingIcon,
                     name: 'Vaultex',
                     productsCount: 256,

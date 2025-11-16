@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:magic_hardware/common/widgets/layouts/grid_layout.dart';
-import 'package:magic_hardware/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:magic_hardware/common/widgets/texts/section_heading.dart';
 import 'package:magic_hardware/features/shop/models/category_model.dart';
+import 'package:magic_hardware/features/shop/models/product_model.dart';
 
 import '../../../../../common/widgets/brands/brand_showcase.dart';
+import '../../../../../common/widgets/products/product_cards/product_card_vertical.dart';
 import '../../../../../utils/constants/image_strings.dart';
 import '../../../../../utils/constants/sizes.dart';
 
@@ -39,7 +40,7 @@ class MagicCategoryTab extends StatelessWidget {
 
               MagicGridLayout(
                 itemCount: 4,
-                itemBuilder: (_, index) => const MagicProductCardVertical(),
+                itemBuilder: (_, index) => MagicProductCardVertical(product: ProductModel.empty()),
               ),
               const SizedBox(height: MagicSizes.spaceBtwItems),
             ],

@@ -4,27 +4,35 @@ import 'package:iconsax/iconsax.dart';
 import 'package:magic_hardware/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:magic_hardware/common/widgets/images/magic_rounded_image.dart';
 import 'package:magic_hardware/common/widgets/texts/product_title_text.dart';
+import 'package:magic_hardware/features/shop/controllers/product_controller.dart';
 import 'package:magic_hardware/utils/constants/enums.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 import 'package:magic_hardware/utils/helpers/helper_functions.dart';
 
+import '../../../../features/shop/models/product_model.dart';
 import '../../../../features/shop/screens/product_details/product_detail.dart';
 import '../../../../utils/constants/colors.dart';
-import '../../../../utils/constants/image_strings.dart';
 import '../../../styles/shadows.dart';
 import '../../icons/magic_circular_icon.dart';
 import '../../texts/brand_title_text_with_verified_icon.dart';
 import '../../texts/product_price_text.dart';
 
 class MagicProductCardVertical extends StatelessWidget {
-  const MagicProductCardVertical({super.key});
+  const MagicProductCardVertical({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
+    final controller = ProductController.instance;
+    final salePercentage = controller.calculateSalePercentage(
+      product.price,
+      product.salePrice,
+    );
     final dark = MagicHelperFunctions.isDarkMode(context);
 
     return GestureDetector(
-      onTap: () => Get.to(() => const ProductDetailScreen()),
+      onTap: () => Get.to(() => ProductDetailScreen(product: product)),
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(0),
@@ -46,15 +54,19 @@ class MagicProductCardVertical extends StatelessWidget {
               child: Stack(
                 children: [
                   // Thumbnail Image
-                  MagicRoundedImage(
-                    imageUrl: MagicImages.weldingGlove,
-                    applyImageRadius: true,
-                    backgroundColor: MagicHelperFunctions.isDarkMode(context)
-                        ? MagicColors.darkestGrey
-                        : MagicColors.light,
+                  Center(
+                    child: MagicRoundedImage(
+                      imageUrl: product.thumbnail,
+                      applyImageRadius: true,
+                      isNetworkImage: true,
+                      backgroundColor: MagicHelperFunctions.isDarkMode(context)
+                          ? MagicColors.darkestGrey
+                          : MagicColors.light,
+                    ),
                   ),
 
                   // Sale Tag
+                  if (salePercentage != null)
                   Positioned(
                     top: 12,
                     child: MagicRoundedContainer(
@@ -67,7 +79,7 @@ class MagicProductCardVertical extends StatelessWidget {
                         vertical: MagicSizes.xs,
                       ),
                       child: Text(
-                        '-25%',
+                        '$salePercentage%',
                         style: Theme.of(
                           context,
                         ).textTheme.labelLarge!.apply(color: MagicColors.black),
@@ -97,9 +109,12 @@ class MagicProductCardVertical extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MagicProductTitleText(title: 'Welding Gloves', smallSize: true),
-                  SizedBox(height: MagicSizes.spaceBtwItems / 2),
-                  MagicBrandTitleWithVerifiedIcon(title: 'Vaultex', brandTextSize: TextSizes.small),
+                  MagicProductTitleText(title: product.title, smallSize: true),
+                  const SizedBox(height: MagicSizes.spaceBtwItems / 2),
+                  MagicBrandTitleWithVerifiedIcon(
+                    title: product.brand?.name ?? '',
+                    brandTextSize: TextSizes.small,
+                  ),
                 ],
               ),
             ),
@@ -109,14 +124,29 @@ class MagicProductCardVertical extends StatelessWidget {
             // Price Row
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-              // Price
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: MagicSizes.sm),
-                  child: const MagicProductPriceText(
-                    price: '95.00',
-                    isLarge: false,
+                // Price
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (product.productType == ProductType.single.toString() && (product.salePrice ?? 0) > 0)
+                        Padding(
+                          padding: const EdgeInsets.only(left: MagicSizes.sm),
+                          child: Text(
+                            'MVR ${product.price.toString()}',
+                            style: Theme.of(context).textTheme.labelMedium!
+                                .apply(decoration: TextDecoration.lineThrough),
+                          ),
+                        ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: MagicSizes.sm),
+                        child: MagicProductPriceText(
+                          price: 'MVR ${controller.getProductPrice(product)}',
+                          isLarge: false,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
 
