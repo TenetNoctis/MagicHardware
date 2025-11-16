@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants/sizes.dart';
+import '../shimmers/shimmer.dart';
 
 class MagicRoundedImage extends StatelessWidget {
   const MagicRoundedImage({
@@ -46,12 +48,19 @@ class MagicRoundedImage extends StatelessWidget {
           borderRadius: applyImageRadius
               ? BorderRadiusGeometry.circular(borderRadius)
               : BorderRadius.zero,
-          child: Image(
-            fit: fit,
-            image: isNetworkImage
-                ? NetworkImage(imageUrl)
-                : AssetImage(imageUrl) as ImageProvider,
-          ),
+          child: isNetworkImage
+              ? CachedNetworkImage(
+                  fit: fit,
+                  imageUrl: imageUrl,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      MagicShimmerEffect(
+                        width: width ?? 230,
+                        height: height ?? 230,
+                        radius: borderRadius,
+                      ),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                )
+              : Image(image: AssetImage(imageUrl), fit: fit),
         ),
       ),
     );

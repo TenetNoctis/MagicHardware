@@ -17,6 +17,7 @@ class MagicCircularImage extends StatelessWidget {
     this.fit = BoxFit.cover,
     this.padding = MagicSizes.sm,
     this.isNetworkImage = false,
+    this.radius = 100,
   });
 
   final BoxFit? fit;
@@ -25,6 +26,7 @@ class MagicCircularImage extends StatelessWidget {
   final Color? overlayColor;
   final Color? backgroundColor;
   final double width, height, padding;
+  final double radius;
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +43,13 @@ class MagicCircularImage extends StatelessWidget {
         borderRadius: BorderRadius.circular(100),
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(100),
+        borderRadius: BorderRadius.circular(radius),
         child: SizedBox(
           width: 55,
           height: 55,
           child: isNetworkImage
               ? CachedNetworkImage(
-                  fit: BoxFit.cover,
+                  fit: fit,
                   color: overlayColor,
                   imageUrl: image,
                   progressIndicatorBuilder: (context, url, downloadProgress) =>

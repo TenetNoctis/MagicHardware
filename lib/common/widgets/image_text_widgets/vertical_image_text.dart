@@ -37,6 +37,7 @@ class MagicVerticalImageText extends StatelessWidget {
               image: image,
               fit: BoxFit.fitWidth,
               padding: MagicSizes.sm * 1.4,
+              radius: 0,
               isNetworkImage: isNetworkImage,
               backgroundColor: backgroundColor,
               overlayColor: dark ? MagicColors.light : MagicColors.dark,

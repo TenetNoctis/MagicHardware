@@ -7,7 +7,6 @@ import 'package:magic_hardware/features/shop/screens/home/widgets/home_appbar.da
 import 'package:magic_hardware/features/shop/screens/home/widgets/home_categories.dart';
 import 'package:magic_hardware/features/shop/screens/home/widgets/promo_slider.dart';
 import 'package:magic_hardware/utils/constants/colors.dart';
-import 'package:magic_hardware/utils/constants/image_strings.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 
 import '../../../../common/widgets/custom_shapes/containers/primary_header_container.dart';
@@ -66,13 +65,7 @@ class HomeScreen extends StatelessWidget {
             // Promo Slider
             Padding(
               padding: const EdgeInsets.only(top: MagicSizes.defaultSpace),
-              child: const MagicPromoSlider(
-                banners: [
-                  MagicImages.promoBanner1,
-                  MagicImages.promoBanner2,
-                  MagicImages.promoBanner3,
-                ],
-              ),
+              child: const MagicPromoSlider(),
             ),
 
             Padding(

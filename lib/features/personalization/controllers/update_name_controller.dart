@@ -52,8 +52,8 @@ class UpdateNameController extends GetxController {
 
       // Update user's first & last name in backend
       Map<String, dynamic> name = {
-        'firstName': firstName.text.trim(),
-        'lastName': lastName.text.trim(),
+        'FirstName': firstName.text.trim(),
+        'LastName': lastName.text.trim(),
       };
       await userRepository.updateSingleField(name);
 
