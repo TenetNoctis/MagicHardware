@@ -14,6 +14,8 @@ import 'package:magic_hardware/utils/helpers/helper_functions.dart';
 
 import '../../../../common/widgets/list_tiles/user_profile_tile.dart';
 import '../../../../data/repositories/authentication/authentication_repository.dart';
+import '../../../../data/repositories/products/product_dummy_data.dart';
+import '../../../../data/repositories/products/product_repository.dart';
 import '../profile/profile.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -123,7 +125,10 @@ class SettingsScreen extends StatelessWidget {
                     icon: Iconsax.document_upload,
                     title: 'Load Data',
                     subtitle: 'Upload Data to your Cloud Firebase',
-                    onTap: () {},
+                    onTap: () {
+                      final productRepository = Get.put(ProductRepository());
+                      productRepository.uploadDummyData(MagicDummyData.products);
+                    },
                   ),
 
                   MagicSettingsMenuTile(

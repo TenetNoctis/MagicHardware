@@ -17,9 +17,27 @@ class ProductRepository extends GetxController {
       final snapshot = await _db
           .collection('Products')
           .where('IsFeatured', isEqualTo: true)
-          .limit(4)
+          .limit(6)
           .get();
       return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
+    } on FirebaseException catch (e) {
+      throw MagicFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw MagicPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
+
+  /// Upload dummy data to the Cloud Firebase
+  Future<void> uploadDummyData(List<ProductModel> products) async {
+    try {
+      final batch = _db.batch();
+      for (var product in products) {
+        final docRef = _db.collection('Products').doc(product.id);
+        batch.set(docRef, product.toJson());
+      }
+      await batch.commit();
     } on FirebaseException catch (e) {
       throw MagicFirebaseException(e.code).message;
     } on PlatformException catch (e) {

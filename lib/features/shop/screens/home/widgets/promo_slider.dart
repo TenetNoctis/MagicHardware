@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../../../common/widgets/custom_shapes/containers/circular_container.dart';
 import '../../../../../common/widgets/images/magic_rounded_image.dart';
+import '../../../../../common/widgets/shimmers/banner_shimmer.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../controllers/banner_controller.dart';
@@ -15,8 +16,11 @@ class MagicPromoSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(BannerController());
     return Obx(() {
+      // Show loader while loading
+      if (controller.isLoading.value) return const MagicBannerShimmer();
+
       // No data found
-      if (controller.banners.isEmpty) {
+      if (controller.banners.isEmpty && controller.isLoading.value != true) {
         return const Center(child: Text('No Data Found!'));
       } else {
         return Column(

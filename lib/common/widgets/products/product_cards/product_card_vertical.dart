@@ -56,6 +56,8 @@ class MagicProductCardVertical extends StatelessWidget {
                   // Thumbnail Image
                   Center(
                     child: MagicRoundedImage(
+                      height: 150,
+                      width: double.infinity,
                       imageUrl: product.thumbnail,
                       applyImageRadius: true,
                       isNetworkImage: true,
@@ -69,6 +71,7 @@ class MagicProductCardVertical extends StatelessWidget {
                   if (salePercentage != null)
                   Positioned(
                     top: 12,
+                    left: 3,
                     child: MagicRoundedContainer(
                       radius: MagicSizes.sm,
                       backgroundColor: MagicColors.secondary.withValues(
@@ -122,6 +125,17 @@ class MagicProductCardVertical extends StatelessWidget {
             const Spacer(),
 
             // Price Row
+
+            // Sale Price
+            if (product.productType == ProductType.single.toString() && (product.salePrice ?? 0) > 0)
+              Padding(
+                padding: const EdgeInsets.only(left: MagicSizes.sm),
+                child: Text(
+                  'MVR ${product.price.toString()}', style: Theme.of(context).textTheme.labelMedium!.apply(decoration: TextDecoration.lineThrough),
+                ),
+              ),
+
+            // Regular Price
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -130,19 +144,10 @@ class MagicProductCardVertical extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (product.productType == ProductType.single.toString() && (product.salePrice ?? 0) > 0)
-                        Padding(
-                          padding: const EdgeInsets.only(left: MagicSizes.sm),
-                          child: Text(
-                            'MVR ${product.price.toString()}',
-                            style: Theme.of(context).textTheme.labelMedium!
-                                .apply(decoration: TextDecoration.lineThrough),
-                          ),
-                        ),
                       Padding(
                         padding: const EdgeInsets.only(left: MagicSizes.sm),
                         child: MagicProductPriceText(
-                          price: 'MVR ${controller.getProductPrice(product)}',
+                          price: controller.getProductPrice(product),
                           isLarge: false,
                         ),
                       ),
