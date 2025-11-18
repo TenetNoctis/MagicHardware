@@ -6,6 +6,7 @@ import 'package:magic_hardware/utils/constants/sizes.dart';
 class MagicBannerShimmer extends StatelessWidget {
   const MagicBannerShimmer({super.key});
 
+  // Shimmer Effect for Banner
   @override
   Widget build(BuildContext context) {
     return Column(

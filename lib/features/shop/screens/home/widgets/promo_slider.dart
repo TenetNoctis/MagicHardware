@@ -16,7 +16,7 @@ class MagicPromoSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(BannerController());
     return Obx(() {
-      // Show loader while loading
+      // Show shimmer loader while loading
       if (controller.isLoading.value) return const MagicBannerShimmer();
 
       // No data found
