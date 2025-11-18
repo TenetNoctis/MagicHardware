@@ -4,7 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:magic_hardware/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:magic_hardware/common/widgets/images/magic_rounded_image.dart';
 import 'package:magic_hardware/common/widgets/texts/product_title_text.dart';
-import 'package:magic_hardware/features/shop/controllers/product_controller.dart';
+import 'package:magic_hardware/features/shop/controllers/product/product_controller.dart';
 import 'package:magic_hardware/utils/constants/enums.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 import 'package:magic_hardware/utils/helpers/helper_functions.dart';
@@ -69,26 +69,26 @@ class MagicProductCardVertical extends StatelessWidget {
 
                   // Sale Tag
                   if (salePercentage != null)
-                  Positioned(
-                    top: 12,
-                    left: 3,
-                    child: MagicRoundedContainer(
-                      radius: MagicSizes.sm,
-                      backgroundColor: MagicColors.secondary.withValues(
-                        alpha: 0.5,
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: MagicSizes.xs,
-                        vertical: MagicSizes.xs,
-                      ),
-                      child: Text(
-                        '$salePercentage%',
-                        style: Theme.of(
-                          context,
-                        ).textTheme.labelLarge!.apply(color: MagicColors.black),
+                    Positioned(
+                      top: 12,
+                      left: 3,
+                      child: MagicRoundedContainer(
+                        radius: MagicSizes.sm,
+                        backgroundColor: MagicColors.secondary.withValues(
+                          alpha: 0.5,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: MagicSizes.xs,
+                          vertical: MagicSizes.xs,
+                        ),
+                        child: Text(
+                          '$salePercentage%',
+                          style: Theme.of(context).textTheme.labelLarge!.apply(
+                            color: MagicColors.black,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
 
                   // Favorite Icon Button
                   Positioned(
@@ -127,11 +127,15 @@ class MagicProductCardVertical extends StatelessWidget {
             // Price Row
 
             // Sale Price
-            if (product.productType == ProductType.single.toString() && (product.salePrice ?? 0) > 0)
+            if (product.productType == ProductType.single.toString() &&
+                (product.salePrice ?? 0) > 0)
               Padding(
                 padding: const EdgeInsets.only(left: MagicSizes.sm),
                 child: Text(
-                  'MVR ${product.price.toString()}', style: Theme.of(context).textTheme.labelMedium!.apply(decoration: TextDecoration.lineThrough),
+                  'MVR ${product.price.toStringAsFixed(2)}',
+                  style: Theme.of(context).textTheme.labelMedium!.apply(
+                    decoration: TextDecoration.lineThrough,
+                  ),
                 ),
               ),
 

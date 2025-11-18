@@ -6,8 +6,10 @@ import 'package:magic_hardware/features/shop/screens/product_details/widgets/bot
 import 'package:magic_hardware/features/shop/screens/product_details/widgets/product_attributes.dart';
 import 'package:magic_hardware/features/shop/screens/product_details/widgets/product_detail_image_slider.dart';
 import 'package:magic_hardware/features/shop/screens/product_details/widgets/product_meta_data.dart';
-import 'package:magic_hardware/features/shop/screens/product_reviews/product_reviews.dart';
 import 'package:magic_hardware/features/shop/screens/product_details/widgets/rating_share_widget.dart';
+import 'package:magic_hardware/features/shop/screens/product_reviews/product_reviews.dart';
+import 'package:magic_hardware/utils/constants/colors.dart';
+import 'package:magic_hardware/utils/constants/enums.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 import 'package:readmore/readmore.dart';
 
@@ -26,7 +28,7 @@ class ProductDetailScreen extends StatelessWidget {
         child: Column(
           children: [
             // Product Image Slider
-            MagicProductImageSlider(),
+            MagicProductImageSlider(product: product),
 
             // Product Details
             Padding(
@@ -36,21 +38,25 @@ class ProductDetailScreen extends StatelessWidget {
                 bottom: MagicSizes.defaultSpace,
               ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Rating and Share
                   MagicRatingsAndShare(),
 
                   // Title, Price, Stock and Brand
-                  MagicProductMetaData(),
+                  MagicProductMetaData(product: product),
 
                   // Attributes
-                  MagicProductAttributes(),
-                  const SizedBox(height: MagicSizes.spaceBtwSections),
+                  if (product.productType == ProductType.variable.toString()) ...[
+                    MagicProductAttributes(product: product),
+                    const SizedBox(height: MagicSizes.spaceBtwSections),
+                  ],
 
                   // Checkout
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(backgroundColor: MagicColors.primary, side: BorderSide(color: MagicColors.primary)),
                       onPressed: () {},
                       child: Text('Checkout'),
                     ),
@@ -64,10 +70,8 @@ class ProductDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: MagicSizes.spaceBtwItems),
                   ReadMoreText(
-                    'Crafted for professional welders who demand excellence in both safety and performance, '
-                    'Vaultex Welding Gloves represent the pinnacle of personal protective equipment in the welding industry. '
-                    'These gloves are engineered through extensive research and development to provide superior protection against '
-                    'the extreme hazards encountered in welding operations while maintaining the dexterity and comfort necessary for precision work.',
+                    product.description ?? '',
+                    textAlign: TextAlign.left,
                     trimLines: 2,
                     trimMode: TrimMode.Line,
                     trimCollapsedText: ' Show More',

@@ -1,22 +1,30 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:magic_hardware/features/shop/controllers/product/images_controller.dart';
 
 import '../../../../../common/widgets/appbar/appbar.dart';
 import '../../../../../common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
 import '../../../../../common/widgets/icons/magic_circular_icon.dart';
 import '../../../../../common/widgets/images/magic_rounded_image.dart';
 import '../../../../../utils/constants/colors.dart';
-import '../../../../../utils/constants/image_strings.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
+import '../../../models/product_model.dart';
 
 class MagicProductImageSlider extends StatelessWidget {
-  const MagicProductImageSlider({super.key,});
+  const MagicProductImageSlider({super.key, required this.product});
 
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     final dark = MagicHelperFunctions.isDarkMode(context);
+
+    final controller = Get.put(ImagesController());
+    final images = controller.getAllProductImages(product);
+
     return MagicCurvedEdgeWidget(
       child: Container(
         color: dark ? MagicColors.darkerGrey : MagicColors.light,
@@ -28,7 +36,20 @@ class MagicProductImageSlider extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(MagicSizes.productImageRadius * 3),
                 child: Center(
-                  child: Image(image: AssetImage(MagicImages.weldingGlove)),
+                  child: Obx(() {
+                    final image = controller.selectedProductImage.value;
+                    return GestureDetector(
+                      onTap: () => controller.showEnlargedImage(image),
+                      child: CachedNetworkImage(
+                        imageUrl: image,
+                        progressIndicatorBuilder: (_, _, downloadProgress) =>
+                            CircularProgressIndicator(
+                              value: downloadProgress.progress,
+                              color: MagicColors.primary,
+                            ),
+                      ),
+                    );
+                  }),
                 ),
               ),
             ),
@@ -43,19 +64,30 @@ class MagicProductImageSlider extends StatelessWidget {
                 child: ListView.separated(
                   separatorBuilder: (_, _) =>
                       SizedBox(width: MagicSizes.spaceBtwItems),
-                  itemCount: 6,
+                  itemCount: images.length,
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   physics: const AlwaysScrollableScrollPhysics(),
-                  itemBuilder: (_, index) => MagicRoundedImage(
-                    width: 80,
-                    backgroundColor: dark
-                        ? MagicColors.darkestGrey
-                        : MagicColors.white,
-                    border: Border.all(color: MagicColors.primary),
-                    padding: const EdgeInsets.all(MagicSizes.sm),
-                    imageUrl: MagicImages.weldingGlove,
-                  ),
+                  itemBuilder: (_, index) => Obx(() {
+                    final imageSelected =
+                        controller.selectedProductImage.value == images[index];
+                    return MagicRoundedImage(
+                      width: 80,
+                      isNetworkImage: true,
+                      backgroundColor: dark
+                          ? MagicColors.darkestGrey
+                          : MagicColors.white,
+                      padding: const EdgeInsets.all(MagicSizes.sm),
+                      imageUrl: images[index],
+                      onPressed: () =>
+                          controller.selectedProductImage.value = images[index],
+                      border: Border.all(
+                        color: imageSelected
+                            ? MagicColors.primary
+                            : Colors.transparent,
+                      ),
+                    );
+                  }),
                 ),
               ),
             ),

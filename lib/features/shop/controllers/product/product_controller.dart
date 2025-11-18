@@ -2,8 +2,8 @@ import 'package:get/get.dart';
 import 'package:magic_hardware/features/shop/models/product_model.dart';
 import 'package:magic_hardware/utils/popups/loaders.dart';
 
-import '../../../data/repositories/products/product_repository.dart';
-import '../../../utils/constants/enums.dart';
+import '../../../../data/repositories/products/product_repository.dart';
+import '../../../../utils/constants/enums.dart';
 
 class ProductController extends GetxController {
   static ProductController get instance => Get.find();
@@ -38,35 +38,30 @@ class ProductController extends GetxController {
 
   // Get Product Price or Price Range
   String getProductPrice(ProductModel product) {
-    double smallestPrice = double.infinity;
-    double largestPrice = 0.0;
-
-    // If no variations, return the base price or sale price
+    // If no variations, return the base price or sale price, formatted to 2 decimal places.
     if (product.productType == ProductType.single.toString()) {
-      return (product.salePrice != null && product.salePrice != 0.0
-              ? product.salePrice
-              : product.price)
-          .toString();
+      final priceToUse = (product.salePrice != null && product.salePrice! > 0)
+          ? product.salePrice!
+          : product.price;
+      return priceToUse.toStringAsFixed(2);
     } else {
-      // Calculate the smallest and largest prices among variations
-      if (product.productVariations != null) {
-        for (var variation in product.productVariations!) {
-          final salePrice = variation.salePrice ?? 0.0;
-          final priceToConsider = salePrice > 0.0 ? salePrice : variation.price;
+      double smallestPrice = double.infinity;
+      double largestPrice = 0.0;
 
-          if (priceToConsider < smallestPrice) {
-            smallestPrice = priceToConsider;
-          }
-          if (priceToConsider > largestPrice) {
-            largestPrice = priceToConsider;
-          }
-        }
+      // Calculate the smallest and largest prices among variations
+      for (var variation in product.productVariations ?? []) {
+        final salePrice = variation.salePrice ?? 0.0;
+        final priceToConsider = salePrice > 0.0 ? salePrice : variation.price;
+
+        if (priceToConsider < smallestPrice) smallestPrice = priceToConsider;
+        if (priceToConsider > largestPrice) largestPrice = priceToConsider;
       }
-      // Return the smallest and largest prices as a range
+
+      // Return the smallest and largest prices as a range, formatted to 2 decimal places.
       if (smallestPrice.isEqual(largestPrice)) {
-        return largestPrice.toString();
+        return largestPrice.toStringAsFixed(2);
       } else {
-        return '$smallestPrice - $largestPrice';
+        return '${smallestPrice.toStringAsFixed(2)} - ${largestPrice.toStringAsFixed(2)}';
       }
     }
   }
