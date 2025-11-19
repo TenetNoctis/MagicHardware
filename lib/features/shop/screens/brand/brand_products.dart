@@ -31,7 +31,7 @@ class BrandProducts extends StatelessWidget {
               ),
               SizedBox(height: MagicSizes.spaceBtwSections),
 
-              MagicSortableProducts(),
+              MagicSortableProducts(products: [],),
             ],
           ),
         ),

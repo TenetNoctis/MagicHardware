@@ -36,6 +36,17 @@ class ProductController extends GetxController {
     }
   }
 
+  Future<List<ProductModel>> fetchAllFeaturedProducts() async {
+    try {
+      // Fetch Products
+      final products = await productRepository.getAllFeaturedProducts();
+      return products;
+    } catch (e) {
+      MagicLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+      return [];
+    }
+  }
+
   // Get Product Price or Price Range
   String getProductPrice(ProductModel product) {
     // If no variations, return the base price or sale price, formatted to 2 decimal places.
@@ -70,8 +81,7 @@ class ProductController extends GetxController {
   String? calculateSalePercentage(double originalPrice, double? salePrice) {
     if (salePrice == null || salePrice <= 0.0) return null;
     if (originalPrice <= 0) return null;
-    double discountPercentage =
-        ((originalPrice - salePrice) / originalPrice) * 100;
+    double discountPercentage = ((originalPrice - salePrice) / originalPrice) * 100;
     return discountPercentage.toStringAsFixed(0);
   }
 

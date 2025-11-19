@@ -11,6 +11,23 @@ class ProductRepository extends GetxController {
 
   final _db = FirebaseFirestore.instance;
 
+  // Get All featured products
+  Future<List<ProductModel>> getAllFeaturedProducts() async {
+    try {
+      final snapshot = await _db
+          .collection('Products')
+          .where('IsFeatured', isEqualTo: true)
+          .get();
+      return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
+    } on FirebaseException catch (e) {
+      throw MagicFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw MagicPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
+
   // Get featured products
   Future<List<ProductModel>> getFeaturedProducts() async {
     try {
@@ -20,6 +37,21 @@ class ProductRepository extends GetxController {
           .limit(6)
           .get();
       return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
+    } on FirebaseException catch (e) {
+      throw MagicFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw MagicPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
+
+  // Get Products based on Query
+  Future<List<ProductModel>> getProductsByQuery(Query query) async {
+    try {
+      final querySnapshot = await query.get();
+      final List<ProductModel> productList = querySnapshot.docs.map((doc) => ProductModel.fromQuerySnapshot(doc)).toList();
+      return productList;
     } on FirebaseException catch (e) {
       throw MagicFirebaseException(e.code).message;
     } on PlatformException catch (e) {

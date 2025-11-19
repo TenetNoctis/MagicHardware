@@ -80,18 +80,33 @@ class HomeScreen extends StatelessWidget {
                   // Heading
                   MagicSectionHeading(
                     title: 'Popular Products',
-                    onPressed: () => Get.to(() => const AllProductsScreen()),
+                    onPressed: () => Get.to(
+                      () => AllProductsScreen(
+                        title: 'Popular Products',
+                        futureMethod: controller.fetchAllFeaturedProducts(),
+                      ),
+                    ),
                   ),
                   const SizedBox(height: MagicSizes.spaceBtwItems),
 
                   // Popular Products
                   Obx(() {
-                    if (controller.isLoading.value) return const MagicVerticalProductShimmer();
-                    if (controller.featuredProducts.isEmpty) return Center(child: Text('No Data Found!', style: Theme.of(context).textTheme.bodyMedium));
+                    if (controller.isLoading.value) {
+                      return const MagicVerticalProductShimmer();
+                    }
+                    if (controller.featuredProducts.isEmpty) {
+                      return Center(
+                        child: Text(
+                          'No Data Found!',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      );
+                    }
                     return MagicGridLayout(
                       itemCount: controller.featuredProducts.length,
-                      itemBuilder: (_, index) =>
-                          MagicProductCardVertical(product: controller.featuredProducts[index])
+                      itemBuilder: (_, index) => MagicProductCardVertical(
+                        product: controller.featuredProducts[index],
+                      ),
                     );
                   }),
                 ],
