@@ -13,6 +13,7 @@ import 'package:magic_hardware/utils/constants/sizes.dart';
 import '../../../../common/widgets/custom_shapes/containers/primary_header_container.dart';
 import '../../../../common/widgets/custom_shapes/containers/search_container.dart';
 import '../../../../common/widgets/texts/section_heading.dart';
+import '../../controllers/product/all_products_controller.dart';
 import '../../controllers/product/product_controller.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -21,6 +22,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ProductController());
+    Get.put(AllProductsController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

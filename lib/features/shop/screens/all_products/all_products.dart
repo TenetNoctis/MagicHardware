@@ -24,7 +24,7 @@ class AllProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(AllProductsController());
+    final controller = Get.find<AllProductsController>();
 
     return Scaffold(
       appBar: MagicAppBar(title: Text(title), showBackArrow: true),

@@ -10,18 +10,20 @@ import 'package:magic_hardware/features/shop/controllers/category_controller.dar
 import 'package:magic_hardware/features/shop/screens/brand/all_brands.dart';
 import 'package:magic_hardware/features/shop/screens/store/widgets/category_tab.dart';
 import 'package:magic_hardware/utils/constants/colors.dart';
-import 'package:magic_hardware/utils/constants/image_strings.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 import 'package:magic_hardware/utils/helpers/helper_functions.dart';
 
 import '../../../../common/widgets/brands/brand_card.dart';
-import '../../models/brand_model.dart';
+import '../../../../common/widgets/shimmers/brands_shimmer.dart';
+import '../../controllers/brand_controller.dart';
+import '../brand/brand_products.dart';
 
 class StoreScreen extends StatelessWidget {
   const StoreScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final brandController = Get.put(BrandController());
     final categories = CategoryController.instance.featuredCategories;
     return DefaultTabController(
       length: categories.length,
@@ -71,37 +73,52 @@ class StoreScreen extends StatelessWidget {
                       const SizedBox(height: MagicSizes.spaceBtwItems / 1.5),
 
                       // Brand Grid
-                      MagicGridLayout(
-                        itemCount: 4,
-                        mainAxisExtent: 80,
-                        itemBuilder: (_, index) {
-                          return MagicBrandCard(
-                            showBorder: true,
-                            brand: BrandModel(
-                              id: '1',
-                              image: MagicImages.weldingIcon,
-                              name: 'Vaultex',
-                              productsCount: 256,
+                      Obx(() {
+                        if (brandController.isLoading.value) return MagicBrandsShimmer();
+
+                        if (brandController.featuredBrands.isEmpty) {
+                          return Center(
+                            child: Text(
+                              'No Data Found!',
+                              style: Theme.of(context).textTheme.bodyMedium,
                             ),
                           );
-                        },
-                      ),
+                        }
+                        return MagicGridLayout(
+                          itemCount: brandController.featuredBrands.length,
+                          mainAxisExtent: 80,
+                          itemBuilder: (_, index) {
+                            final brand = brandController.featuredBrands[index];
+                            return MagicBrandCard(
+                              brand: brand,
+                              showBorder: true,
+                              onTap: () => Get.to(() => BrandProducts(brand: brand)),
+                            );
+                          },
+                        );
+                      }),
                     ],
                   ),
                 ),
 
                 // Tabs
-                bottom: MagicTabBar(tabs: categories.map((category) => Tab(child: Text(category.name))).toList()),
+                bottom: MagicTabBar(
+                  tabs: categories
+                      .map((category) => Tab(child: Text(category.name)))
+                      .toList(),
+                ),
               ),
             ];
           },
 
           // Body
           body: TabBarView(
-            children: categories.map((category) => MagicCategoryTab(category: category)).toList()),
+            children: categories
+                .map((category) => MagicCategoryTab(category: category))
+                .toList(),
+          ),
         ),
       ),
     );
   }
 }
-

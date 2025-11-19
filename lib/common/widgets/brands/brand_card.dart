@@ -40,8 +40,10 @@ class MagicBrandCard extends StatelessWidget {
             /// -- Icon
             Flexible(
               child: MagicCircularImage(
+                fit: BoxFit.contain,
+                radius: 0,
                 image: brand.image,
-                isNetworkImage: false,
+                isNetworkImage: true,
                 backgroundColor: Colors.transparent,
                 overlayColor: isDark ? MagicColors.white : MagicColors.black,
               ),
@@ -53,7 +55,7 @@ class MagicBrandCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MagicBrandTitleWithVerifiedIcon(title: brand.name, brandTextSize: TextSizes.large),
+                  MagicBrandTitleWithVerifiedIcon(title: brand.name, brandTextSize: TextSizes.medium),
                   Text(
                     '${brand.productsCount ?? 0} products',
                     overflow: TextOverflow.ellipsis,

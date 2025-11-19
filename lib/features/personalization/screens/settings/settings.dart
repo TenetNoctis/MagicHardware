@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:magic_hardware/common/widgets/appbar/appbar.dart';
 import 'package:magic_hardware/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:magic_hardware/common/widgets/list_tiles/settings_menu_tile.dart';
@@ -16,6 +16,7 @@ import '../../../../common/widgets/list_tiles/user_profile_tile.dart';
 import '../../../../data/repositories/authentication/authentication_repository.dart';
 import '../../../../data/repositories/products/product_dummy_data.dart';
 import '../../../../data/repositories/products/product_repository.dart';
+import '../../controllers/user_controller.dart';
 import '../profile/profile.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -24,6 +25,9 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = MagicHelperFunctions.isDarkMode(context);
+    final controller = UserController.instance;
+    final admin = '!0SBr5d6jy1VcFXpGV6Vn1b2Cz153';
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -121,25 +125,32 @@ class SettingsScreen extends StatelessWidget {
 
                   SizedBox(height: MagicSizes.spaceBtwItems),
 
-                  MagicSettingsMenuTile(
-                    icon: Iconsax.document_upload,
-                    title: 'Load Data',
-                    subtitle: 'Upload Data to your Cloud Firebase',
-                    onTap: () {
-                      final productRepository = Get.put(ProductRepository());
-                      productRepository.uploadDummyData(MagicDummyData.products);
-                    },
-                  ),
+                  if (controller.user.value!.id == admin)
+                    MagicSettingsMenuTile(
+                      icon: Iconsax.document_upload,
+                      title: 'Load Data',
+                      subtitle: 'Upload Data to your Cloud Firebase',
+                      onTap: () {
+                        final productRepository = Get.put(ProductRepository());
+                        productRepository.uploadDummyData(
+                          MagicDummyData.products,
+                        );
+                      },
+                    ),
 
                   MagicSettingsMenuTile(
                     icon: Iconsax.location,
                     title: 'Geolocation',
                     subtitle: 'Set recommendations based on location',
                     onTap: () {},
-                    trailing: Switch(value: true,
-                        activeTrackColor: MagicColors.primary,
-                        activeThumbColor: dark ? MagicColors.black : MagicColors.white,
-                        onChanged: (value) {}),
+                    trailing: Switch(
+                      value: true,
+                      activeTrackColor: MagicColors.primary,
+                      activeThumbColor: dark
+                          ? MagicColors.black
+                          : MagicColors.white,
+                      onChanged: (value) {},
+                    ),
                   ),
 
                   MagicSettingsMenuTile(
