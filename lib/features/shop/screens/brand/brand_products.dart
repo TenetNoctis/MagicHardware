@@ -32,7 +32,7 @@ class BrandProducts extends StatelessWidget {
               SizedBox(height: MagicSizes.spaceBtwSections),
 
               FutureBuilder(
-                future: controller.getBrandProducts(brand.id),
+                future: controller.getBrandProducts(brandId: brand.id),
                 builder: (context, snapshot) {
                   const loader = MagicVerticalProductShimmer();
                   final widget = MagicCloudHelperFunctions.checkMultiRecordState(snapshot: snapshot, loader: loader);

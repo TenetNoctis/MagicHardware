@@ -45,10 +45,12 @@ dependencies:
   lottie: ^3.3.2
   shimmer: ^3.0.0
   image_picker: ^1.2.1
+  rename_app: ^1.6.5
 
   # Icons
   iconsax: ^0.0.8
   cupertino_icons: ^1.0.8
+  flutter_launcher_icons: ^0.14.4
 
   # State Management
   get: ^4.6.5
@@ -66,6 +68,13 @@ dependencies:
   google_sign_in: ^7.2.0
   firebase_storage: ^13.0.4
   cached_network_image: ^3.4.1
+
+flutter_launcher_icons:
+  image_path: "assets/icons/magic-icon.png"
+  android: true
+  adaptive_icon_background: "#FF000000"
+  adaptive_icon_foreground: "assets/icons/magic-icon.png"
+  ios: true
 
 dev_dependencies:
   flutter_test:

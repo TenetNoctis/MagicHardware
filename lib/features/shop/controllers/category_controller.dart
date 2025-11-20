@@ -1,7 +1,10 @@
 import 'package:get/get.dart';
 import 'package:magic_hardware/data/repositories/categories/category_repository.dart';
+import 'package:magic_hardware/data/repositories/products/product_repository.dart';
 import 'package:magic_hardware/features/shop/models/category_model.dart';
 import 'package:magic_hardware/utils/popups/loaders.dart';
+
+import '../models/product_model.dart';
 
 class CategoryController extends GetxController {
   static CategoryController get instance => Get.find();
@@ -40,4 +43,14 @@ class CategoryController extends GetxController {
   }
   // Load selected category data
   // Get category or sub-category products
+  Future<List<ProductModel>> getCategoryProducts({required String categoryId, int limit = 4}) async {
+    try {
+      final products = await ProductRepository.instance.getProductsForCategory(categoryId: categoryId, limit: limit);
+      return products;
+    } catch (e) {
+      MagicLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
+      return [];
+    }
+  }
+
 }
