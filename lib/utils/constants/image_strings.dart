@@ -25,6 +25,7 @@ class MagicImages {
   static const String verifyIllustration = "assets/images/animations/verify.gif";
   static const String processingAnimation = "assets/images/animations/processing.json";
   static const String successAnimation = "assets/images/animations/success.json";
+  static const String emptyAnimation = "assets/images/animations/empty.json";
 
 
   // Payment Methods

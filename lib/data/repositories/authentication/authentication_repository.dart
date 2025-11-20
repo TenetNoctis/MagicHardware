@@ -10,6 +10,7 @@ import 'package:magic_hardware/features/authentication/screens/login/login.dart'
 import 'package:magic_hardware/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:magic_hardware/features/authentication/screens/signup/verify_email.dart';
 import 'package:magic_hardware/navigation_menu.dart';
+import 'package:magic_hardware/utils/local_storage/storage_utility.dart';
 
 import '../../../utils/exceptions/firebase_auth_exceptions.dart';
 import '../../../utils/exceptions/firebase_exceptions.dart';
@@ -38,6 +39,7 @@ class AuthenticationRepository extends GetxController {
 
     if (user != null) {
       if (user.emailVerified) {
+        await MagicLocalStorage.init(user.uid);
         Get.offAll(() => const NavigationMenu());
       } else {
         Get.offAll(() => VerifyEmailScreen(email: _auth.currentUser?.email));

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:magic_hardware/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:magic_hardware/common/widgets/images/magic_rounded_image.dart';
+import 'package:magic_hardware/common/widgets/products/favorite_icon/favorite_icon.dart';
 import 'package:magic_hardware/common/widgets/texts/brand_title_text_with_verified_icon.dart';
 import 'package:magic_hardware/common/widgets/texts/product_price_text.dart';
 import 'package:magic_hardware/common/widgets/texts/product_title_text.dart';
@@ -10,7 +11,6 @@ import 'package:magic_hardware/utils/helpers/helper_functions.dart';
 
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
-import '../../icons/magic_circular_icon.dart';
 
 class MagicProductCardHorizontal extends StatelessWidget {
   const MagicProductCardHorizontal({super.key});
@@ -71,12 +71,7 @@ class MagicProductCardHorizontal extends StatelessWidget {
                 Positioned(
                   top: 0,
                   right: 0,
-                  child: const MagicCircularIcon(
-                    width: 40,
-                    height: 40,
-                    icon: Iconsax.heart5,
-                    color: Colors.red,
-                  ),
+                  child: const MagicFavoriteIcon(productId: '')
                 ),
               ],
             ),

@@ -1,12 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:magic_hardware/common/widgets/products/favorite_icon/favorite_icon.dart';
 import 'package:magic_hardware/features/shop/controllers/product/images_controller.dart';
 
 import '../../../../../common/widgets/appbar/appbar.dart';
 import '../../../../../common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
-import '../../../../../common/widgets/icons/magic_circular_icon.dart';
 import '../../../../../common/widgets/images/magic_rounded_image.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
@@ -98,7 +97,7 @@ class MagicProductImageSlider extends StatelessWidget {
               child: MagicAppBar(
                 showBackArrow: true,
                 actions: [
-                  MagicCircularIcon(icon: Iconsax.heart5, color: Colors.red),
+                  MagicFavoriteIcon(productId: product.id),
                 ],
               ),
             ),

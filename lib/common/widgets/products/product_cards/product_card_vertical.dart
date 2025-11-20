@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:magic_hardware/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:magic_hardware/common/widgets/images/magic_rounded_image.dart';
+import 'package:magic_hardware/common/widgets/products/favorite_icon/favorite_icon.dart';
 import 'package:magic_hardware/common/widgets/texts/product_title_text.dart';
 import 'package:magic_hardware/features/shop/controllers/product/product_controller.dart';
 import 'package:magic_hardware/utils/constants/enums.dart';
@@ -13,7 +14,6 @@ import '../../../../features/shop/models/product_model.dart';
 import '../../../../features/shop/screens/product_details/product_detail.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../styles/shadows.dart';
-import '../../icons/magic_circular_icon.dart';
 import '../../texts/brand_title_text_with_verified_icon.dart';
 import '../../texts/product_price_text.dart';
 
@@ -94,12 +94,7 @@ class MagicProductCardVertical extends StatelessWidget {
                   Positioned(
                     top: 6,
                     right: 1,
-                    child: const MagicCircularIcon(
-                      width: 40,
-                      height: 40,
-                      icon: Iconsax.heart5,
-                      color: Colors.red,
-                    ),
+                    child: MagicFavoriteIcon(productId: product.id),
                   ),
                 ],
               ),
