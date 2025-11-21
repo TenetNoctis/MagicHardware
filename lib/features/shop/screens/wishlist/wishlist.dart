@@ -6,13 +6,14 @@ import 'package:magic_hardware/common/widgets/icons/magic_circular_icon.dart';
 import 'package:magic_hardware/common/widgets/layouts/grid_layout.dart';
 import 'package:magic_hardware/common/widgets/loaders/animation_loader.dart';
 import 'package:magic_hardware/features/shop/controllers/product/favorites_controller.dart';
+import 'package:magic_hardware/features/shop/controllers/product/product_controller.dart';
+import 'package:magic_hardware/features/shop/screens/all_products/all_products.dart';
 import 'package:magic_hardware/features/shop/screens/home/home.dart';
 import 'package:magic_hardware/utils/constants/image_strings.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 import 'package:magic_hardware/utils/helpers/cloud_helper_functions.dart';
 
 import '../../../../common/widgets/products/product_cards/product_card_vertical.dart';
-import '../../../../navigation_menu.dart';
 
 class WishlistScreen extends StatelessWidget {
   const WishlistScreen({super.key});
@@ -54,7 +55,7 @@ class WishlistScreen extends StatelessWidget {
                           animation: MagicImages.emptyAnimation,
                           width: 0.5,
                           onActionPressed: () =>
-                              Get.off(() => const NavigationMenu()),
+                              Get.to(() => AllProductsScreen(title: 'All Products', futureMethod: Get.find<ProductController>().fetchAllFeaturedProducts())),
                         ),
                       ],
                     );

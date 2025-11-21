@@ -5,7 +5,7 @@ import 'package:magic_hardware/utils/constants/sizes.dart';
 class MagicProfileMenu extends StatelessWidget {
   const MagicProfileMenu({
     super.key,
-    this.icon = Iconsax.arrow_right_34,
+    this.icon = Iconsax.add2,
     required this.onPressed,
     required this.title,
     required this.value,

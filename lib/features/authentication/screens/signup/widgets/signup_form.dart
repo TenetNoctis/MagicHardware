@@ -80,6 +80,7 @@ class MagicSignupForm extends StatelessWidget {
             controller: controller.phoneNumber,
             validator: (value) =>
                 MagicValidator.validatePhoneNumberFormat(value),
+            keyboardType: TextInputType.phone,
             decoration: const InputDecoration(
               labelText: MagicTexts.phoneNo,
               prefixIcon: Icon(Iconsax.call),

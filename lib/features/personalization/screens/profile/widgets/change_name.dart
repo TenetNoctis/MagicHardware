@@ -29,7 +29,7 @@ class ChangeName extends StatelessWidget {
           children: [
             // Headings
             Text(
-              'Use real name for easy verification',
+              'Use your real name for easy verification!',
               style: Theme.of(context).textTheme.labelMedium,
             ),
             const SizedBox(height: MagicSizes.spaceBtwSections),

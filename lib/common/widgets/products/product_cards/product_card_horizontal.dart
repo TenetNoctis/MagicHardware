@@ -6,17 +6,26 @@ import 'package:magic_hardware/common/widgets/products/favorite_icon/favorite_ic
 import 'package:magic_hardware/common/widgets/texts/brand_title_text_with_verified_icon.dart';
 import 'package:magic_hardware/common/widgets/texts/product_price_text.dart';
 import 'package:magic_hardware/common/widgets/texts/product_title_text.dart';
-import 'package:magic_hardware/utils/constants/image_strings.dart';
 import 'package:magic_hardware/utils/helpers/helper_functions.dart';
 
+import '../../../../features/shop/controllers/product/product_controller.dart';
+import '../../../../features/shop/models/product_model.dart';
 import '../../../../utils/constants/colors.dart';
+import '../../../../utils/constants/enums.dart';
 import '../../../../utils/constants/sizes.dart';
 
 class MagicProductCardHorizontal extends StatelessWidget {
-  const MagicProductCardHorizontal({super.key});
+  const MagicProductCardHorizontal({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
+    final controller = ProductController.instance;
+    final salePercentage = controller.calculateSalePercentage(
+      product.price,
+      product.salePrice,
+    );
     final dark = MagicHelperFunctions.isDarkMode(context);
     return Container(
       width: 310,
@@ -41,37 +50,39 @@ class MagicProductCardHorizontal extends StatelessWidget {
                   height: 120,
                   width: 120,
                   child: MagicRoundedImage(
-                    imageUrl: MagicImages.weldingGlove,
+                    imageUrl: product.thumbnail,
+                    isNetworkImage: true,
                     applyImageRadius: true,
                   ),
                 ),
 
                 // Sale Tag
-                Positioned(
-                  top: 5,
-                  child: MagicRoundedContainer(
-                    radius: MagicSizes.sm,
-                    backgroundColor: MagicColors.secondary.withValues(
-                      alpha: 0.5,
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: MagicSizes.xs,
-                      vertical: MagicSizes.xs,
-                    ),
-                    child: Text(
-                      '-25%',
-                      style: Theme.of(
-                        context,
-                      ).textTheme.labelLarge!.apply(color: MagicColors.black),
+                if (salePercentage != null)
+                  Positioned(
+                    top: 5,
+                    child: MagicRoundedContainer(
+                      radius: MagicSizes.sm,
+                      backgroundColor: MagicColors.secondary.withValues(
+                        alpha: 0.5,
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: MagicSizes.xs,
+                        vertical: MagicSizes.xs,
+                      ),
+                      child: Text(
+                        '$salePercentage%',
+                        style: Theme.of(
+                          context,
+                        ).textTheme.labelLarge!.apply(color: MagicColors.black),
+                      ),
                     ),
                   ),
-                ),
 
                 // Favorite Icon Button
                 Positioned(
                   top: 0,
                   right: 0,
-                  child: const MagicFavoriteIcon(productId: '')
+                  child: MagicFavoriteIcon(productId: product.id),
                 ),
               ],
             ),
@@ -86,28 +97,53 @@ class MagicProductCardHorizontal extends StatelessWidget {
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   // Product Details
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       MagicProductTitleText(
-                        title: 'Welding Gloves',
+                        title: product.title,
                         smallSize: true,
                       ),
-                      SizedBox(height: MagicSizes.spaceBtwItems / 2),
-                      MagicBrandTitleWithVerifiedIcon(title: 'Vaultex'),
-                      SizedBox(height: MagicSizes.spaceBtwItems / 2),
+                      SizedBox(height: MagicSizes.spaceBtwItems / 3),
+                      MagicBrandTitleWithVerifiedIcon(
+                        title: product.brand!.name,
+                      ),
                     ],
                   ),
 
                   Spacer(),
 
+                  // Price Row
+
+                  // Sale Price
+                  if (product.productType == ProductType.single.toString() &&
+                      (product.salePrice ?? 0) > 0)
+                    Text(
+                      'MVR ${product.price.toStringAsFixed(2)}',
+                      style: Theme.of(context).textTheme.labelMedium!.apply(
+                        decoration: TextDecoration.lineThrough,
+                      ),
+                    ),
+
+                  // Regular Price
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       // Price
-                      Flexible(child: MagicProductPriceText(price: '95.00')),
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            MagicProductPriceText(
+                              price: controller.getProductPrice(product),
+                              isLarge: false,
+                            ),
+                          ],
+                        ),
+                      ),
 
                       // Add to Cart
                       Container(

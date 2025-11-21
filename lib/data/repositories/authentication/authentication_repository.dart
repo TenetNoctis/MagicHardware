@@ -39,8 +39,8 @@ class AuthenticationRepository extends GetxController {
 
     if (user != null) {
       if (user.emailVerified) {
-        await MagicLocalStorage.init(user.uid);
         Get.offAll(() => const NavigationMenu());
+        await MagicLocalStorage.init(user.uid);
       } else {
         Get.offAll(() => VerifyEmailScreen(email: _auth.currentUser?.email));
       }

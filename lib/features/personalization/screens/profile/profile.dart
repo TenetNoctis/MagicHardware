@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:magic_hardware/common/widgets/appbar/appbar.dart';
@@ -6,10 +7,15 @@ import 'package:magic_hardware/common/widgets/images/magic_circular_image.dart';
 import 'package:magic_hardware/common/widgets/shimmers/shimmer.dart';
 import 'package:magic_hardware/common/widgets/texts/section_heading.dart';
 import 'package:magic_hardware/features/personalization/controllers/user_controller.dart';
+import 'package:magic_hardware/features/personalization/screens/profile/widgets/change_dob.dart';
+import 'package:magic_hardware/features/personalization/screens/profile/widgets/change_gender.dart';
 import 'package:magic_hardware/features/personalization/screens/profile/widgets/change_name.dart';
+import 'package:magic_hardware/features/personalization/screens/profile/widgets/change_phone.dart';
 import 'package:magic_hardware/features/personalization/screens/profile/widgets/profile_menu.dart';
 import 'package:magic_hardware/utils/constants/image_strings.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
+
+import '../../../../utils/popups/loaders.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -32,7 +38,11 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     Obx(() {
                       if (controller.imageUploading.value) {
-                        return const MagicShimmerEffect(width: 60, height: 60, radius: 60);
+                        return const MagicShimmerEffect(
+                          width: 60,
+                          height: 60,
+                          radius: 60,
+                        );
                       }
                       final networkImage =
                           controller.user.value!.profilePicture;
@@ -68,6 +78,7 @@ class ProfileScreen extends StatelessWidget {
 
               MagicProfileMenu(
                 title: 'Name',
+                icon: Iconsax.arrow_right_34,
                 value: controller.user.value!.fullName,
                 onPressed: () => Get.to(() => const ChangeName()),
               ),
@@ -93,27 +104,42 @@ class ProfileScreen extends StatelessWidget {
                 title: 'User ID',
                 icon: Iconsax.copy,
                 value: controller.user.value!.id,
-                onPressed: () {},
+                onPressed: () {
+                  Clipboard.setData(
+                    ClipboardData(text: controller.user.value!.id),
+                  );
+                  MagicLoaders.successSnackBar(
+                    title: 'Copied',
+                    message: 'User ID copied to clipboard',
+                  );
+                },
               ),
+
               MagicProfileMenu(
                 title: 'E-mail',
                 value: controller.user.value!.email,
                 onPressed: () {},
               ),
+
               MagicProfileMenu(
                 title: 'Phone Number',
-                value: controller.user.value!.phoneNumber,
-                onPressed: () {},
+                icon: Iconsax.arrow_right_34,
+                value: controller.user.value!.phoneNumber.isEmpty ? 'Not Set' : controller.user.value!.phoneNumber,
+                onPressed: () => Get.to(() => const ChangePhone()),
               ),
+
+
               MagicProfileMenu(
                 title: 'Gender',
-                value: 'Male',
-                onPressed: () {},
+                icon: Iconsax.arrow_right_34,
+                value: controller.user.value!.gender.isEmpty ? 'Not set' : controller.user.value!.gender,
+                onPressed: () => Get.to(() => const ChangeGender()),
               ),
               MagicProfileMenu(
                 title: 'Date of Birth',
-                value: '26 Sept, 1999',
-                onPressed: () {},
+                icon: Iconsax.arrow_right_34,
+                value: controller.user.value!.dateOfBirth.isEmpty ? 'Not set' : controller.user.value!.dateOfBirth,
+                onPressed: () => Get.to(() => const ChangeDob()),
               ),
 
               const Divider(),

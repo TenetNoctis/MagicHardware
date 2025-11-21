@@ -47,7 +47,7 @@ class MagicAnimationLoaderWidget extends StatelessWidget {
                   child: OutlinedButton(
                     onPressed: onActionPressed,
                     style: OutlinedButton.styleFrom(
-                      backgroundColor: dark ? MagicColors.darkContainer : MagicColors.primary,
+                      backgroundColor: dark ? MagicColors.darkContainer : MagicColors.white,
                       side: const BorderSide(
                         color: MagicColors.primary,
                       ),
@@ -55,7 +55,7 @@ class MagicAnimationLoaderWidget extends StatelessWidget {
                     child: Text(
                       actionText!,
                       style: Theme.of(context).textTheme.bodyMedium!.apply(
-                        color: MagicColors.white,
+                        color: dark? MagicColors.white : MagicColors.black,
                       ),
                     ),
                   ),
