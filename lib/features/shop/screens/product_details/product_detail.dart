@@ -22,92 +22,96 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: MagicBottomAddToCart(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Product Image Slider
-            MagicProductImageSlider(product: product),
+    return SafeArea(
+      top: false,
+      bottom: true,
+      child: Scaffold(
+        bottomNavigationBar: MagicBottomAddToCart(),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              // Product Image Slider
+              MagicProductImageSlider(product: product),
 
-            // Product Details
-            Padding(
-              padding: EdgeInsets.only(
-                right: MagicSizes.defaultSpace,
-                left: MagicSizes.defaultSpace,
-                bottom: MagicSizes.defaultSpace,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Rating and Share
-                  MagicRatingsAndShare(),
+              // Product Details
+              Padding(
+                padding: EdgeInsets.only(
+                  right: MagicSizes.defaultSpace,
+                  left: MagicSizes.defaultSpace,
+                  bottom: MagicSizes.defaultSpace,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Rating and Share
+                    MagicRatingsAndShare(),
 
-                  // Title, Price, Stock and Brand
-                  MagicProductMetaData(product: product),
+                    // Title, Price, Stock and Brand
+                    MagicProductMetaData(product: product),
 
-                  // Attributes
-                  if (product.productType == ProductType.variable.toString()) ...[
-                    MagicProductAttributes(product: product),
-                    const SizedBox(height: MagicSizes.spaceBtwSections),
-                  ],
-
-                  // Checkout
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(backgroundColor: MagicColors.primary, side: BorderSide(color: MagicColors.primary)),
-                      onPressed: () {},
-                      child: Text('Checkout'),
-                    ),
-                  ),
-                  const SizedBox(height: MagicSizes.spaceBtwSections),
-
-                  // Description
-                  const MagicSectionHeading(
-                    title: 'Description',
-                    showActionButton: false,
-                  ),
-                  const SizedBox(height: MagicSizes.spaceBtwItems),
-                  ReadMoreText(
-                    product.description ?? '',
-                    textAlign: TextAlign.left,
-                    trimLines: 2,
-                    trimMode: TrimMode.Line,
-                    trimCollapsedText: ' Show More',
-                    trimExpandedText: ' Show Less',
-                    moreStyle: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w800,
-                    ),
-                    lessStyle: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-
-                  // Reviews
-                  const Divider(),
-                  SizedBox(height: MagicSizes.spaceBtwItems),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      MagicSectionHeading(
-                        title: 'Reviews (199)',
-                        onPressed: () {},
-                        showActionButton: false,
-                      ),
-                      IconButton(
-                        onPressed: () => Get.to(const ProductReviewsScreen()),
-                        icon: const Icon(Iconsax.arrow_right_3),
-                      ),
+                    // Attributes
+                    if (product.productType == ProductType.variable.toString()) ...[
+                      MagicProductAttributes(product: product),
+                      const SizedBox(height: MagicSizes.spaceBtwSections),
                     ],
-                  ),
-                  SizedBox(height: MagicSizes.spaceBtwSections),
-                ],
+
+                    // Checkout
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(backgroundColor: MagicColors.primary, side: BorderSide(color: MagicColors.primary)),
+                        onPressed: () {},
+                        child: Text('Checkout'),
+                      ),
+                    ),
+                    const SizedBox(height: MagicSizes.spaceBtwSections),
+
+                    // Description
+                    const MagicSectionHeading(
+                      title: 'Description',
+                      showActionButton: false,
+                    ),
+                    const SizedBox(height: MagicSizes.spaceBtwItems),
+                    ReadMoreText(
+                      product.description ?? '',
+                      textAlign: TextAlign.left,
+                      trimLines: 2,
+                      trimMode: TrimMode.Line,
+                      trimCollapsedText: ' Show More',
+                      trimExpandedText: ' Show Less',
+                      moreStyle: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w800,
+                      ),
+                      lessStyle: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+
+                    // Reviews
+                    const Divider(),
+                    SizedBox(height: MagicSizes.spaceBtwItems),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        MagicSectionHeading(
+                          title: 'Reviews (199)',
+                          onPressed: () {},
+                          showActionButton: false,
+                        ),
+                        IconButton(
+                          onPressed: () => Get.to(const ProductReviewsScreen()),
+                          icon: const Icon(Iconsax.arrow_right_3),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: MagicSizes.spaceBtwSections),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

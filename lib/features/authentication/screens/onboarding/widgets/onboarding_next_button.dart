@@ -5,15 +5,12 @@ import 'package:magic_hardware/features/authentication/controllers/onboarding/on
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/device/device_utility.dart';
-import '../../../../../utils/helpers/helper_functions.dart';
 
 class OnBoardingNextButton extends StatelessWidget {
   const OnBoardingNextButton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final dark = MagicHelperFunctions.isDarkMode(context);
-
     return Positioned(
       right: MagicSizes.defaultSpace,
       bottom: MagicDeviceUtils.getBottomNavigationBarHeight(),
@@ -21,7 +18,8 @@ class OnBoardingNextButton extends StatelessWidget {
         onPressed: () => OnBoardingController.instance.nextPage(),
         style: ElevatedButton.styleFrom(
           shape: const CircleBorder(),
-          backgroundColor: dark ? MagicColors.primary : Colors.black,
+          backgroundColor: MagicColors.primary,
+          side: BorderSide(color: MagicColors.primary)
         ),
         child: const Icon(Iconsax.arrow_right_3),
       ),

@@ -6,6 +6,8 @@ import 'package:magic_hardware/utils/constants/sizes.dart';
 import 'package:magic_hardware/utils/constants/text_strings.dart';
 import 'package:magic_hardware/utils/validators/validation.dart';
 
+import '../../../../../utils/constants/colors.dart';
+
 class ReAuthLoginForm extends StatelessWidget {
   const ReAuthLoginForm({super.key});
 
@@ -43,9 +45,11 @@ class ReAuthLoginForm extends StatelessWidget {
                       suffixIcon: IconButton(
                         onPressed: () => controller.hidePassword.value =
                             !controller.hidePassword.value,
-                        icon: Icon(controller.hidePassword.value
-                            ? Iconsax.eye_slash
-                            : Iconsax.eye),
+                        icon: Icon(
+                          controller.hidePassword.value
+                              ? Iconsax.eye_slash
+                              : Iconsax.eye,
+                        ),
                       ),
                     ),
                   ),
@@ -54,8 +58,16 @@ class ReAuthLoginForm extends StatelessWidget {
 
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(onPressed: () => controller.reAuthenticateEmailAndPasswordUser(), child: const Text('Verify')),
-                )
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: MagicColors.primary,
+                      side: BorderSide(color: MagicColors.primary),
+                    ),
+                    onPressed: () =>
+                        controller.reAuthenticateEmailAndPasswordUser(),
+                    child: const Text('Verify'),
+                  ),
+                ),
               ],
             ),
           ),

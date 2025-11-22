@@ -10,7 +10,7 @@ class MagicColors {
   static const Color accent = Color(0xFFb0c7ff);
 
   // Dashboard Specific Colors
-  static const Color dashboardAppbarBackground = Color(0xFF4b68ff);
+  static const Color dashboardAppbarBackground = Color(0xFFF38331);
 
   // Text Colors
   static const Color textPrimary = Color(0xFF333333);

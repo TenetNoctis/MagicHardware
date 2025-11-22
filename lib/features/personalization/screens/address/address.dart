@@ -5,7 +5,9 @@ import 'package:magic_hardware/common/widgets/appbar/appbar.dart';
 import 'package:magic_hardware/features/personalization/screens/address/widgets/single_address.dart';
 import 'package:magic_hardware/utils/constants/colors.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
+import 'package:magic_hardware/utils/helpers/cloud_helper_functions.dart';
 
+import '../../controllers/address_controller.dart';
 import 'add_new_address.dart';
 
 class UserAddressScreen extends StatelessWidget {
@@ -13,12 +15,8 @@ class UserAddressScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(AddressController());
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: MagicColors.primary,
-        onPressed: () => Get.to(() => AddNewAddressScreen()),
-        child: Icon(Iconsax.add, color: MagicColors.white),
-      ),
       appBar: MagicAppBar(
         showBackArrow: true,
         title: Text(
@@ -28,14 +26,37 @@ class UserAddressScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsetsGeometry.all(MagicSizes.defaultSpace),
-          child: Column(
-            children: [
-              MagicSingleAddress(selectedAddress: true),
-              MagicSingleAddress(selectedAddress: false),
-            ],
+          padding: EdgeInsets.all(MagicSizes.defaultSpace),
+          child: Obx(
+            () => FutureBuilder(
+              key: Key(controller.refreshData.value.toString()),
+              future: controller.getAllUserAddresses(),
+              builder: (context, snapshot) {
+                final response =
+                    MagicCloudHelperFunctions.checkMultiRecordState(
+                      snapshot: snapshot,
+                    );
+
+                if (response != null) return response;
+
+                final addresses = snapshot.data!;
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: addresses.length,
+                  itemBuilder: (_, index) => MagicSingleAddress(
+                    address: addresses[index],
+                    onTap: () => controller.selectAddress(addresses[index]),
+                  ),
+                );
+              },
+            ),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: MagicColors.primary,
+        onPressed: () => Get.to(() => AddNewAddressScreen()),
+        child: Icon(Iconsax.add, color: MagicColors.white),
       ),
     );
   }

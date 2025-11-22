@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:magic_hardware/features/authentication/screens/signup/signup.dart';
 import 'package:magic_hardware/utils/validators/validation.dart';
 
+import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/text_strings.dart';
 import '../../../controllers/login/login_controller.dart';
@@ -88,6 +89,10 @@ class MagicLoginForm extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: MagicColors.primary,
+                    side: BorderSide(color: MagicColors.primary)
+                ),
                 onPressed: () => controller.emailAndPasswordSignIn(),
                 child: const Text(MagicTexts.signIn),
               ),
@@ -98,6 +103,7 @@ class MagicLoginForm extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
+                style: OutlinedButton.styleFrom(side: BorderSide(color: MagicColors.primary)),
                 onPressed: () => Get.to(() => const SignupScreen()),
                 child: const Text(MagicTexts.createAccount),
               ),

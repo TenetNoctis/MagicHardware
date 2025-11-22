@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
 
@@ -19,10 +20,10 @@ class OnBoardingPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image(
+          Lottie.asset(
+            image,
             width: MagicHelperFunctions.screenWidth() * 0.8,
             height: MagicHelperFunctions.screenWidth() * 0.6,
-            image: AssetImage(image),
           ),
           Text(
             title,

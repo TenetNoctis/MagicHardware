@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:magic_hardware/common/widgets/appbar/appbar.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 
+import '../../../../../utils/constants/colors.dart';
 import '../../../controllers/update_gender_controller.dart';
 
 class ChangeGender extends StatelessWidget {
@@ -66,6 +67,10 @@ class ChangeGender extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: MagicColors.primary,
+                    side: BorderSide(color: MagicColors.primary)
+                ),
                 onPressed: () => controller.updateGender(),
                 child: const Text('Save'),
               ),

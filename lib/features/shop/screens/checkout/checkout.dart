@@ -6,7 +6,6 @@ import 'package:magic_hardware/features/shop/screens/cart/widgets/cart_items.dar
 import 'package:magic_hardware/features/shop/screens/checkout/widgets/billing_address_section.dart';
 import 'package:magic_hardware/features/shop/screens/checkout/widgets/billing_amount_section.dart';
 import 'package:magic_hardware/features/shop/screens/checkout/widgets/billing_payment_section.dart';
-import 'package:magic_hardware/navigation_menu.dart';
 import 'package:magic_hardware/utils/constants/colors.dart';
 import 'package:magic_hardware/utils/constants/image_strings.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
@@ -21,67 +20,75 @@ class CheckoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = MagicHelperFunctions.isDarkMode(context);
-    return Scaffold(
-      appBar: MagicAppBar(
-        title: Text(
-          'Order Review',
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
-        showBackArrow: true,
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(MagicSizes.defaultSpace),
-          child: Column(
-            children: [
-              // Items in Cart
-              MagicAllCartItems(showAddRemoveButtons: false, physics: const NeverScrollableScrollPhysics()),
-              SizedBox(height: MagicSizes.spaceBtwSections),
-
-              // Coupon
-              MagicCouponCode(),
-              SizedBox(height: MagicSizes.spaceBtwSections),
-
-              // Billing
-              MagicRoundedContainer(
-                showBorder: true,
-                padding: EdgeInsets.all(MagicSizes.md),
-                backgroundColor: dark ? MagicColors.black : MagicColors.white,
-                child: Column(
-                  children: [
-                    // Pricing
-                    MagicBillingAmountSection(),
-
-                    // Divider
-                    Divider(),
-
-                    // Payment Methods
-                    MagicBillingPaymentSection(),
-                    SizedBox(height: MagicSizes.spaceBtwItems),
-
-                    // Address
-                    MagicBillingAddressSection(),
-                  ],
-                ),
-              ),
-            ],
+    return SafeArea(
+      top: false,
+      bottom: true,
+      child: Scaffold(
+        appBar: MagicAppBar(
+          title: Text(
+            'Order Review',
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
+          showBackArrow: true,
         ),
-      ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(MagicSizes.defaultSpace),
+            child: Column(
+              children: [
+                // Items in Cart
+                MagicAllCartItems(showAddRemoveButtons: false, physics: const NeverScrollableScrollPhysics()),
+                SizedBox(height: MagicSizes.spaceBtwSections),
 
-      // Checkout Button
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(MagicSizes.defaultSpace),
-        child: ElevatedButton(
-          onPressed: () => Get.to(
-            () => SuccessScreen(
-              image: MagicImages.successfulPaymentIcon,
-              title: 'Payment Success!',
-              subTitle: 'Your items will be shipped soon',
-              onPressed: () => Get.offAll(() => const NavigationMenu()),
+                // Coupon
+                MagicCouponCode(),
+                SizedBox(height: MagicSizes.spaceBtwSections),
+
+                // Billing
+                MagicRoundedContainer(
+                  showBorder: true,
+                  padding: EdgeInsets.all(MagicSizes.md),
+                  backgroundColor: dark ? MagicColors.black : MagicColors.white,
+                  child: Column(
+                    children: [
+                      // Pricing
+                      MagicBillingAmountSection(),
+
+                      // Divider
+                      Divider(),
+
+                      // Payment Methods
+                      MagicBillingPaymentSection(),
+                      SizedBox(height: MagicSizes.spaceBtwItems),
+
+                      // Address
+                      MagicBillingAddressSection(),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
-          child: Text('Checkout MVR 71.25'),
+        ),
+
+        // Checkout Button
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(MagicSizes.defaultSpace),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: MagicColors.primary,
+                side: BorderSide(color: MagicColors.primary)
+            ),
+            onPressed: () => Get.to(
+              () => SuccessScreen(
+                image: MagicImages.successAnimation,
+                title: 'Payment Success!',
+                subTitle: 'Your items will be shipped soon',
+                onPressed: () => Get.back(),
+              ),
+            ),
+            child: Text('Checkout MVR 71.25'),
+          ),
         ),
       ),
     );

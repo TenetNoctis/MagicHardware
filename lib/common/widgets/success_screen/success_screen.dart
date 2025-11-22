@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
 import '../../../utils/constants/text_strings.dart';
 import '../../styles/spacing_styles.dart';
@@ -47,6 +48,10 @@ class SuccessScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: MagicColors.primary,
+                      side: BorderSide(color: MagicColors.primary)
+                  ),
                   onPressed: onPressed,
                   child: const Text(MagicTexts.mContinue),
                 ),

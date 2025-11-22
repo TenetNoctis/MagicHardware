@@ -5,6 +5,7 @@ import 'package:magic_hardware/features/authentication/controllers/signup/signup
 import 'package:magic_hardware/features/authentication/screens/signup/widgets/terms_conditions_checkbox.dart';
 import 'package:magic_hardware/utils/validators/validation.dart';
 
+import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/text_strings.dart';
 
@@ -115,6 +116,10 @@ class MagicSignupForm extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: MagicColors.primary,
+                  side: BorderSide(color: MagicColors.primary)
+              ),
               onPressed: () => controller.signup(),
               child: const Text(MagicTexts.createAccount),
             ),

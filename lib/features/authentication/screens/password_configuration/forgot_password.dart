@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:magic_hardware/utils/validators/validation.dart';
 
+import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/constants/text_strings.dart';
 import '../../controllers/forget_password/forget_password_controller.dart';
@@ -50,6 +51,10 @@ class ForgotPassword extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: MagicColors.primary,
+                    side: BorderSide(color: MagicColors.primary)
+                ),
                 onPressed: () => controller.sendPasswordResetEmail(),
                 child: const Text(MagicTexts.submit),
               ),

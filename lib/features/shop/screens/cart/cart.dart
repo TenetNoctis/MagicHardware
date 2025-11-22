@@ -5,29 +5,39 @@ import 'package:magic_hardware/features/shop/screens/cart/widgets/cart_items.dar
 import 'package:magic_hardware/features/shop/screens/checkout/checkout.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 
+import '../../../../utils/constants/colors.dart';
+
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MagicAppBar(
-        title: Text('Cart', style: Theme.of(context).textTheme.headlineSmall),
-        showBackArrow: true,
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(MagicSizes.defaultSpace),
+    return SafeArea(
+      top: false,
+      bottom: true,
+      child: Scaffold(
+        appBar: MagicAppBar(
+          title: Text('Cart', style: Theme.of(context).textTheme.headlineSmall),
+          showBackArrow: true,
+        ),
+        body: Padding(
+          padding: EdgeInsets.all(MagicSizes.defaultSpace),
 
-        // Items in Cart
-        child: MagicAllCartItems(),
-      ),
+          // Items in Cart
+          child: MagicAllCartItems(),
+        ),
 
-      // Checkout Button
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(MagicSizes.defaultSpace),
-        child: ElevatedButton(
-          onPressed: () => Get.to(() => const CheckoutScreen()),
-          child: Text('Checkout MVR 71.25'),
+        // Checkout Button
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(MagicSizes.defaultSpace),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: MagicColors.primary,
+                side: BorderSide(color: MagicColors.primary)
+            ),
+            onPressed: () => Get.to(() => const CheckoutScreen()),
+            child: Text('Checkout MVR 71.25'),
+          ),
         ),
       ),
     );

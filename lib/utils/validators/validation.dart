@@ -11,14 +11,14 @@ class MagicValidator {
     return null;
   }
 
-  static String? validatePinCode(String? pinCode) {
+  static String? validatePostalCode(String? pinCode) {
     if (pinCode == null || pinCode.isEmpty) {
       return 'Pin Code is required.';
     }
 
     // Check for minimum pinCode length
-    if (pinCode.length < 6) {
-      return 'Pin Code must be 6 Digits.';
+    if (pinCode.length < 5) {
+      return 'Pin Code must be 5 Digits.';
     }
 
     return null;
@@ -121,6 +121,7 @@ class MagicValidator {
   }
 
   /// Phone Number Validation
+  /*
   static String? validatePhoneNumber(String? value) {
     if (value == null || value.isEmpty) {
       return 'Phone number is required.';
@@ -130,6 +131,7 @@ class MagicValidator {
 
     return returnValue;
   }
+  */
 
   static String? validatePhoneNumberFormat(String? value) {
     if (value == null || value.isEmpty) {
@@ -137,10 +139,11 @@ class MagicValidator {
     }
 
     // Regular expression for phone number validation
-    final phoneRegExp = RegExp(r'^\d{7}$');
+    // Allows: 1234567, +960 123-4567, +960 1234567, +9601234567
+    final phoneRegExp = RegExp(r'^(\+960\s?\d{3}[-]?\d{4}|\d{7})$');
 
     if (!phoneRegExp.hasMatch(value)) {
-      return 'Invalid phone number format (7 digits required).';
+      return 'Invalid phone number format (e.g. 1234567, +960 123-4567, +960 1234567, +9601234567).';
     }
 
     return null;

@@ -5,6 +5,7 @@ import 'package:magic_hardware/data/repositories/authentication/authentication_r
 import 'package:magic_hardware/features/authentication/controllers/signup/verify_email_controller.dart';
 import 'package:magic_hardware/utils/constants/text_strings.dart';
 
+import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/image_strings.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/helpers/helper_functions.dart';
@@ -65,6 +66,10 @@ class VerifyEmailScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: MagicColors.primary,
+                      side: BorderSide(color: MagicColors.primary)
+                  ),
                   onPressed: () => controller.checkEmailVerified(),
                   child: const Text(MagicTexts.mContinue),
                 ),
