@@ -12,7 +12,7 @@ class MagicBrandTitleWithVerifiedIcon extends StatelessWidget {
     this.textColor,
     this.maxLines = 1,
     required this.title,
-    this.iconColor = MagicColors.dashboardAppbarBackground,
+    this.iconColor = MagicColors.verifiedBadge,
     this.textAlign = TextAlign.center,
     this.brandTextSize = TextSizes.small,
   });
