@@ -7,7 +7,15 @@ import '../../../../utils/helpers/helper_functions.dart';
 import '../../icons/magic_circular_icon.dart';
 
 class MagicProductQuantityWithAddRemoveButton extends StatelessWidget {
-  const MagicProductQuantityWithAddRemoveButton({super.key});
+  const MagicProductQuantityWithAddRemoveButton({
+    super.key,
+    required this.quantity,
+    this.add,
+    this.remove,
+  });
+
+  final int quantity;
+  final VoidCallback? add, remove;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +33,10 @@ class MagicProductQuantityWithAddRemoveButton extends StatelessWidget {
           backgroundColor: MagicHelperFunctions.isDarkMode(context)
               ? MagicColors.darkerGrey
               : MagicColors.light,
+          onPressed: remove,
         ),
         const SizedBox(width: MagicSizes.spaceBtwItems),
-        Text('2', style: Theme.of(context).textTheme.titleSmall),
+        Text(quantity.toString(), style: Theme.of(context).textTheme.titleSmall),
         const SizedBox(width: MagicSizes.spaceBtwItems),
         MagicCircularIcon(
           icon: Iconsax.add,
@@ -36,6 +45,7 @@ class MagicProductQuantityWithAddRemoveButton extends StatelessWidget {
           size: MagicSizes.md,
           color: MagicColors.white,
           backgroundColor: MagicColors.primary,
+          onPressed: add,
         ),
       ],
     );

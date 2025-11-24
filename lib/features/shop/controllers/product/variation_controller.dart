@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:magic_hardware/features/shop/controllers/product/cart_controller.dart';
 import 'package:magic_hardware/features/shop/controllers/product/images_controller.dart';
 import 'package:magic_hardware/features/shop/models/product_model.dart';
 import 'package:magic_hardware/features/shop/models/product_variation_model.dart';
@@ -39,6 +40,12 @@ class VariationController extends GetxController {
           selectedVariation.image;
     }
 
+    if (selectedVariation.id.isNotEmpty) {
+      final cartController = CartController.instance;
+      cartController.productQuantityInCart.value = cartController
+          .getVariationQuantityInCart(product.id, selectedVariation.id);
+    }
+
     // Assign selected variation
     this.selectedVariation.value = selectedVariation;
 
@@ -77,7 +84,10 @@ class VariationController extends GetxController {
   }
 
   String getVariationPrice() {
-    return (selectedVariation.value.salePrice! > 0 ? selectedVariation.value.salePrice : selectedVariation.value.price).toString();
+    return (selectedVariation.value.salePrice! > 0
+            ? selectedVariation.value.salePrice
+            : selectedVariation.value.price)
+        .toString();
   }
 
   // Check Variation Stock Status

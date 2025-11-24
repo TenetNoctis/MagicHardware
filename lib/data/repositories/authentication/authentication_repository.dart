@@ -39,8 +39,8 @@ class AuthenticationRepository extends GetxController {
 
     if (user != null) {
       if (user.emailVerified) {
-        Get.offAll(() => const NavigationMenu());
         await MagicLocalStorage.init(user.uid);
+        Get.offAll(() => const NavigationMenu());
       } else {
         Get.offAll(() => VerifyEmailScreen(email: _auth.currentUser?.email));
       }
@@ -207,6 +207,7 @@ class AuthenticationRepository extends GetxController {
   // [LogoutUser] - Valid for all authentication
   Future<void> logout() async {
     try {
+      MagicLocalStorage.reset();
       await _googleSignIn.signOut();
       await FirebaseAuth.instance.signOut();
       Get.offAll(() => const LoginScreen());

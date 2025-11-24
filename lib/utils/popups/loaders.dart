@@ -8,6 +8,15 @@ import '../helpers/helper_functions.dart';
 class MagicLoaders {
   static void hideSnackBar() => ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();
 
+  static void closeAllSnackBars() {
+    // Close GetX SnackBars
+    if (Get.isSnackbarOpen) {
+      Get.closeAllSnackbars();
+    }
+    // Close Flutter native SnackBars
+    ScaffoldMessenger.of(Get.context!).clearSnackBars();
+  }
+
   static void customToast({required String message}) {
     ScaffoldMessenger.of(Get.context!).showSnackBar(
       SnackBar(

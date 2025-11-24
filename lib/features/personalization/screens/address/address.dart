@@ -7,6 +7,8 @@ import 'package:magic_hardware/utils/constants/colors.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 import 'package:magic_hardware/utils/helpers/cloud_helper_functions.dart';
 
+import '../../../../common/widgets/loaders/animation_loader.dart';
+import '../../../../utils/constants/image_strings.dart';
 import '../../controllers/address_controller.dart';
 import 'add_new_address.dart';
 
@@ -32,11 +34,20 @@ class UserAddressScreen extends StatelessWidget {
               key: Key(controller.refreshData.value.toString()),
               future: controller.getAllUserAddresses(),
               builder: (context, snapshot) {
+                final emptyWidget = Column(
+                  children: [
+                    SizedBox(height: MagicSizes.spaceBtwSections * 5),
+                    MagicAnimationLoaderWidget(
+                      text: 'No Addresses Saved',
+                      animation: MagicImages.emptyAnimation,
+                    ),
+                  ],
+                );
                 final response =
                     MagicCloudHelperFunctions.checkMultiRecordState(
                       snapshot: snapshot,
+                      nothingFound: emptyWidget,
                     );
-
                 if (response != null) return response;
 
                 final addresses = snapshot.data!;

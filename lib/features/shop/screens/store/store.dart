@@ -33,7 +33,7 @@ class StoreScreen extends StatelessWidget {
             'Store',
             style: Theme.of(context).textTheme.headlineMedium,
           ),
-          actions: [MagicCartCounterIcon(onPressed: () {})],
+          actions: [MagicCartCounterIcon(iconColor: MagicColors.white, counterBgColor: MagicColors.black, counterTextColor: MagicColors.white)],
         ),
 
         body: NestedScrollView(

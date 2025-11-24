@@ -26,7 +26,7 @@ class ProductDetailScreen extends StatelessWidget {
       top: false,
       bottom: true,
       child: Scaffold(
-        bottomNavigationBar: MagicBottomAddToCart(),
+        bottomNavigationBar: MagicBottomAddToCart(product: product),
         body: SingleChildScrollView(
           child: Column(
             children: [

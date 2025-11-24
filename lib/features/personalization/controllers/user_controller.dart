@@ -12,6 +12,8 @@ import 'package:magic_hardware/utils/popups/full_screen_loader.dart';
 import 'package:magic_hardware/utils/popups/loaders.dart';
 
 import '../../../data/repositories/user/user_repository.dart';
+import '../../../utils/constants/colors.dart';
+import '../../../utils/helpers/helper_functions.dart';
 import '../models/user_model.dart';
 
 class UserController extends GetxController {
@@ -26,6 +28,7 @@ class UserController extends GetxController {
   final verifyPassword = TextEditingController();
   final userRepository = Get.put(UserRepository());
   GlobalKey<FormState> reAuthFormKey = GlobalKey<FormState>();
+  final dark = MagicHelperFunctions.isDarkMode(Get.context!);
 
   @override
   void onInit() {
@@ -96,21 +99,12 @@ class UserController extends GetxController {
       contentPadding: EdgeInsets.all(MagicSizes.md),
       title: 'Delete Account',
       middleText: 'Are you sure you want to delete your account?',
-      confirm: ElevatedButton(
-        onPressed: () async => deleteUserAccount(),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.red,
-          side: const BorderSide(color: Colors.red),
-        ),
-        child: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: MagicSizes.lg),
-          child: Text('Delete'),
-        ),
-      ),
-      cancel: OutlinedButton(
-        onPressed: () => Navigator.of(Get.overlayContext!).pop(),
-        child: const Text('Cancel'),
-      ),
+      textConfirm: 'Delete',
+      textCancel: 'Cancel',
+      confirmTextColor: Colors.white,
+      buttonColor: Colors.red,
+      cancelTextColor: dark ? MagicColors.white : MagicColors.black,
+      onConfirm: () async => deleteUserAccount(),
     );
   }
 

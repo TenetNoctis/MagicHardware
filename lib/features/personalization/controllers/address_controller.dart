@@ -78,7 +78,7 @@ class AddressController extends GetxController {
         atoll: atoll.text.trim(),
         postalCode: postalCode.text.trim(),
         landmark: landmark.text.trim(),
-        selectedAddress: true,
+        selectedAddress: false,
       );
 
       // Add new address to the database
@@ -86,9 +86,6 @@ class AddressController extends GetxController {
 
       // Update the ID in the address object
       addressValue.id = id;
-
-      // Update Selected Address Status
-      await selectAddress(addressValue);
 
       // Stop Loading
       MagicFullScreenLoader.stopLoading();
@@ -129,6 +126,9 @@ class AddressController extends GetxController {
   }
 
   Future selectAddress(AddressModel newSelectedAddress) async {
+    if (selectedAddress.value.id == newSelectedAddress.id) {
+      return;
+    }
     try {
       Get.defaultDialog(
         title: '',
@@ -153,7 +153,7 @@ class AddressController extends GetxController {
       // Update the selected address in the database
       await addressRepository.updateSelectedField(newSelectedAddress.id, true);
 
-      Get.back();
+      Get.close(1);
     } catch (e) {
       MagicLoaders.errorSnackBar(
         title: 'Error in Selection',
@@ -168,59 +168,66 @@ class AddressController extends GetxController {
       // Show confirmation dialog
       Get.defaultDialog(
         title: 'Delete Address',
-        middleText: 'Are you sure you want to delete this address? This action cannot be undone.',
+        middleText:
+            'Are you sure you want to delete this address? This action cannot be undone.',
         textConfirm: 'Delete',
         textCancel: 'Cancel',
         confirmTextColor: MagicColors.white,
         buttonColor: MagicColors.primary,
         cancelTextColor: dark ? MagicColors.white : MagicColors.black,
         onConfirm: () async {
-          // Close the dialog
-          Get.back();
+          try {
+            // Close the confirmation dialog
+            Get.back();
 
-          // Show loading
-          Get.defaultDialog(
-            title: '',
-            onWillPop: () async => false,
-            barrierDismissible: false,
-            backgroundColor: Colors.transparent,
-            content: const MagicCircularLoader(),
-          );
+            // Show loading
+            Get.defaultDialog(
+              title: '',
+              onWillPop: () async => false,
+              barrierDismissible: false,
+              backgroundColor: Colors.transparent,
+              content: const MagicCircularLoader(),
+            );
 
-          // Check if we're deleting the selected address
-          final isDeletingSelectedAddress = selectedAddress.value.id == addressId;
+            // Check if we're deleting the selected address
+            final isDeletingSelectedAddress =
+                selectedAddress.value.id == addressId;
 
-          // Delete from database
-          await addressRepository.deleteAddress(addressId);
+            // Delete from database
+            await addressRepository.deleteAddress(addressId);
 
-          // If deleted address was selected, clear the selection
-          if (isDeletingSelectedAddress) {
-            selectedAddress.value = AddressModel.empty();
+            // If deleted address was selected, clear the selection
+            if (isDeletingSelectedAddress) {
+              selectedAddress.value = AddressModel.empty();
+            }
+
+            // Close loading dialog
+            if (Get.isDialogOpen ?? false) {
+              Get.back();
+            }
+
+            // Refresh the address list
+            refreshData.toggle();
+
+            // Show success message
+            MagicLoaders.successSnackBar(
+              title: 'Address Deleted',
+              message: 'Your address has been deleted successfully',
+            );
+          } catch (e) {
+            // Close loading dialog if open
+            if (Get.isDialogOpen ?? false) {
+              Get.back();
+            }
+            MagicLoaders.errorSnackBar(
+              title: 'Error deleting address',
+              message: e.toString(),
+            );
           }
-
-          // Close loading dialog
-          Get.back();
-
-          // Refresh the address list
-          refreshData.toggle();
-
-          // Show success message
-          MagicLoaders.successSnackBar(
-            title: 'Address Deleted',
-            message: 'Your address has been deleted successfully',
-          );
         },
       );
     } catch (e) {
-      // Close any open dialogs
-      if (Get.isDialogOpen ?? false) {
-        Get.back();
-      }
-      MagicLoaders.errorSnackBar(
-        title: 'Error',
-        message: e.toString(),
-      );
+      MagicLoaders.errorSnackBar(title: 'Error', message: e.toString());
     }
   }
-
 }

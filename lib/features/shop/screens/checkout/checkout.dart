@@ -37,7 +37,7 @@ class CheckoutScreen extends StatelessWidget {
             child: Column(
               children: [
                 // Items in Cart
-                MagicAllCartItems(showAddRemoveButtons: false, physics: const NeverScrollableScrollPhysics()),
+                MagicAllCartItems(showAddRemoveButtons: false),
                 SizedBox(height: MagicSizes.spaceBtwSections),
 
                 // Coupon

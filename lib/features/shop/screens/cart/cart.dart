@@ -5,13 +5,19 @@ import 'package:magic_hardware/features/shop/screens/cart/widgets/cart_items.dar
 import 'package:magic_hardware/features/shop/screens/checkout/checkout.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 
+import '../../../../common/widgets/loaders/animation_loader.dart';
 import '../../../../utils/constants/colors.dart';
+import '../../../../utils/constants/image_strings.dart';
+import '../../controllers/product/cart_controller.dart';
+import '../../controllers/product/product_controller.dart';
+import '../all_products/all_products.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = CartController.instance;
     return SafeArea(
       top: false,
       bottom: true,
@@ -20,25 +26,53 @@ class CartScreen extends StatelessWidget {
           title: Text('Cart', style: Theme.of(context).textTheme.headlineSmall),
           showBackArrow: true,
         ),
-        body: Padding(
-          padding: EdgeInsets.all(MagicSizes.defaultSpace),
+        body: Obx(() {
+          final emptyWidget = MagicAnimationLoaderWidget(
+            text: 'Whoops! Cart is empty...',
+            showAction: true,
+            actionText: 'Explore Products',
+            animation: MagicImages.emptyAnimation,
+            width: 0.5,
+            onActionPressed: () => Get.to(
+              () => AllProductsScreen(
+                title: 'All Products',
+                futureMethod: Get.find<ProductController>()
+                    .fetchAllFeaturedProducts(),
+              ),
+            ),
+          );
 
-          // Items in Cart
-          child: MagicAllCartItems(),
-        ),
+          if (controller.cartItems.isEmpty) {
+            return emptyWidget;
+          } else {
+            return SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.all(MagicSizes.defaultSpace),
+
+                // Items in Cart
+                child: MagicAllCartItems(),
+              ),
+            );
+          }
+        }),
 
         // Checkout Button
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.all(MagicSizes.defaultSpace),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                backgroundColor: MagicColors.primary,
-                side: BorderSide(color: MagicColors.primary)
-            ),
-            onPressed: () => Get.to(() => const CheckoutScreen()),
-            child: Text('Checkout MVR 71.25'),
-          ),
-        ),
+        bottomNavigationBar: controller.cartItems.isEmpty
+            ? const SizedBox()
+            : Padding(
+                padding: const EdgeInsets.all(MagicSizes.defaultSpace),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: MagicColors.primary,
+                    side: BorderSide(color: MagicColors.primary),
+                  ),
+                  onPressed: () => Get.to(() => const CheckoutScreen()),
+                  child: Obx(
+                    () =>
+                        Text('Checkout MVR ${controller.totalCartPrice.value}'),
+                  ),
+                ),
+              ),
       ),
     );
   }

@@ -1,8 +1,8 @@
 import 'package:get_storage/get_storage.dart';
 
 class MagicLocalStorage {
-
-  late final GetStorage _storage;
+  late GetStorage _storage;
+  String? _currentBucket;
 
   static MagicLocalStorage? _instance;
 
@@ -14,10 +14,14 @@ class MagicLocalStorage {
   }
 
   static Future<void> init(String bucketName) async {
-    await GetStorage.init(bucketName);
-    _instance = MagicLocalStorage._instance;
     _instance ??= MagicLocalStorage._internal();
-    _instance!._storage = GetStorage(bucketName);
+
+    // Only reinitialize if bucket name changed or not yet initialized
+    if (_instance!._currentBucket != bucketName) {
+      await GetStorage.init(bucketName);
+      _instance!._storage = GetStorage(bucketName);
+      _instance!._currentBucket = bucketName;
+    }
   }
 
   // Generic method to save data
@@ -27,16 +31,21 @@ class MagicLocalStorage {
 
   // Generic method to read data
   T? readData<T>(String key) {
-      return _storage.read<T>(key);
+    return _storage.read<T>(key);
   }
 
   // Generic method to remove data
   Future<void> removeData(String key) async {
-    await _storage.remove (key);
+    await _storage.remove(key);
   }
 
   // Clear all data in storage
   Future<void> clearAll() async {
     await _storage.erase();
+  }
+
+  // Optional: Add a reset method for logout
+  static void reset() {
+    _instance?._currentBucket = null;
   }
 }
