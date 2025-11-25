@@ -13,8 +13,10 @@ import 'package:magic_hardware/utils/constants/sizes.dart';
 import '../../../../common/widgets/custom_shapes/containers/primary_header_container.dart';
 import '../../../../common/widgets/custom_shapes/containers/search_container.dart';
 import '../../../../common/widgets/texts/section_heading.dart';
+import '../../../personalization/controllers/address_controller.dart';
 import '../../controllers/product/all_products_controller.dart';
 import '../../controllers/product/product_controller.dart';
+import '../search/product_search_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -23,28 +25,29 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(ProductController());
     Get.put(AllProductsController());
+    Get.put(AddressController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const MagicPrimaryHeaderContainer(
+            MagicPrimaryHeaderContainer(
               child: Column(
                 children: [
                   //Appbar
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(
                       right: MagicSizes.defaultSpace / 2,
                     ),
                     child: MagicHomeAppBar(),
                   ),
-                  SizedBox(height: MagicSizes.spaceBtwSections),
+                  const SizedBox(height: MagicSizes.spaceBtwSections),
 
                   // Searchbar
-                  MagicSearchContainer(text: 'Search in Store'),
-                  SizedBox(height: MagicSizes.spaceBtwSections),
+                  MagicSearchContainer(text: 'Search in Store', onTap: () => Get.to(() => const ProductSearchScreen())),
+                  const SizedBox(height: MagicSizes.spaceBtwSections),
 
                   // Categories
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(left: MagicSizes.defaultSpace),
                     child: Column(
                       children: [
@@ -62,7 +65,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(height: MagicSizes.spaceBtwSections),
+                  const SizedBox(height: MagicSizes.spaceBtwSections),
                 ],
               ),
             ),

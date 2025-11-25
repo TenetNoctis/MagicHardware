@@ -17,6 +17,7 @@ import '../../../../common/widgets/brands/brand_card.dart';
 import '../../../../common/widgets/shimmers/brands_shimmer.dart';
 import '../../controllers/brand_controller.dart';
 import '../brand/brand_products.dart';
+import '../search/product_search_screen.dart';
 
 class StoreScreen extends StatelessWidget {
   const StoreScreen({super.key});
@@ -74,7 +75,7 @@ class StoreScreen extends StatelessWidget {
                         text: 'Search in Store',
                         showBorder: true,
                         padding: EdgeInsets.zero,
-                        // showBackground: false,
+                        onTap: () => Get.to(() => const ProductSearchScreen()),
                       ),
                       SizedBox(height: MagicSizes.spaceBtwSections),
 
@@ -87,8 +88,9 @@ class StoreScreen extends StatelessWidget {
 
                       // Brand Grid
                       Obx(() {
-                        if (brandController.isLoading.value)
+                        if (brandController.isLoading.value) {
                           return MagicBrandsShimmer();
+                        }
 
                         if (brandController.featuredBrands.isEmpty) {
                           return Center(

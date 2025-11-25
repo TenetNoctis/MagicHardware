@@ -11,7 +11,22 @@ class ProductRepository extends GetxController {
 
   final _db = FirebaseFirestore.instance;
 
-  // Get All featured products
+  // Get all products from firestore
+  Future<List<ProductModel>> getAllProducts() async {
+    try {
+      final snapshot = await _db.collection('Products').get();
+      final list = snapshot.docs.map((document) => ProductModel.fromSnapshot(document)).toList();
+      return list;
+    } on FirebaseException catch (e) {
+      throw MagicFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw MagicPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
+
+  // Get all featured products
   Future<List<ProductModel>> getAllFeaturedProducts() async {
     try {
       final snapshot = await _db
@@ -28,7 +43,7 @@ class ProductRepository extends GetxController {
     }
   }
 
-  // Get featured products
+  // Get limited number of featured products
   Future<List<ProductModel>> getFeaturedProducts() async {
     try {
       final snapshot = await _db
@@ -78,10 +93,7 @@ class ProductRepository extends GetxController {
   }
 
   // Get Products For Brand
-  Future<List<ProductModel>> getProductsForBrand({
-    required String brandId,
-    int limit = -1,
-  }) async {
+  Future<List<ProductModel>> getProductsForBrand({required String brandId, int limit = -1}) async {
     try {
       final querySnapshot = limit == -1
           ? await _db
@@ -105,10 +117,7 @@ class ProductRepository extends GetxController {
   }
 
   // Get Products For Brand
-  Future<List<ProductModel>> getProductsForCategory({
-    required String categoryId,
-    int limit = 4,
-  }) async {
+  Future<List<ProductModel>> getProductsForCategory({required String categoryId, int limit = 4}) async {
     try {
       QuerySnapshot productCategoryQuery = limit == -1
           ? await _db

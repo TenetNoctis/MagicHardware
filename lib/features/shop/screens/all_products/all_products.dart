@@ -26,23 +26,27 @@ class AllProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<AllProductsController>();
 
-    return Scaffold(
-      appBar: MagicAppBar(title: Text(title), showBackArrow: true),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(MagicSizes.defaultSpace),
-          child: FutureBuilder(
-            future: futureMethod ?? controller.fetchProductsByQuery(query),
-            builder: (context, snapshot) {
-              const loader = MagicVerticalProductShimmer();
-              final widget = MagicCloudHelperFunctions.checkMultiRecordState(snapshot: snapshot, loader: loader);
+    return SafeArea(
+      top: false,
+      bottom: true,
+      child: Scaffold(
+        appBar: MagicAppBar(title: Text(title), showBackArrow: true),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(MagicSizes.defaultSpace),
+            child: FutureBuilder(
+              future: futureMethod ?? controller.fetchProductsByQuery(query),
+              builder: (context, snapshot) {
+                const loader = MagicVerticalProductShimmer();
+                final widget = MagicCloudHelperFunctions.checkMultiRecordState(snapshot: snapshot, loader: loader);
 
-              if (widget != null) return widget;
+                if (widget != null) return widget;
 
-              final products = snapshot.data!;
+                final products = snapshot.data!;
 
-              return MagicSortableProducts(products: products);
-            },
+                return MagicSortableProducts(products: products);
+              },
+            ),
           ),
         ),
       ),

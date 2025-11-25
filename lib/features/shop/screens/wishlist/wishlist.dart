@@ -59,7 +59,7 @@ class WishlistScreen extends StatelessWidget {
                             () => AllProductsScreen(
                               title: 'All Products',
                               futureMethod: ProductController.instance
-                                  .fetchAllFeaturedProducts(),
+                                  .fetchAllProducts(),
                             ),
                           ),
                         ),

@@ -29,7 +29,7 @@ class MagicAppBar extends StatelessWidget implements PreferredSizeWidget {
         automaticallyImplyLeading: false,
         leading: showBackArrow
             ? IconButton(
-                onPressed: () => Get.back(),
+                onPressed: () => Get.back(closeOverlays: true),
                 icon: const Icon(Iconsax.arrow_left),
                 color: dark ? Colors.white : Colors.black,
               )

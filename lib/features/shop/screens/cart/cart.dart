@@ -36,7 +36,7 @@ class CartScreen extends StatelessWidget {
             onActionPressed: () => Get.to(
               () => AllProductsScreen(
                 title: 'All Products',
-                futureMethod: ProductController.instance.fetchAllFeaturedProducts(),
+                futureMethod: ProductController.instance.fetchAllProducts(),
               ),
             ),
           );
