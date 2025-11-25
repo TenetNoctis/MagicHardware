@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:magic_hardware/common/widgets/appbar/appbar.dart';
 import 'package:magic_hardware/common/widgets/layouts/grid_layout.dart';
 import 'package:magic_hardware/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:magic_hardware/common/widgets/shimmers/vertical_product_shimmer.dart';
 import 'package:magic_hardware/features/shop/controllers/product/product_search_controller.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
+import 'package:iconsax/iconsax.dart';
 
 class ProductSearchScreen extends StatelessWidget {
   const ProductSearchScreen({super.key});
@@ -17,7 +17,10 @@ class ProductSearchScreen extends StatelessWidget {
     final searchController = TextEditingController();
 
     return Scaffold(
-      appBar: MagicAppBar(showBackArrow: true, title: Text('Search Products')),
+      appBar: MagicAppBar(
+        showBackArrow: true,
+        title: Text('Search Products'),
+      ),
       body: Column(
         children: [
           // Search Bar
@@ -25,6 +28,7 @@ class ProductSearchScreen extends StatelessWidget {
             padding: const EdgeInsets.all(MagicSizes.defaultSpace),
             child: TextField(
               controller: searchController,
+              autofocus: true,
               onChanged: (value) => controller.searchProducts(value),
               decoration: InputDecoration(
                 hintText: 'Search for products...',
@@ -32,12 +36,12 @@ class ProductSearchScreen extends StatelessWidget {
                 suffixIcon: Obx(() {
                   return controller.searchQuery.value.isNotEmpty
                       ? IconButton(
-                          icon: const Icon(Iconsax.close_circle),
-                          onPressed: () {
-                            searchController.clear();
-                            controller.clearSearch();
-                          },
-                        )
+                    icon: const Icon(Iconsax.close_circle),
+                    onPressed: () {
+                      searchController.clear();
+                      controller.clearSearch();
+                    },
+                  )
                       : const SizedBox.shrink();
                 }),
                 border: OutlineInputBorder(
@@ -50,7 +54,7 @@ class ProductSearchScreen extends StatelessWidget {
           // Search Results
           Expanded(
             child: Obx(() {
-              // Show Loader
+              // Loading state
               if (controller.isLoading.value) {
                 return const MagicVerticalProductShimmer();
               }
