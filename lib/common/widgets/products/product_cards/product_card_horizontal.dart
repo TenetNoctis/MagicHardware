@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:magic_hardware/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:magic_hardware/common/widgets/images/magic_rounded_image.dart';
 import 'package:magic_hardware/common/widgets/products/favorite_icon/favorite_icon.dart';
@@ -15,6 +14,7 @@ import '../../../../features/shop/screens/product_details/product_detail.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/enums.dart';
 import '../../../../utils/constants/sizes.dart';
+import 'add_to_cart_button.dart';
 
 class MagicProductCardHorizontal extends StatelessWidget {
   const MagicProductCardHorizontal({super.key, required this.product});
@@ -153,27 +153,7 @@ class MagicProductCardHorizontal extends StatelessWidget {
                         ),
 
                         // Add to Cart
-                        Container(
-                          decoration: const BoxDecoration(
-                            color: MagicColors.darkestGrey,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(MagicSizes.cardRadiusMd),
-                              bottomRight: Radius.circular(
-                                MagicSizes.productImageRadius,
-                              ),
-                            ),
-                          ),
-                          child: SizedBox(
-                            width: MagicSizes.iconLg * 1.3,
-                            height: MagicSizes.iconLg * 1.3,
-                            child: Center(
-                              child: const Icon(
-                                Iconsax.add,
-                                color: MagicColors.white,
-                              ),
-                            ),
-                          ),
-                        ),
+                        ProductCardAddToCartButton(product: product),
                       ],
                     ),
                   ],

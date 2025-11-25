@@ -3,7 +3,7 @@ import 'package:magic_hardware/utils/formatters/formatter.dart';
 
 class AddressModel {
   String id;
-  final String address;
+  final String addressName;
   final String phoneNumber;
   final String street;
   final String island;
@@ -15,7 +15,7 @@ class AddressModel {
 
   AddressModel({
     required this.id,
-    required this.address,
+    required this.addressName,
     required this.phoneNumber,
     required this.street,
     required this.island,
@@ -30,7 +30,7 @@ class AddressModel {
 
   static AddressModel empty() => AddressModel(
     id: '',
-    address: '',
+    addressName: '',
     phoneNumber: '',
     street: '',
     island: '',
@@ -42,7 +42,7 @@ class AddressModel {
   Map<String, dynamic> toJson() {
     return {
       'Id': id,
-      'Address': address,
+      'Address Name': addressName,
       'Phone Number': phoneNumber,
       'Street': street,
       'Island': island,
@@ -57,7 +57,7 @@ class AddressModel {
   factory AddressModel.fromMap(Map<String, dynamic> data) {
     return AddressModel(
       id: data['Id'] as String,
-      address: data['Address'] as String,
+      addressName: data['Address Name'] as String,
       phoneNumber: data['Phone Number'] as String,
       street: data['Street'] as String,
       island: data['Island'] as String,
@@ -73,7 +73,7 @@ class AddressModel {
     final data = snapshot.data() as Map<String, dynamic>;
     return AddressModel(
       id: snapshot.id,
-      address: data['Address'] ?? '',
+      addressName: data['Address Name'] ?? '',
       phoneNumber: data['Phone Number'] ?? '',
       street: data['Street'] ?? '',
       island: data['Island'] ?? '',

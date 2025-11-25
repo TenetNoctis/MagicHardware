@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:magic_hardware/common/widgets/loaders/circular_loader.dart';
+import 'package:magic_hardware/common/widgets/texts/section_heading.dart';
 import 'package:magic_hardware/data/repositories/address/address_repository.dart';
 import 'package:magic_hardware/features/personalization/models/address_model.dart';
+import 'package:magic_hardware/features/personalization/screens/address/add_new_address.dart';
+import 'package:magic_hardware/features/personalization/screens/address/widgets/single_address.dart';
 import 'package:magic_hardware/utils/constants/image_strings.dart';
+import 'package:magic_hardware/utils/constants/sizes.dart';
 import 'package:magic_hardware/utils/formatters/formatter.dart';
+import 'package:magic_hardware/utils/helpers/cloud_helper_functions.dart';
 import 'package:magic_hardware/utils/helpers/network_manager.dart';
 import 'package:magic_hardware/utils/popups/full_screen_loader.dart';
 import 'package:magic_hardware/utils/popups/loaders.dart';
@@ -27,7 +32,13 @@ class AddressController extends GetxController {
   RxBool refreshData = true.obs;
   final Rx<AddressModel> selectedAddress = AddressModel.empty().obs;
   final addressRepository = Get.put(AddressRepository());
-  final dark = MagicHelperFunctions.isDarkMode(Get.context!);
+
+
+  @override
+  void onInit() {
+    super.onInit();
+    getAllUserAddresses();
+  }
 
   // Fetch all user specific addresses
   Future<List<AddressModel>> getAllUserAddresses() async {
@@ -71,7 +82,7 @@ class AddressController extends GetxController {
 
       final addressValue = AddressModel(
         id: '',
-        address: address.text.trim(),
+        addressName: address.text.trim(),
         phoneNumber: MagicFormatter.formatPhoneNumber(phoneNumber.text.trim()),
         street: street.text.trim(),
         island: island.text.trim(),
@@ -113,6 +124,57 @@ class AddressController extends GetxController {
     }
   }
 
+  // Show Addresses ModalBottomSheet at Checkout
+  Future<dynamic> selectNewAddressPopup(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (_) => SingleChildScrollView(
+        padding: EdgeInsets.all(MagicSizes.lg),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const MagicSectionHeading(
+              title: 'Select Address',
+              showActionButton: false,
+            ),
+            const SizedBox(height: MagicSizes.spaceBtwSections),
+            FutureBuilder(
+              future: getAllUserAddresses(),
+              builder: (_, snapshot) {
+                final response =
+                    MagicCloudHelperFunctions.checkMultiRecordState(
+                      snapshot: snapshot,
+                    );
+                if (response != null) return response;
+
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (_, index) => MagicSingleAddress(
+                    address: snapshot.data![index],
+                    onTap: () async {
+                      await selectAddress(snapshot.data![index]);
+                      Get.back();
+                    },
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: MagicSizes.defaultSpace * 2),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => Get.to(() => const AddNewAddressScreen()),
+                child: const Text('Add new address'),
+              ),
+            ),
+            const SizedBox(height: MagicSizes.defaultSpace * 2),
+          ],
+        ),
+      ),
+    );
+  }
+
   // Function to reset form fields
   void resetFormFields() {
     address.clear();
@@ -125,6 +187,7 @@ class AddressController extends GetxController {
     addressFormKey.currentState?.reset();
   }
 
+  // Select Address
   Future selectAddress(AddressModel newSelectedAddress) async {
     if (selectedAddress.value.id == newSelectedAddress.id) {
       return;
@@ -174,7 +237,7 @@ class AddressController extends GetxController {
         textCancel: 'Cancel',
         confirmTextColor: MagicColors.white,
         buttonColor: MagicColors.primary,
-        cancelTextColor: dark ? MagicColors.white : MagicColors.black,
+        cancelTextColor: MagicHelperFunctions.isDarkMode(Get.context!) ? MagicColors.white : MagicColors.black,
         onConfirm: () async {
           try {
             // Close the confirmation dialog

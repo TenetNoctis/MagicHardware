@@ -8,7 +8,6 @@ import 'package:magic_hardware/features/shop/screens/product_details/widgets/pro
 import 'package:magic_hardware/features/shop/screens/product_details/widgets/product_meta_data.dart';
 import 'package:magic_hardware/features/shop/screens/product_details/widgets/rating_share_widget.dart';
 import 'package:magic_hardware/features/shop/screens/product_reviews/product_reviews.dart';
-import 'package:magic_hardware/utils/constants/colors.dart';
 import 'package:magic_hardware/utils/constants/enums.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 import 'package:readmore/readmore.dart';
@@ -56,6 +55,7 @@ class ProductDetailScreen extends StatelessWidget {
                     ],
 
                     // Checkout
+                    /*
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -65,6 +65,7 @@ class ProductDetailScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: MagicSizes.spaceBtwSections),
+                     */
 
                     // Description
                     const MagicSectionHeading(

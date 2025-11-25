@@ -41,7 +41,8 @@ class WishlistScreen extends StatelessWidget {
           padding: EdgeInsets.all(MagicSizes.defaultSpace),
           child: Column(
             children: [
-              Obx(() => FutureBuilder(
+              Obx(
+                () => FutureBuilder(
                   future: controller.favoriteProducts(),
                   builder: (context, snapshot) {
                     // Nothing Found Widget
@@ -54,8 +55,13 @@ class WishlistScreen extends StatelessWidget {
                           actionText: 'Explore Products',
                           animation: MagicImages.emptyAnimation,
                           width: 0.5,
-                          onActionPressed: () =>
-                              Get.to(() => AllProductsScreen(title: 'All Products', futureMethod: Get.find<ProductController>().fetchAllFeaturedProducts())),
+                          onActionPressed: () => Get.to(
+                            () => AllProductsScreen(
+                              title: 'All Products',
+                              futureMethod: ProductController.instance
+                                  .fetchAllFeaturedProducts(),
+                            ),
+                          ),
                         ),
                       ],
                     );

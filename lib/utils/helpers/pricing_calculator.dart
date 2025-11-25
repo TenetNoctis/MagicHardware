@@ -1,11 +1,15 @@
 
 class MagicPricingCalculator {
+
+  static double calculateSubTotal(double productPrice, String location) {
+    double subTotal = productPrice / (1 + getTaxRateForLocation(location));
+    return subTotal;
+  }
+
   static double calculateTotalPrice(double productPrice, String location) {
     double taxRate = getTaxRateForLocation(location);
     double taxAmount = productPrice * taxRate;
-
     double shippingCost = getShippingCost(location);
-
     double totalPrice = productPrice + taxAmount + shippingCost;
     return totalPrice;
   }
@@ -26,11 +30,7 @@ class MagicPricingCalculator {
   }
 
   static double getShippingCost(String location) {
-    return 5.00;
+    return 10.00;
   }
-
- //static double calculateCartTotal(CartModel cart) {
- //     return cart.items.map((e) => e.price).fold(0, (previousPrice, currentPrice) => previousPrice + (currentPrice ?? 0));
- // }
 
 }

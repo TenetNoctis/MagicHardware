@@ -36,8 +36,7 @@ class CartScreen extends StatelessWidget {
             onActionPressed: () => Get.to(
               () => AllProductsScreen(
                 title: 'All Products',
-                futureMethod: Get.find<ProductController>()
-                    .fetchAllFeaturedProducts(),
+                futureMethod: ProductController.instance.fetchAllFeaturedProducts(),
               ),
             ),
           );
@@ -69,7 +68,7 @@ class CartScreen extends StatelessWidget {
                   onPressed: () => Get.to(() => const CheckoutScreen()),
                   child: Obx(
                     () =>
-                        Text('Checkout MVR ${controller.totalCartPrice.value}'),
+                        Text('Checkout MVR ${controller.totalCartPrice.value.toStringAsFixed(2)}'),
                   ),
                 ),
               ),

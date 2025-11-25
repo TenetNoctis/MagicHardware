@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 
 class MagicOutlinedButtonTheme {
-  MagicOutlinedButtonTheme ._ (); //To avoid creating instances
+  MagicOutlinedButtonTheme ._ ();
 
   // Light Theme
   static final lightOutlinedButtonTheme = OutlinedButtonThemeData(

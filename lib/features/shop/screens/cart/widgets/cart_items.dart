@@ -25,11 +25,11 @@ class MagicAllCartItems extends StatelessWidget {
           final item = cartController.cartItems[index];
           return Column(
             children: [
-              MagicCartItem(cartItem: item),
-              if (showAddRemoveButtons)
-                const SizedBox(height: MagicSizes.spaceBtwItems),
+              MagicCartItem(cartItem: item, showQuantity: !showAddRemoveButtons),
 
-              if (showAddRemoveButtons)
+
+              if (showAddRemoveButtons) ...[
+                const SizedBox(height: MagicSizes.spaceBtwItems),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -51,6 +51,7 @@ class MagicAllCartItems extends StatelessWidget {
                     MagicProductPriceText(price: (item.price * item.quantity).toStringAsFixed(2)),
                   ],
                 ),
+              ]
             ],
           );
         }),

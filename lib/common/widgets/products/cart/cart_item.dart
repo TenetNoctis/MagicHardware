@@ -9,9 +9,11 @@ import '../../texts/brand_title_text_with_verified_icon.dart';
 import '../../texts/product_title_text.dart';
 
 class MagicCartItem extends StatelessWidget {
-  const MagicCartItem({super.key, required this.cartItem});
+  const MagicCartItem(
+      {super.key, required this.cartItem, this.showQuantity = false});
 
   final CartItemModel cartItem;
+  final bool showQuantity;
 
   @override
   Widget build(BuildContext context) {
@@ -42,21 +44,40 @@ class MagicCartItem extends StatelessWidget {
               Text.rich(
                 TextSpan(
                   children: (cartItem.selectedVariation ?? {}).entries.map(
-                    (e) => TextSpan(
-                      children: [
+                        (e) =>
                         TextSpan(
-                          text: ' ${e.key} ',
-                          style: Theme.of(context).textTheme.bodySmall,
+                          children: [
+                            TextSpan(
+                              text: '${e.key} ',
+                              style: Theme
+                                  .of(context)
+                                  .textTheme
+                                  .bodySmall,
+                            ),
+                            TextSpan(
+                              text: '${e.value} ',
+                              style: Theme
+                                  .of(context)
+                                  .textTheme
+                                  .bodyLarge,
+                            ),
+                          ],
                         ),
-                        TextSpan(
-                          text: '${e.value} ',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      ],
-                    ),
                   ).toList(),
                 ),
               ),
+              if (showQuantity) ...[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Qty: ${cartItem.quantity}',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    Text('MVR ${cartItem.price.toStringAsFixed(2)}')
+                  ],
+                ),
+              ],
             ],
           ),
         ),

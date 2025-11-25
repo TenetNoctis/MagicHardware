@@ -1,25 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:magic_hardware/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:magic_hardware/common/widgets/success_screen/success_screen.dart';
 import 'package:magic_hardware/features/shop/screens/cart/widgets/cart_items.dart';
 import 'package:magic_hardware/features/shop/screens/checkout/widgets/billing_address_section.dart';
 import 'package:magic_hardware/features/shop/screens/checkout/widgets/billing_amount_section.dart';
 import 'package:magic_hardware/features/shop/screens/checkout/widgets/billing_payment_section.dart';
 import 'package:magic_hardware/utils/constants/colors.dart';
-import 'package:magic_hardware/utils/constants/image_strings.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 import 'package:magic_hardware/utils/helpers/helper_functions.dart';
+import 'package:magic_hardware/utils/popups/loaders.dart';
 
 import '../../../../common/widgets/appbar/appbar.dart';
 import '../../../../common/widgets/products/cart/coupon_widget.dart';
+import '../../../../utils/helpers/pricing_calculator.dart';
+import '../../controllers/product/cart_controller.dart';
+import '../../controllers/product/order_controller.dart';
 
 class CheckoutScreen extends StatelessWidget {
   const CheckoutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cartController = CartController.instance;
+    final subTotal = MagicPricingCalculator.calculateSubTotal(cartController.totalCartPrice.value, 'Maldives');
+    final totalAmount = MagicPricingCalculator.calculateTotalPrice(subTotal, 'Maldives');
+    final orderController = Get.put(OrderController());
+
     final dark = MagicHelperFunctions.isDarkMode(context);
+
     return SafeArea(
       top: false,
       bottom: true,
@@ -38,11 +46,11 @@ class CheckoutScreen extends StatelessWidget {
               children: [
                 // Items in Cart
                 MagicAllCartItems(showAddRemoveButtons: false),
-                SizedBox(height: MagicSizes.spaceBtwSections),
+                const SizedBox(height: MagicSizes.spaceBtwSections),
 
                 // Coupon
                 MagicCouponCode(),
-                SizedBox(height: MagicSizes.spaceBtwSections),
+                const SizedBox(height: MagicSizes.spaceBtwSections),
 
                 // Billing
                 MagicRoundedContainer(
@@ -79,15 +87,10 @@ class CheckoutScreen extends StatelessWidget {
                 backgroundColor: MagicColors.primary,
                 side: BorderSide(color: MagicColors.primary)
             ),
-            onPressed: () => Get.to(
-              () => SuccessScreen(
-                image: MagicImages.successAnimation,
-                title: 'Payment Success!',
-                subTitle: 'Your items will be shipped soon',
-                onPressed: () => Get.back(),
-              ),
-            ),
-            child: Text('Checkout MVR 71.25'),
+            onPressed: subTotal > 0 ?
+            () => orderController.processOrder(totalAmount) :
+            () => MagicLoaders.warningSnackBar(title: 'Empty Cart', message: 'Add items in the cart in order to proceed'),
+            child: Text('Checkout MVR ${totalAmount.toStringAsFixed(2)}'),
           ),
         ),
       ),

@@ -31,6 +31,7 @@ class MagicImages {
   // Payment Methods
   static const String visa = "assets/icons/payment_methods/visa.png";
   static const String bml = "assets/icons/payment_methods/bml.png";
+  static const String cashOnDelivery = "assets/icons/payment_methods/cash-on-delivery.png";
   static const String creditCard = "assets/icons/payment_methods/credit-card.png";
   static const String masterCard = "assets/icons/payment_methods/master-card.png";
   static const String paypal = "assets/icons/payment_methods/paypal.png";
