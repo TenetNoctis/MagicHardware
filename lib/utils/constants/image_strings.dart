@@ -17,12 +17,6 @@ class MagicImages {
   static const String onBoardingImage3 = "assets/images/on_boarding_images/shopping.json";
 
   // Animations
-  static const String productsIllustration = "assets/images/animations/product.gif";
-  static const String productsSaleIllustration = "assets/images/animations/product-sale.png";
-  static const String staticSuccessIllustration = "assets/images/animations/success.png";
-  static const String deliveredInPlaneIllustration = "assets/images/animations/delivered.png";
-  static const String deliveredEmailIllustration = "assets/images/animations/delivered-email.png";
-  static const String verifyIllustration = "assets/images/animations/verify.gif";
   static const String processingAnimation = "assets/images/animations/processing.json";
   static const String successAnimation = "assets/images/animations/success.json";
   static const String emptyAnimation = "assets/images/animations/empty.json";
@@ -39,17 +33,6 @@ class MagicImages {
   static const String applePay = "assets/icons/payment_methods/apple-pay.png";
   static const String successfulPaymentIcon = "assets/icons/payment_methods/successful_payment_icon.png";
 
-  // Categories
-  static const String weldingIcon = "assets/icons/categories/welding.png";
-
-  // Products
-  static const String weldingGlove = "assets/images/products/welding-glove.png";
-
   // User
   static const String user = "assets/images/user/user.png";
-
-  // Banners
-  static const String promoBanner1 = "assets/images/banners/welding-machine.jpg";
-  static const String promoBanner2 = "assets/images/banners/welding-rod.jpg";
-  static const String promoBanner3 = "assets/images/banners/cutoff-machine.jpg";
 }

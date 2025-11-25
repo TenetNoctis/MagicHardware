@@ -6,7 +6,6 @@ import 'package:magic_hardware/common/widgets/products/product_cards/product_car
 import 'package:magic_hardware/common/widgets/texts/section_heading.dart';
 import 'package:magic_hardware/features/shop/controllers/category_controller.dart';
 import 'package:magic_hardware/features/shop/screens/all_products/all_products.dart';
-import 'package:magic_hardware/utils/constants/image_strings.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 
 import '../../../../common/widgets/shimmers/horizontal_product_shimmer.dart';
@@ -28,13 +27,16 @@ class SubCategoriesScreen extends StatelessWidget {
           padding: EdgeInsets.all(MagicSizes.defaultSpace),
           child: Column(
             children: [
-              // Banner
-              MagicRoundedImage(
-                imageUrl: MagicImages.promoBanner2,
-                width: double.infinity,
-                applyImageRadius: true,
-              ),
-              SizedBox(height: MagicSizes.spaceBtwSections),
+              // Banner - Only show if bannerImage is not null
+              if (category.bannerImage != null && category.bannerImage!.isNotEmpty) ...[
+                MagicRoundedImage(
+                  imageUrl: category.bannerImage!,
+                  isNetworkImage: true,
+                  width: double.infinity,
+                  applyImageRadius: true,
+                ),
+                SizedBox(height: MagicSizes.spaceBtwSections),
+              ],
 
               // Sub-Categories
               FutureBuilder(
@@ -42,10 +44,10 @@ class SubCategoriesScreen extends StatelessWidget {
                 builder: (context, snapshot) {
                   const loader = MagicHorizontalProductShimmer();
                   final widget =
-                      MagicCloudHelperFunctions.checkMultiRecordState(
-                        snapshot: snapshot,
-                        loader: loader,
-                      );
+                  MagicCloudHelperFunctions.checkMultiRecordState(
+                    snapshot: snapshot,
+                    loader: loader,
+                  );
                   if (widget != null) return widget;
                   final subCategories = snapshot.data!;
                   return ListView.builder(
@@ -60,10 +62,10 @@ class SubCategoriesScreen extends StatelessWidget {
                         ),
                         builder: (context, snapshot) {
                           final widget =
-                              MagicCloudHelperFunctions.checkMultiRecordState(
-                                snapshot: snapshot,
-                                loader: loader,
-                              );
+                          MagicCloudHelperFunctions.checkMultiRecordState(
+                            snapshot: snapshot,
+                            loader: loader,
+                          );
                           if (widget != null) return widget;
                           final products = snapshot.data!;
                           return Column(
@@ -72,13 +74,13 @@ class SubCategoriesScreen extends StatelessWidget {
                               MagicSectionHeading(
                                 title: subCategory.name,
                                 onPressed: () => Get.to(
-                                  () => AllProductsScreen(
+                                      () => AllProductsScreen(
                                     title: subCategory.name,
                                     futureMethod: controller
                                         .getCategoryProducts(
-                                          categoryId: subCategory.id,
-                                          limit: -1,
-                                        ),
+                                      categoryId: subCategory.id,
+                                      limit: -1,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -92,14 +94,18 @@ class SubCategoriesScreen extends StatelessWidget {
                                   itemCount: products.length,
                                   scrollDirection: Axis.horizontal,
                                   separatorBuilder: (context, index) =>
-                                      const SizedBox(
-                                        width: MagicSizes.spaceBtwItems,
-                                      ),
+                                  const SizedBox(
+                                    width: MagicSizes.spaceBtwItems,
+                                  ),
                                   itemBuilder: (context, index) =>
-                                      MagicProductCardHorizontal(product: products[index]),
+                                      MagicProductCardHorizontal(
+                                        product: products[index],
+                                      ),
                                 ),
                               ),
-                              const SizedBox(height: MagicSizes.spaceBtwSections / 2),
+                              const SizedBox(
+                                height: MagicSizes.spaceBtwSections / 2,
+                              ),
                             ],
                           );
                         },

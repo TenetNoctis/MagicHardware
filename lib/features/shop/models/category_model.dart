@@ -6,6 +6,7 @@ class CategoryModel {
   String image;
   String parentId;
   bool isFeatured;
+  String? bannerImage;
 
   CategoryModel({
     required this.id,
@@ -13,6 +14,7 @@ class CategoryModel {
     required this.image,
     this.parentId = '',
     required this.isFeatured,
+    this.bannerImage,
   });
 
   // Empty Helper Function
@@ -26,6 +28,7 @@ class CategoryModel {
       'Image': image,
       'ParentId': parentId,
       'IsFeatured': isFeatured,
+      'BannerImage': bannerImage,
     };
   }
 
@@ -41,6 +44,7 @@ class CategoryModel {
         image: data['Image'] ?? '',
         parentId: data['ParentId'] ?? '',
         isFeatured: data['IsFeatured'] ?? false,
+        bannerImage: data['BannerImage'] ?? '',
       );
     } else {
       return CategoryModel.empty();
