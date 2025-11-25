@@ -37,7 +37,6 @@ class AllProductsController extends GetxController {
         break;
       case 'On Sale':
         products.sort((a, b) {
-          // Treat null sale prices as 0 for comparison
           final salePriceA = a.salePrice ?? 0;
           final salePriceB = b.salePrice ?? 0;
           return salePriceB.compareTo(salePriceA);

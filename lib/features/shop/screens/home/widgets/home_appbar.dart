@@ -40,7 +40,7 @@ class MagicHomeAppBar extends StatelessWidget {
         ],
       ),
       actions: [
-        MagicCartCounterIcon(iconColor: MagicColors.white, counterBgColor: MagicColors.black, counterTextColor: MagicColors.white),
+        MagicCartCounterIcon(iconColor: MagicColors.white, counterBgColor: MagicColors.white, counterTextColor: MagicColors.black),
       ],
     );
   }

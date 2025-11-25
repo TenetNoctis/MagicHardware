@@ -23,6 +23,7 @@ class StoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = MagicHelperFunctions.isDarkMode(context);
     final brandController = Get.put(BrandController());
     final categories = CategoryController.instance.featuredCategories;
     return DefaultTabController(
@@ -33,7 +34,19 @@ class StoreScreen extends StatelessWidget {
             'Store',
             style: Theme.of(context).textTheme.headlineMedium,
           ),
-          actions: [MagicCartCounterIcon(iconColor: MagicColors.white, counterBgColor: MagicColors.black, counterTextColor: MagicColors.white)],
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(
+                right: MagicSizes.sm,
+                top: MagicSizes.sm,
+              ),
+              child: MagicCartCounterIcon(
+                iconColor: dark ? MagicColors.white : MagicColors.black,
+                counterBgColor: dark ? MagicColors.white : MagicColors.black,
+                counterTextColor: dark ? MagicColors.black : MagicColors.white,
+              ),
+            ),
+          ],
         ),
 
         body: NestedScrollView(
@@ -74,7 +87,8 @@ class StoreScreen extends StatelessWidget {
 
                       // Brand Grid
                       Obx(() {
-                        if (brandController.isLoading.value) return MagicBrandsShimmer();
+                        if (brandController.isLoading.value)
+                          return MagicBrandsShimmer();
 
                         if (brandController.featuredBrands.isEmpty) {
                           return Center(
@@ -92,7 +106,8 @@ class StoreScreen extends StatelessWidget {
                             return MagicBrandCard(
                               brand: brand,
                               showBorder: true,
-                              onTap: () => Get.to(() => BrandProducts(brand: brand)),
+                              onTap: () =>
+                                  Get.to(() => BrandProducts(brand: brand)),
                             );
                           },
                         );
