@@ -5,7 +5,6 @@ import 'package:magic_hardware/common/widgets/appbar/appbar.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 import 'package:magic_hardware/utils/validators/validation.dart';
 
-import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/text_strings.dart';
 import '../../../controllers/update_name_controller.dart';
 
@@ -70,10 +69,6 @@ class ChangeName extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: MagicColors.primary,
-                    side: BorderSide(color: MagicColors.primary)
-                ),
                 onPressed: () => controller.updateUserName(),
                 child: const Text('Save'),
               ),

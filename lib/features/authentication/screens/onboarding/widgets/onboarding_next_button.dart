@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:magic_hardware/features/authentication/controllers/onboarding/onboarding_controller.dart';
 
-import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/device/device_utility.dart';
 
@@ -18,8 +17,6 @@ class OnBoardingNextButton extends StatelessWidget {
         onPressed: () => OnBoardingController.instance.nextPage(),
         style: ElevatedButton.styleFrom(
           shape: const CircleBorder(),
-          backgroundColor: MagicColors.primary,
-          side: BorderSide(color: MagicColors.primary)
         ),
         child: const Icon(Iconsax.arrow_right_3),
       ),

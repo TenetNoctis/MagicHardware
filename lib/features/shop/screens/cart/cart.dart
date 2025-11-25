@@ -6,7 +6,6 @@ import 'package:magic_hardware/features/shop/screens/checkout/checkout.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 
 import '../../../../common/widgets/loaders/animation_loader.dart';
-import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/image_strings.dart';
 import '../../controllers/product/cart_controller.dart';
 import '../../controllers/product/product_controller.dart';
@@ -61,10 +60,6 @@ class CartScreen extends StatelessWidget {
             : Padding(
                 padding: const EdgeInsets.all(MagicSizes.defaultSpace),
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: MagicColors.primary,
-                    side: BorderSide(color: MagicColors.primary),
-                  ),
                   onPressed: () => Get.to(() => const CheckoutScreen()),
                   child: Obx(
                     () =>

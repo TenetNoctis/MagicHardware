@@ -5,7 +5,6 @@ import 'package:magic_hardware/features/personalization/controllers/address_cont
 import 'package:magic_hardware/utils/constants/sizes.dart';
 import 'package:magic_hardware/utils/validators/validation.dart';
 
-import '../../../../utils/constants/colors.dart';
 
 class AddNewAddressScreen extends StatelessWidget {
   const AddNewAddressScreen({super.key});
@@ -104,10 +103,6 @@ class AddNewAddressScreen extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: MagicColors.primary,
-                      side: BorderSide(color: MagicColors.primary)
-                    ),
                     onPressed: () => controller.addNewAddress(),
                     child: Text('Save Address'),
                   ),

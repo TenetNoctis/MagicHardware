@@ -83,10 +83,6 @@ class CheckoutScreen extends StatelessWidget {
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.all(MagicSizes.defaultSpace),
           child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                backgroundColor: MagicColors.primary,
-                side: BorderSide(color: MagicColors.primary)
-            ),
             onPressed: subTotal > 0 ?
             () => orderController.processOrder(totalAmount) :
             () => MagicLoaders.warningSnackBar(title: 'Empty Cart', message: 'Add items in the cart in order to proceed'),

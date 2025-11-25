@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:magic_hardware/features/authentication/controllers/forget_password/forget_password_controller.dart';
 import 'package:magic_hardware/utils/constants/image_strings.dart';
 
-import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/constants/text_strings.dart';
 import '../../../../utils/helpers/helper_functions.dart';
@@ -60,10 +59,6 @@ class ResetPasswordScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: MagicColors.primary,
-                      side: BorderSide(color: MagicColors.primary)
-                  ),
                   onPressed: () => Get.offAll(() => const LoginScreen()),
                   child: const Text(MagicTexts.done),
                 ),

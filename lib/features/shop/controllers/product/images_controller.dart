@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:magic_hardware/features/shop/models/product_model.dart';
-import 'package:magic_hardware/utils/constants/colors.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 
 class ImagesController extends GetxController {
@@ -53,7 +52,6 @@ class ImagesController extends GetxController {
               child: SizedBox(
                 width: 150,
                 child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(side: BorderSide(color: MagicColors.primary)),
                   onPressed: () => Get.back(),
                   child: Text('Close'),
                 ),

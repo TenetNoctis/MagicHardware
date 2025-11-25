@@ -5,7 +5,6 @@ import 'package:magic_hardware/common/widgets/appbar/appbar.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 import 'package:magic_hardware/utils/validators/validation.dart';
 
-import '../../../../../utils/constants/colors.dart';
 import '../../../controllers/update_dob_controller.dart';
 
 class ChangeDob extends StatelessWidget {
@@ -56,10 +55,6 @@ class ChangeDob extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: MagicColors.primary,
-                    side: BorderSide(color: MagicColors.primary)
-                ),
                 onPressed: () => controller.updateDateOfBirth(),
                 child: const Text('Save'),
               ),

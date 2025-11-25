@@ -89,6 +89,10 @@ class MagicLoginForm extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () => controller.emailAndPasswordSignIn(),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  side: BorderSide(color: Colors.blue),
+                ),
                 child: const Text(MagicTexts.signIn),
               ),
             ),
@@ -99,6 +103,9 @@ class MagicLoginForm extends StatelessWidget {
               width: double.infinity,
               child: OutlinedButton(
                 onPressed: () => Get.to(() => const SignupScreen()),
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: Colors.blueAccent),
+                ),
                 child: const Text(MagicTexts.createAccount),
               ),
             ),

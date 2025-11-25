@@ -149,6 +149,7 @@ class AddressController extends GetxController {
 
                 return ListView.builder(
                   shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: snapshot.data!.length,
                   itemBuilder: (_, index) => MagicSingleAddress(
                     address: snapshot.data![index],

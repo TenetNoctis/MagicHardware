@@ -175,9 +175,6 @@ class SettingsScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        side: const BorderSide(color: MagicColors.primary),
-                      ),
                       onPressed: () =>
                           AuthenticationRepository.instance.logout(),
                       child: const Text('Logout'),
