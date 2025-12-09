@@ -4,21 +4,33 @@ import 'package:get/get.dart';
 import 'package:magic_hardware/features/shop/models/product_model.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 
+/// A controller to manage product images.
 class ImagesController extends GetxController {
+  /// Singleton instance of [ImagesController].
   static ImagesController get instance => Get.find();
 
-  // Variables
+  /// Observable for the currently selected product image.
   RxString selectedProductImage = ''.obs;
 
-  // Get all Images from product and Variations
+  /// Retrieves all images from the product and its variations.
+  ///
+  /// Returns a list of image URLs.
   List<String> getAllProductImages(ProductModel product) {
+    // Use a Set to avoid duplicate images
     Set<String> images = {};
+
+    // Add thumbnail image
     images.add(product.thumbnail);
+
+    // Set the selected image to the thumbnail initially
     selectedProductImage.value = product.thumbnail;
+
+    // Add additional product images
     if (product.images != null) {
       images.addAll(product.images!);
     }
 
+    // Add images from product variations if they exist
     if (product.productVariations != null ||
         product.productVariations!.isNotEmpty) {
       images.addAll(
@@ -29,7 +41,7 @@ class ImagesController extends GetxController {
     return images.toList();
   }
 
-  // Show Image in Full Screen
+  /// Displays an enlarged view of the selected image in a full-screen dialog.
   void showEnlargedImage(String image) {
     Get.to(
       fullscreenDialog: true,
@@ -40,7 +52,7 @@ class ImagesController extends GetxController {
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 vertical: MagicSizes.defaultSpace * 2,
                 horizontal: MagicSizes.defaultSpace,
               ),
@@ -53,7 +65,7 @@ class ImagesController extends GetxController {
                 width: 150,
                 child: OutlinedButton(
                   onPressed: () => Get.back(),
-                  child: Text('Close'),
+                  child: const Text('Close'),
                 ),
               ),
             ),

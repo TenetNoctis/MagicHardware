@@ -7,7 +7,9 @@ import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/constants/text_strings.dart';
 import '../../controllers/forget_password/forget_password_controller.dart';
 
+/// A screen that allows users to reset their password.
 class ForgotPassword extends StatelessWidget {
+  /// Creates a [ForgotPassword] screen.
   const ForgotPassword({super.key});
 
   @override
@@ -34,11 +36,11 @@ class ForgotPassword extends StatelessWidget {
 
             // Text Field
             Form(
-              key:  controller.forgetPasswordFormKey,
+              key: controller.forgetPasswordFormKey,
               child: TextFormField(
                 controller: controller.email,
                 validator: MagicValidator.validateEmail,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: MagicTexts.email,
                   prefixIcon: Icon(Iconsax.direct_right),
                 ),

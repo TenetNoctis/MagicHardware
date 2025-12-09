@@ -1,12 +1,12 @@
-/// Custom exception class to handle various Firebase-related errors.
+/// A custom exception class to handle various Firebase-related errors.
 class MagicFirebaseException implements Exception {
   /// The error code associated with the exception.
   final String code;
 
-  /// Constructor that takes an error code.
+  /// Creates a [MagicFirebaseException] with the given error [code].
   MagicFirebaseException(this.code);
 
-  /// Get the corresponding error message based on the error code.
+  /// Gets the corresponding error message based on the error [code].
   String get message {
     switch (code) {
       case 'unknown':

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+/// A class that contains all the colors used in the app.
+/// This class has a private constructor and all the colors are static.
 class MagicColors {
   MagicColors._();
+
   static const Color white = Color(0xFFFFFFFF);
 
   // App Basic Colors
@@ -18,7 +21,7 @@ class MagicColors {
   // Text Colors
   static const Color textPrimary = Color(0xFF333333);
   static const Color textSecondary = Color(0xFF6C757D);
-  static const Color textWhite = Colors.white;
+  static const Color textWhite = Color(0xFFFFFFFF);
 
   // Background Colors
   static const Color light = Color(0xFFF6F6F6);
@@ -27,7 +30,7 @@ class MagicColors {
 
   // Background Container Colors
   static const Color lightContainer = Color(0xFFF6F6F6);
-  static Color darkContainer = MagicColors.black;
+  static Color darkContainer = Color(0xFF000000);
 
   // Button Colors
   static const Color buttonPrimary = Color(0xFF4b68ff);

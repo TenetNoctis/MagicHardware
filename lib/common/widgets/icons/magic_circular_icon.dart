@@ -4,7 +4,9 @@ import 'package:magic_hardware/utils/constants/sizes.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/helpers/helper_functions.dart';
 
+/// A circular icon widget with a background color and an optional onPressed callback.
 class MagicCircularIcon extends StatelessWidget {
+  /// Creates a circular icon.
   const MagicCircularIcon({
     super.key,
     this.width,
@@ -16,9 +18,25 @@ class MagicCircularIcon extends StatelessWidget {
     this.onPressed,
   });
 
-  final double? width, height, size;
+  /// The width of the container.
+  final double? width;
+
+  /// The height of the container.
+  final double? height;
+
+  /// The size of the icon.
+  final double? size;
+
+  /// The icon to display.
   final IconData icon;
-  final Color? color, backgroundColor;
+
+  /// The color of the icon.
+  final Color? color;
+
+  /// The background color of the icon.
+  final Color? backgroundColor;
+
+  /// The callback function when the icon is pressed.
   final VoidCallback? onPressed;
 
   @override

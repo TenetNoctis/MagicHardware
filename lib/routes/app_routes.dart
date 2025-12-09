@@ -19,8 +19,9 @@ import 'package:magic_hardware/routes/routes.dart';
 import '../features/shop/models/product_model.dart';
 import '../features/shop/screens/product_details/product_detail.dart';
 
-
+/// A class containing the application's routes.
 class AppRoutes {
+  /// A list of [GetPage]s that define the routes and their corresponding screens.
   static final pages = [
     GetPage(name: MagicRoutes.home, page: () => const HomeScreen()),
     GetPage(name: MagicRoutes.store, page: () => const StoreScreen()),

@@ -12,9 +12,17 @@ import '../../../../../common/widgets/products/product_cards/product_card_vertic
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/helpers/cloud_helper_functions.dart';
 
+/// A widget that displays a tab for a specific category, including its brands and products.
+///
+/// This widget is designed to be used within a tabbed view, where each tab represents a different category.
+/// It displays a list of brands associated with the category and a grid of products from that category.
 class MagicCategoryTab extends StatelessWidget {
+  /// Creates a [MagicCategoryTab].
+  ///
+  /// The [category] parameter is required.
   const MagicCategoryTab({super.key, required this.category});
 
+  /// The category to display in the tab.
   final CategoryModel category;
 
   @override
@@ -39,7 +47,7 @@ class MagicCategoryTab extends StatelessWidget {
                   final widget =
                       MagicCloudHelperFunctions.checkMultiRecordState(
                         snapshot: snapshot,
-                        loader: MagicVerticalProductShimmer(),
+                        loader: const MagicVerticalProductShimmer(),
                       );
                   if (widget != null) return widget;
 
@@ -50,7 +58,7 @@ class MagicCategoryTab extends StatelessWidget {
                       MagicSectionHeading(
                         title: 'You might like',
                         onPressed: () => Get.to(
-                          AllProductsScreen(
+                          () => AllProductsScreen(
                             title: category.name,
                             futureMethod: controller.getCategoryProducts(
                               categoryId: category.id,

@@ -16,9 +16,14 @@ import '../../../../utils/constants/enums.dart';
 import '../../../../utils/constants/sizes.dart';
 import 'add_to_cart_button.dart';
 
+/// A widget that displays a product card with a horizontal layout.
 class MagicProductCardHorizontal extends StatelessWidget {
+  /// Creates a [MagicProductCardHorizontal].
+  ///
+  /// The [product] model is required to display the product information.
   const MagicProductCardHorizontal({super.key, required this.product});
 
+  /// The product to be displayed in the card.
   final ProductModel product;
 
   @override

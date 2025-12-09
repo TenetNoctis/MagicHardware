@@ -11,10 +11,22 @@ import '../../../utils/helpers/helper_functions.dart';
 import '../custom_shapes/containers/rounded_container.dart';
 import 'brand_card.dart';
 
+/// A widget to display a brand and a preview of its products.
 class MagicBrandShowcase extends StatelessWidget {
-  const MagicBrandShowcase({super.key, required this.images, required this.brand});
+  /// Creates a [MagicBrandShowcase].
+  ///
+  /// - [brand]: The brand to showcase.
+  /// - [images]: A list of product image URLs to display.
+  const MagicBrandShowcase({
+    super.key,
+    required this.images,
+    required this.brand,
+  });
 
+  /// The brand to showcase.
   final BrandModel brand;
+
+  /// A list of product image URLs to display as a preview.
   final List<String> images;
 
   @override
@@ -29,13 +41,8 @@ class MagicBrandShowcase extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: MagicSizes.spaceBtwItems),
         child: Column(
           children: [
-            // Brand with products count
-            MagicBrandCard(
-              brand: brand,
-              showBorder: false,
-            ),
+            MagicBrandCard(brand: brand, showBorder: false),
             const SizedBox(height: MagicSizes.spaceBtwItems),
-            // Brand Top 3 Product Images
             Row(
               children: images
                   .map((image) => brandTopProductImageWidget(image, context))
@@ -47,6 +54,7 @@ class MagicBrandShowcase extends StatelessWidget {
     );
   }
 
+  /// A helper widget to display a single top product image.
   Widget brandTopProductImageWidget(String image, context) {
     return Expanded(
       child: MagicRoundedContainer(
@@ -57,11 +65,12 @@ class MagicBrandShowcase extends StatelessWidget {
         margin: const EdgeInsets.only(right: MagicSizes.sm),
         padding: const EdgeInsets.all(MagicSizes.md),
         child: CachedNetworkImage(
-            fit: BoxFit.contain,
-            imageUrl: image,
-          progressIndicatorBuilder: (context, url, downloadProgress) => const MagicShimmerEffect(width: 100, height: 100),
+          fit: BoxFit.contain,
+          imageUrl: image,
+          progressIndicatorBuilder: (context, url, downloadProgress) =>
+              const MagicShimmerEffect(width: 100, height: 100),
           errorWidget: (context, url, error) => const Icon(Icons.error),
-        )
+        ),
       ),
     );
   }

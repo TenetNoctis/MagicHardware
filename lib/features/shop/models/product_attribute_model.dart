@@ -1,25 +1,27 @@
+/// Represents a product attribute.
 class ProductAttributeModel {
+  /// The name of the attribute (e.g., "Color", "Size").
   String? name;
+
+  /// The list of possible values for the attribute (e.g. "Green", "Black", "no. 39", "no. 40").
   final List<String>? values;
 
+  /// Creates a [ProductAttributeModel].
   ProductAttributeModel({this.name, this.values});
 
-  // Map ProductAttributeModel to JSON format
+  /// Converts the [ProductAttributeModel] to a JSON object.
   Map<String, dynamic> toJson() {
-    return {
-      'Name': name,
-      'Values': values,
-    };
+    return {'Name': name, 'Values': values};
   }
 
-  /// Map Json oriented document snapshot from Firebase to Model
+  /// Creates a [ProductAttributeModel] from a JSON object.
   factory ProductAttributeModel.fromJson(Map<String, dynamic> document) {
     final data = document;
     if (data.isEmpty) return ProductAttributeModel();
 
     return ProductAttributeModel(
       name: data.containsKey('Name') ? data['Name'] : '',
-      values: data['Values'] != null ? List<String>.from(data['Values']) : []
+      values: data['Values'] != null ? List<String>.from(data['Values']) : [],
     );
   }
 }

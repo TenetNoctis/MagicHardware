@@ -1,6 +1,6 @@
-
+/// A class that contains all the text strings used in the app.
+/// This class provides static constants for each text, making it easy to reference them throughout the app.
 class MagicTexts {
-
   // Global Texts
 
   // OnBoarding Texts
@@ -8,9 +8,9 @@ class MagicTexts {
   static const String onBoardingTitle2 = "Select Payment Method";
   static const String onBoardingTitle3 = "Deliver at your door step";
 
-  static const String onBoardingSubTitle1 = "Welcome to a World of Limitless Choices - Your Perfect Product Awaits!";
+  static const String onBoardingSubTitle1 = "Welcome to Magic Hardware! Your Gateway to Seamless Online Shopping - Your Perfect Product Awaits!";
   static const String onBoardingSubTitle2 = "For Seamless Transactions, Choose Your Payment Path - Your Convenience, Our Priority!";
-  static const String onBoardingSubTitle3 = "From Our Doorstep to Yours - Swift, Secure, and Contactless Delivery!";
+  static const String onBoardingSubTitle3 = "From Our Doorstep to Yours - Swift and Secure Delivery!";
 
   // Authentication Form Text
   static const String firstName = "First Name";
@@ -57,4 +57,15 @@ class MagicTexts {
 
   // Validation
   static const String dateOfBirthError = "You must be at least 18 years old.";
+  
+  // Error
+  static const String somethingWentWrong = "Something went wrong. Please try again later.";
+  static const String unableToFindUser = "Unable to find user information. Try again later.";
+  static const String invalidCredentials = "Invalid credentials. Please try again.";
+  static const String productNotFound = 'Product not found.';
+  static const String fetchUserAddressesError = 'Failed to fetch user addresses: ';
+  static const String addAddressError = 'Something went wrong while saving your address. Try again later';
+  static const String updateAddressError = 'Unable to update your address selection. Try again later';
+  static const String deleteAddressError = 'Unable to delete address. Try again later: ';
+  
 }

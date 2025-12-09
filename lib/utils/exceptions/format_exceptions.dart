@@ -1,20 +1,21 @@
-/// Custom exception class to handle various format-related errors.
+/// A custom exception class to handle various format-related errors.
 class MagicFormatException implements Exception {
-  /// The associated error message.
+  /// The error message associated with the exception.
   final String message;
 
-  /// Default constructor with a generic error message.
+  /// Creates a [MagicFormatException] with an optional error [message].
+  /// If no message is provided, a default message is used.
   const MagicFormatException([this.message = 'An unexpected format error occurred. Please check your input.']);
 
-  /// Create a format exception from a specific error message.
+  /// Creates a [MagicFormatException] from a specific error message.
   factory MagicFormatException.fromMessage(String message) {
     return MagicFormatException(message);
   }
 
-  /// Get the corresponding error message.
+  /// Gets the formatted error message.
   String get formattedMessage => message;
 
-  /// Create a format exception from a specific error code.
+  /// Creates a [MagicFormatException] from a specific error code.
   factory MagicFormatException.fromCode(String code) {
     switch (code) {
       case 'invalid-email-format':

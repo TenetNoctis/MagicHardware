@@ -5,7 +5,9 @@ import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
 import '../../../utils/helpers/helper_functions.dart';
 
+/// A widget for displaying an animation with text and an optional action button.
 class MagicAnimationLoaderWidget extends StatelessWidget {
+  /// Creates an animation loader widget.
   const MagicAnimationLoaderWidget({
     super.key,
     required this.text,
@@ -16,11 +18,22 @@ class MagicAnimationLoaderWidget extends StatelessWidget {
     this.width = 0.8,
   });
 
+  /// The text to be displayed below the animation.
   final String text;
+
+  /// The path to the Lottie animation file.
   final String animation;
+
+  /// Whether to show an action button below the text.
   final bool showAction;
+
+  /// The text to be displayed on the action button.
   final String? actionText;
+
+  /// The callback function to be executed when the action button is pressed.
   final VoidCallback? onActionPressed;
+
+  /// The width of the animation as a fraction of the screen width.
   final double width;
 
   @override
@@ -47,13 +60,15 @@ class MagicAnimationLoaderWidget extends StatelessWidget {
                   child: OutlinedButton(
                     onPressed: onActionPressed,
                     style: OutlinedButton.styleFrom(
-                      backgroundColor: dark ? MagicColors.darkContainer : MagicColors.primary,
+                      backgroundColor: dark
+                          ? MagicColors.darkContainer
+                          : MagicColors.primary,
                     ),
                     child: Text(
                       actionText!,
-                      style: Theme.of(context).textTheme.bodyMedium!.apply(
-                        color: MagicColors.white,
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium!.apply(color: MagicColors.white),
                     ),
                   ),
                 )

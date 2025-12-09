@@ -5,10 +5,10 @@ import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/helpers/helper_functions.dart';
 import '../../custom_shapes/containers/rounded_container.dart';
 
+/// A widget that provides a text field for entering a coupon code and a button to apply it.
 class MagicCouponCode extends StatelessWidget {
-  const MagicCouponCode({
-    super.key,
-  });
+  /// Creates a [MagicCouponCode] widget.
+  const MagicCouponCode({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class MagicCouponCode extends StatelessWidget {
     return MagicRoundedContainer(
       showBorder: true,
       backgroundColor: dark ? MagicColors.dark : MagicColors.white,
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         top: MagicSizes.sm,
         bottom: MagicSizes.sm,
         right: MagicSizes.sm,
@@ -26,7 +26,7 @@ class MagicCouponCode extends StatelessWidget {
         children: [
           Flexible(
             child: TextFormField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Have a promo code? Enter Here!',
                 focusedBorder: InputBorder.none,
                 enabledBorder: InputBorder.none,
@@ -42,11 +42,15 @@ class MagicCouponCode extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                  foregroundColor: dark ? MagicColors.white.withValues(alpha: 0.5) : MagicColors.dark.withValues(alpha: 0.5),
-                  backgroundColor: MagicColors.darkerGrey.withValues(alpha: 0.5),
-                  side: BorderSide(color: MagicColors.grey.withValues(alpha: 0.1))
+                foregroundColor: dark
+                    ? MagicColors.white.withValues(alpha: 0.5)
+                    : MagicColors.dark.withValues(alpha: 0.5),
+                backgroundColor: MagicColors.darkerGrey.withValues(alpha: 0.5),
+                side: BorderSide(
+                  color: MagicColors.grey.withValues(alpha: 0.1),
+                ),
               ),
-              child: Text('Apply'),
+              child: const Text('Apply'),
             ),
           ),
         ],

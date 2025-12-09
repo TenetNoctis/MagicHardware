@@ -9,9 +9,13 @@ import '../custom_shapes/containers/rounded_container.dart';
 import '../images/magic_circular_image.dart';
 import '../texts/brand_title_text_with_verified_icon.dart';
 
-
-
+/// A card widget that displays brand information.
 class MagicBrandCard extends StatelessWidget {
+  /// Creates a [MagicBrandCard].
+  ///
+  /// - [brand]: The brand data to display.
+  /// - [showBorder]: Whether to show a border around the card.
+  /// - [onTap]: A callback function to be executed when the card is tapped.
   const MagicBrandCard({
     super.key,
     required this.brand,
@@ -19,8 +23,13 @@ class MagicBrandCard extends StatelessWidget {
     this.onTap,
   });
 
+  /// The brand data to display.
   final BrandModel brand;
+
+  /// Whether to show a border around the card.
   final bool showBorder;
+
+  /// A callback function to be executed when the card is tapped.
   final void Function()? onTap;
 
   @override
@@ -29,7 +38,7 @@ class MagicBrandCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: onTap,
-      /// Container Design
+      // Main container for the brand card.
       child: MagicRoundedContainer(
         showBorder: showBorder,
         backgroundColor: Colors.transparent,
@@ -37,7 +46,7 @@ class MagicBrandCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            /// -- Icon
+            // Brand icon/image.
             Flexible(
               child: MagicCircularImage(
                 fit: BoxFit.contain,
@@ -50,12 +59,16 @@ class MagicBrandCard extends StatelessWidget {
             ),
             const SizedBox(width: MagicSizes.spaceBtwItems / 2),
 
+            // Brand name and product count.
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MagicBrandTitleWithVerifiedIcon(title: brand.name, brandTextSize: TextSizes.medium),
+                  MagicBrandTitleWithVerifiedIcon(
+                    title: brand.name,
+                    brandTextSize: TextSizes.medium,
+                  ),
                   Text(
                     '${brand.productsCount ?? 0} products',
                     overflow: TextOverflow.ellipsis,

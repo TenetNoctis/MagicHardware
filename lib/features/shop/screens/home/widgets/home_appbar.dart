@@ -8,7 +8,9 @@ import '../../../../../common/widgets/shimmers/shimmer.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/text_strings.dart';
 
+/// A custom app bar for the home screen.
 class MagicHomeAppBar extends StatelessWidget {
+  /// Creates a [MagicHomeAppBar].
   const MagicHomeAppBar({super.key});
 
   @override
@@ -40,7 +42,11 @@ class MagicHomeAppBar extends StatelessWidget {
         ],
       ),
       actions: [
-        MagicCartCounterIcon(iconColor: MagicColors.white, counterBgColor: MagicColors.white, counterTextColor: MagicColors.black),
+        MagicCartCounterIcon(
+          iconColor: MagicColors.white,
+          counterBgColor: MagicColors.white,
+          counterTextColor: MagicColors.black,
+        ),
       ],
     );
   }

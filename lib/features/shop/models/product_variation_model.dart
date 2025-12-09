@@ -1,13 +1,30 @@
+/// Represents a product variation.
 class ProductVariationModel {
+  /// The unique identifier for the product variation.
   final String id;
+
+  /// The stock keeping unit.
   String sku;
+
+  /// The URL of the variation image.
   String image;
+
+  /// The description of the variation.
   String? description;
+
+  /// The price of the variation.
   double price;
+
+  /// The sale price of the variation.
   double? salePrice;
+
+  /// The stock quantity.
   int stock;
+
+  /// A map of attribute names and their values.
   Map<String, String> attributeValues;
 
+  /// Creates a [ProductVariationModel].
   ProductVariationModel({
     required this.id,
     this.sku = '',
@@ -19,10 +36,11 @@ class ProductVariationModel {
     required this.attributeValues,
   });
 
-  /// Create Empty func for clean code
-  static ProductVariationModel empty() => ProductVariationModel(id: '', attributeValues: {});
+  /// Creates an empty [ProductVariationModel].
+  static ProductVariationModel empty() =>
+      ProductVariationModel(id: '', attributeValues: {});
 
-  /// Convert Model to Json
+  /// Converts the [ProductVariationModel] to a JSON object.
   Map<String, dynamic> toJson() {
     return {
       'Id': id,
@@ -36,7 +54,7 @@ class ProductVariationModel {
     };
   }
 
-  /// Map Json oriented document snapshot from Firebase to Model
+  /// Creates a [ProductVariationModel] from a JSON object.
   factory ProductVariationModel.fromJson(Map<String, dynamic> document) {
     final data = document;
     if (data.isEmpty) return ProductVariationModel.empty();

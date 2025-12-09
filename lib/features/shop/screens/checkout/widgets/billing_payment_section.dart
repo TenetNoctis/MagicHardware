@@ -8,7 +8,9 @@ import 'package:magic_hardware/utils/helpers/helper_functions.dart';
 
 import '../../../controllers/product/checkout_controller.dart';
 
+/// A widget that displays the billing payment section.
 class MagicBillingPaymentSection extends StatelessWidget {
+  /// Creates a new [MagicBillingPaymentSection] widget.
   const MagicBillingPaymentSection({super.key});
 
   @override

@@ -9,21 +9,39 @@ import '../../../../utils/constants/image_strings.dart';
 import '../../../../utils/helpers/network_manager.dart';
 import '../../../personalization/models/user_model.dart';
 
+/// Controller for handling the user signup process.
 class SignupController extends GetxController {
+  /// Provides a singleton instance of the [SignupController].
   static SignupController get instance => Get.find();
 
-  // Variables
-  final hidePassword = true.obs; // Observable for hiding/showing password
-  final privacyPolicy = true.obs; // Observable for hiding/showing password
-  final firstName = TextEditingController(); // Controller for first name input
-  final lastName = TextEditingController(); // Controller for last name input
-  final username = TextEditingController(); // Controller for username input
-  final email = TextEditingController(); // Controller for email input
-  final phoneNumber = TextEditingController(); // Controller for phone number input
-  final password = TextEditingController(); // Controller for password input
-  GlobalKey<FormState> signupFormKey = GlobalKey<FormState>(); // Form key for form validation
+  /// Indicates whether the password should be hidden or visible.
+  final hidePassword = true.obs;
 
-  // Signup
+  /// Indicates whether the user has accepted the privacy policy.
+  final privacyPolicy = true.obs;
+
+  /// Text controller for the first name input field.
+  final firstName = TextEditingController();
+
+  /// Text controller for the last name input field.
+  final lastName = TextEditingController();
+
+  /// Text controller for the username input field.
+  final username = TextEditingController();
+
+  /// Text controller for the email input field.
+  final email = TextEditingController();
+
+  /// Text controller for the phone number input field.
+  final phoneNumber = TextEditingController();
+
+  /// Text controller for the password input field.
+  final password = TextEditingController();
+
+  /// A global key for the signup form.
+  GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
+
+  /// Handles the user signup process.
   Future<void> signup() async {
     try {
       // Start Loading

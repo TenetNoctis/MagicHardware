@@ -4,17 +4,36 @@ import 'package:magic_hardware/features/shop/models/cart_item_model.dart';
 import 'package:magic_hardware/utils/constants/enums.dart';
 import 'package:magic_hardware/utils/helpers/helper_functions.dart';
 
+/// Represents an order.
 class OrderModel {
+  /// The unique identifier for the order.
   final String id;
+
+  /// The ID of the user who placed the order.
   final String userId;
+
+  /// The status of the order.
   final OrderStatus status;
+
+  /// The total amount of the order.
   final double totalAmount;
+
+  /// The date the order was placed.
   final DateTime orderDate;
+
+  /// The payment method used for the order.
   final String paymentMethod;
+
+  /// The shipping address for the order.
   final AddressModel? address;
+
+  /// The date the order is expected to be delivered.
   final DateTime? deliveryDate;
+
+  /// The items in the order.
   final List<CartItemModel> items;
 
+  /// Creates an [OrderModel].
   OrderModel({
     required this.id,
     this.userId = '',
@@ -27,19 +46,23 @@ class OrderModel {
     this.deliveryDate,
   });
 
+  /// Returns the formatted order date string.
   String get formattedOrderDate =>
       MagicHelperFunctions.getFormattedDate(orderDate);
 
+  /// Returns the formatted delivery date string.
   String get formattedDeliveryDate => deliveryDate != null
       ? MagicHelperFunctions.getFormattedDate(deliveryDate!)
       : '';
 
+  /// Returns the string representation of the order status.
   String get orderStatusText => status == OrderStatus.delivered
       ? 'Delivered'
       : status == OrderStatus.shipped
       ? 'Shipment on the way'
       : 'Processing';
 
+  /// Converts the [OrderModel] to a JSON object.
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -54,6 +77,7 @@ class OrderModel {
     };
   }
 
+  /// Creates an [OrderModel] from a Firestore snapshot.
   factory OrderModel.fromSnapshot(DocumentSnapshot snapshot) {
     final data = snapshot.data() as Map<String, dynamic>;
     return OrderModel(

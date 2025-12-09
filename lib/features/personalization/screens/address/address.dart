@@ -12,7 +12,9 @@ import '../../../../utils/constants/image_strings.dart';
 import '../../controllers/address_controller.dart';
 import 'add_new_address.dart';
 
+/// A screen that displays a list of the user's addresses.
 class UserAddressScreen extends StatelessWidget {
+  /// Creates a [UserAddressScreen].
   const UserAddressScreen({super.key});
 
   @override

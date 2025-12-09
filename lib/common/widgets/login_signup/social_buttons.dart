@@ -6,11 +6,10 @@ import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/image_strings.dart';
 import '../../../utils/constants/sizes.dart';
 
-
+/// A widget that displays social media login buttons.
 class MagicSocialButtons extends StatelessWidget {
-  const MagicSocialButtons({
-    super.key,
-  });
+  /// Creates a widget with social media login buttons.
+  const MagicSocialButtons({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -9,9 +9,14 @@ import '../../../../utils/constants/image_strings.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/helpers/helper_functions.dart';
 
+/// A screen for verifying the user's email address.
 class VerifyEmailScreen extends StatelessWidget {
+  /// Creates a [VerifyEmailScreen].
+  ///
+  /// The [email] parameter is optional and will be displayed on the screen if provided.
   const VerifyEmailScreen({super.key, this.email});
 
+  /// The user's email address.
   final String? email;
 
   @override
@@ -34,7 +39,11 @@ class VerifyEmailScreen extends StatelessWidget {
             children: [
               // Image
               Image(
-                image: AssetImage(MagicHelperFunctions.isDarkMode(context) ? MagicImages.darkAppLogo : MagicImages.lightAppLogo),
+                image: AssetImage(
+                  MagicHelperFunctions.isDarkMode(context)
+                      ? MagicImages.darkAppLogo
+                      : MagicImages.lightAppLogo,
+                ),
                 width: MagicHelperFunctions.screenWidth() * 0.6,
               ),
               const SizedBox(height: MagicSizes.spaceBtwSections),

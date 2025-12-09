@@ -18,7 +18,9 @@ import '../../controllers/product/all_products_controller.dart';
 import '../../controllers/product/product_controller.dart';
 import '../search/product_search_screen.dart';
 
+/// The home screen of the application.
 class HomeScreen extends StatelessWidget {
+  /// Creates a [HomeScreen] widget.
   const HomeScreen({super.key});
 
   @override
@@ -43,7 +45,10 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: MagicSizes.spaceBtwSections),
 
                   // Searchbar
-                  MagicSearchContainer(text: 'Search in Store', onTap: () => Get.to(() => const ProductSearchScreen())),
+                  MagicSearchContainer(
+                    text: 'Search in Store',
+                    onTap: () => Get.to(() => const ProductSearchScreen()),
+                  ),
                   const SizedBox(height: MagicSizes.spaceBtwSections),
 
                   // Categories

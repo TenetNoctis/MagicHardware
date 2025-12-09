@@ -3,30 +3,53 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../features/shop/models/product_model.dart';
+import '../../../utils/constants/text_strings.dart';
 import '../../../utils/exceptions/firebase_exceptions.dart';
 import '../../../utils/exceptions/platform_exceptions.dart';
 
+/// A repository for managing product-related data.
 class ProductRepository extends GetxController {
+  /// A static getter for the [ProductRepository] instance.
   static ProductRepository get instance => Get.find();
 
   final _db = FirebaseFirestore.instance;
 
-  // Get all products from firestore
+  /// Fetches all products from Firestore.
   Future<List<ProductModel>> getAllProducts() async {
     try {
       final snapshot = await _db.collection('Products').get();
-      final list = snapshot.docs.map((document) => ProductModel.fromSnapshot(document)).toList();
+      final list = snapshot.docs
+          .map((document) => ProductModel.fromSnapshot(document))
+          .toList();
       return list;
     } on FirebaseException catch (e) {
       throw MagicFirebaseException(e.code).message;
     } on PlatformException catch (e) {
       throw MagicPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw MagicTexts.somethingWentWrong;
     }
   }
 
-  // Get all featured products
+  /// Fetches a single product by its ID from Firestore.
+  Future<ProductModel> getProductById(String productId) async {
+    try {
+      final snapshot = await _db.collection('Products').doc(productId).get();
+      if (snapshot.exists) {
+        return ProductModel.fromSnapshot(snapshot);
+      } else {
+        throw MagicTexts.productNotFound;
+      }
+    } on FirebaseException catch (e) {
+      throw MagicFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw MagicPlatformException(e.code).message;
+    } catch (e) {
+      throw MagicTexts.somethingWentWrong;
+    }
+  }
+
+  /// Fetches all featured products.
   Future<List<ProductModel>> getAllFeaturedProducts() async {
     try {
       final snapshot = await _db
@@ -39,11 +62,11 @@ class ProductRepository extends GetxController {
     } on PlatformException catch (e) {
       throw MagicPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw MagicTexts.somethingWentWrong;
     }
   }
 
-  // Get limited number of featured products
+  /// Fetches a limited number of featured products.
   Future<List<ProductModel>> getFeaturedProducts() async {
     try {
       final snapshot = await _db
@@ -57,11 +80,11 @@ class ProductRepository extends GetxController {
     } on PlatformException catch (e) {
       throw MagicPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw MagicTexts.somethingWentWrong;
     }
   }
 
-  // Get Products based on Query
+  /// Fetches products based on a given [Query].
   Future<List<ProductModel>> getProductsByQuery(Query query) async {
     try {
       final querySnapshot = await query.get();
@@ -74,26 +97,38 @@ class ProductRepository extends GetxController {
     } on PlatformException catch (e) {
       throw MagicPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw MagicTexts.somethingWentWrong;
     }
   }
 
-  // Get Favorite Products
-  Future<List<ProductModel>> getFavoriteProducts(List<String> productIds) async {
+  /// Fetches a list of favorite products by their IDs.
+  Future<List<ProductModel>> getFavoriteProducts(
+    List<String> productIds,
+  ) async {
     try {
-      final snapshot = await _db.collection('Products').where(FieldPath.documentId, whereIn: productIds).get();
-      return snapshot.docs.map((querySnapshot) => ProductModel.fromSnapshot(querySnapshot)).toList();
+      final snapshot = await _db
+          .collection('Products')
+          .where(FieldPath.documentId, whereIn: productIds)
+          .get();
+      return snapshot.docs
+          .map((querySnapshot) => ProductModel.fromSnapshot(querySnapshot))
+          .toList();
     } on FirebaseException catch (e) {
       throw MagicFirebaseException(e.code).message;
     } on PlatformException catch (e) {
       throw MagicPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw MagicTexts.somethingWentWrong;
     }
   }
 
-  // Get Products For Brand
-  Future<List<ProductModel>> getProductsForBrand({required String brandId, int limit = -1}) async {
+  /// Fetches products for a specific brand.
+  ///
+  /// The [limit] parameter can be used to restrict the number of products returned.
+  Future<List<ProductModel>> getProductsForBrand({
+    required String brandId,
+    int limit = -1,
+  }) async {
     try {
       final querySnapshot = limit == -1
           ? await _db
@@ -105,44 +140,60 @@ class ProductRepository extends GetxController {
                 .where('Brand.Id', isEqualTo: brandId)
                 .limit(limit)
                 .get();
-      final products = querySnapshot.docs.map((doc) => ProductModel.fromSnapshot(doc)).toList();
+      final products = querySnapshot.docs
+          .map((doc) => ProductModel.fromSnapshot(doc))
+          .toList();
       return products;
     } on FirebaseException catch (e) {
       throw MagicFirebaseException(e.code).message;
     } on PlatformException catch (e) {
       throw MagicPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw MagicTexts.somethingWentWrong;
     }
   }
 
-  // Get Products For Brand
-  Future<List<ProductModel>> getProductsForCategory({required String categoryId, int limit = 4}) async {
+  /// Fetches products for a specific category.
+  ///
+  /// The [limit] parameter can be used to restrict the number of products returned.
+  Future<List<ProductModel>> getProductsForCategory({
+    required String categoryId,
+    int limit = 4,
+  }) async {
     try {
       QuerySnapshot productCategoryQuery = limit == -1
           ? await _db
-          .collection('ProductCategory')
-          .where('categoryId', isEqualTo: categoryId)
-          .get()
+                .collection('ProductCategory')
+                .where('categoryId', isEqualTo: categoryId)
+                .get()
           : await _db
-          .collection('ProductCategory')
-          .where('categoryId', isEqualTo: categoryId)
-          .limit(limit)
+                .collection('ProductCategory')
+                .where('categoryId', isEqualTo: categoryId)
+                .limit(limit)
+                .get();
+      List<String> productIds = productCategoryQuery.docs
+          .map((documentSnapshot) => documentSnapshot['productId'] as String)
+          .toList();
+      final productsQuery = await _db
+          .collection('Products')
+          .where(FieldPath.documentId, whereIn: productIds)
           .get();
-      List<String> productIds = productCategoryQuery.docs.map((documentSnapshot) => documentSnapshot['productId'] as String).toList();
-      final productsQuery = await _db.collection('Products').where(FieldPath.documentId, whereIn: productIds).get();
-      List<ProductModel> products = productsQuery.docs.map((documentSnapshot) => ProductModel.fromSnapshot(documentSnapshot)).toList();
+      List<ProductModel> products = productsQuery.docs
+          .map(
+            (documentSnapshot) => ProductModel.fromSnapshot(documentSnapshot),
+          )
+          .toList();
       return products;
     } on FirebaseException catch (e) {
       throw MagicFirebaseException(e.code).message;
     } on PlatformException catch (e) {
       throw MagicPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw MagicTexts.somethingWentWrong;
     }
   }
 
-  /// Upload dummy data to the Cloud Firebase
+  /// Uploads a list of dummy products to the Cloud Firestore.
   Future<void> uploadDummyData(List<ProductModel> products) async {
     try {
       final batch = _db.batch();
@@ -156,7 +207,7 @@ class ProductRepository extends GetxController {
     } on PlatformException catch (e) {
       throw MagicPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw MagicTexts.somethingWentWrong;
     }
   }
 }

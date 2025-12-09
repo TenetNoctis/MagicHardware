@@ -1,14 +1,30 @@
+/// Represents an item in the shopping cart.
 class CartItemModel {
+  /// The ID of the product.
   String productId;
+
+  /// The title of the product.
   String title;
+
+  /// The price of the product.
   double price;
+
+  /// The URL of the product image.
   String? image;
+
+  /// The quantity of the product.
   int quantity;
+
+  /// The ID of the product variation.
   String variationId;
+
+  /// The name of the brand.
   String? brandName;
+
+  /// The selected variation of the product.
   Map<String, String>? selectedVariation;
 
-  // Constructor
+  /// Creates a [CartItemModel].
   CartItemModel({
     required this.productId,
     this.title = '',
@@ -20,10 +36,10 @@ class CartItemModel {
     this.selectedVariation,
   });
 
-  // Empty Cart
+  /// Creates an empty [CartItemModel].
   static CartItemModel empty() => CartItemModel(productId: '', quantity: 0);
 
-  // Convert a CartItem to a JSON Map
+  /// Converts the [CartItemModel] to a JSON object.
   Map<String, dynamic> toJson() {
     return {
       'productId': productId,
@@ -37,7 +53,7 @@ class CartItemModel {
     };
   }
 
-  // Create a CartItem from a JSON Map
+  /// Creates a [CartItemModel] from a JSON object.
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
     return CartItemModel(
       productId: json['productId'],
@@ -47,7 +63,9 @@ class CartItemModel {
       quantity: json['quantity'],
       variationId: json['variationId'],
       brandName: json['brandName'],
-      selectedVariation: json['selectedVariation'] != null ? Map<String, String>.from(json['selectedVariation']) : null,
+      selectedVariation: json['selectedVariation'] != null
+          ? Map<String, String>.from(json['selectedVariation'])
+          : null,
     );
   }
 }

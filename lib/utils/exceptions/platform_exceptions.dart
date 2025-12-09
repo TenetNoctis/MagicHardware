@@ -1,9 +1,12 @@
-/// Exception class for handling various platform-related errors.
+/// A custom exception class to handle various platform-related errors.
 class MagicPlatformException implements Exception {
+  /// The error code associated with the exception.
   final String code;
 
+  /// Creates a [MagicPlatformException] with the given error [code].
   MagicPlatformException(this.code);
 
+  /// Gets the corresponding error message based on the error [code].
   String get message {
     switch (code) {
       case 'INVALID_LOGIN_CREDENTIALS':
@@ -34,7 +37,6 @@ class MagicPlatformException implements Exception {
         return 'Invalid verification ID. Please request a new verification code.';
       case 'quota-exceeded':
         return 'Quota exceeded. Please try again later.';
-    // Add more cases as needed...
       default:
         return 'An unexpected platform error occurred. Please try again.';
     }

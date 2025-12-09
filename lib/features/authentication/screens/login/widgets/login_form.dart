@@ -9,7 +9,9 @@ import '../../../../../utils/constants/text_strings.dart';
 import '../../../controllers/login/login_controller.dart';
 import '../../password_configuration/forgot_password.dart';
 
+/// A widget that provides a login form for users to sign in.
 class MagicLoginForm extends StatelessWidget {
+  /// Creates a [MagicLoginForm].
   const MagicLoginForm({super.key});
 
   @override
@@ -89,10 +91,6 @@ class MagicLoginForm extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () => controller.emailAndPasswordSignIn(),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  side: BorderSide(color: Colors.blue),
-                ),
                 child: const Text(MagicTexts.signIn),
               ),
             ),
@@ -103,9 +101,6 @@ class MagicLoginForm extends StatelessWidget {
               width: double.infinity,
               child: OutlinedButton(
                 onPressed: () => Get.to(() => const SignupScreen()),
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: Colors.blueAccent),
-                ),
                 child: const Text(MagicTexts.createAccount),
               ),
             ),

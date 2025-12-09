@@ -8,7 +8,9 @@ import 'package:magic_hardware/utils/validators/validation.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/text_strings.dart';
 
+/// A widget that provides a signup form for users to create a new account.
 class MagicSignupForm extends StatelessWidget {
+  /// Creates a [MagicSignupForm].
   const MagicSignupForm({super.key});
 
   @override
@@ -100,7 +102,11 @@ class MagicSignupForm extends StatelessWidget {
                 suffixIcon: IconButton(
                   onPressed: () => controller.hidePassword.value =
                       !controller.hidePassword.value,
-                  icon: Icon(controller.hidePassword.value ? Iconsax.eye_slash : Iconsax.eye),
+                  icon: Icon(
+                    controller.hidePassword.value
+                        ? Iconsax.eye_slash
+                        : Iconsax.eye,
+                  ),
                 ),
               ),
             ),

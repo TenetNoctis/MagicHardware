@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// A widget to display product prices with customizable currency and styling.
 class MagicProductPriceText extends StatelessWidget {
+  /// Creates a [MagicProductPriceText] widget.
   const MagicProductPriceText({
     super.key,
     this.currencySign = 'MVR ',
@@ -10,9 +12,19 @@ class MagicProductPriceText extends StatelessWidget {
     this.lineThrough = false,
   });
 
-  final String currencySign, price;
+  /// The currency symbol to display.
+  final String currencySign;
+
+  /// The price of the product, as a string. Can be a single value or a range (e.g., "100.00 - 250.00").
+  final String price;
+
+  /// The maximum number of lines for the text.
   final int maxLines;
+
+  /// Whether to display the price in a large font size.
   final bool isLarge;
+
+  /// Whether to apply a line-through decoration to the text.
   final bool lineThrough;
 
   @override
@@ -30,8 +42,12 @@ class MagicProductPriceText extends StatelessWidget {
       maxLines: maxLines,
       overflow: TextOverflow.ellipsis,
       style: isLarge
-          ? Theme.of(context).textTheme.headlineMedium!.apply(decoration: lineThrough ? TextDecoration.lineThrough : null)
-          : Theme.of(context).textTheme.titleLarge!.apply(decoration: lineThrough ? TextDecoration.lineThrough : null),
+          ? Theme.of(context).textTheme.headlineMedium!.apply(
+              decoration: lineThrough ? TextDecoration.lineThrough : null,
+            )
+          : Theme.of(context).textTheme.titleLarge!.apply(
+              decoration: lineThrough ? TextDecoration.lineThrough : null,
+            ),
     );
   }
 }

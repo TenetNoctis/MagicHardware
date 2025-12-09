@@ -1,3 +1,5 @@
+/// A class containing the route paths for the application.
+/// This class provides static constants for each route, making it easy to reference them throughout the app.
 class MagicRoutes {
   static const home = '/';
   static const store = '/store';

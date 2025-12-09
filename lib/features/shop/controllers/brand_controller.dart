@@ -6,12 +6,21 @@ import 'package:magic_hardware/utils/popups/loaders.dart';
 
 import '../../../data/repositories/brands/brand_repository.dart';
 
+/// A controller for managing brands.
 class BrandController extends GetxController {
+  /// An instance of the [BrandController].
   static BrandController get instance => Get.find();
 
+  /// Whether the controller is currently loading data.
   RxBool isLoading = true.obs;
+
+  /// A list of all brands.
   final RxList<BrandModel> allBrands = <BrandModel>[].obs;
+
+  /// A list of featured brands.
   final RxList<BrandModel> featuredBrands = <BrandModel>[].obs;
+
+  /// The brand repository.
   final brandRepository = Get.put(BrandRepository());
 
   @override
@@ -20,7 +29,7 @@ class BrandController extends GetxController {
     super.onInit();
   }
 
-  // Load Brands
+  /// Fetches all brands.
   Future<void> getAllBrands() async {
     try {
       // Show Loader
@@ -33,8 +42,9 @@ class BrandController extends GetxController {
       allBrands.assignAll(brands);
 
       // Assign Featured Brands
-      featuredBrands.assignAll(allBrands.where((brand) => brand.isFeatured ?? false).take(4));
-
+      featuredBrands.assignAll(
+        allBrands.where((brand) => brand.isFeatured ?? false).take(4),
+      );
     } catch (e) {
       MagicLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
     } finally {
@@ -42,7 +52,9 @@ class BrandController extends GetxController {
     }
   }
 
-  // Get Brands For Category
+  /// Fetches the brands for a given category.
+  ///
+  /// Returns a list of [BrandModel]s.
   Future<List<BrandModel>> getBrandsForCategory(String categoryId) async {
     try {
       final brands = await brandRepository.getBrandsForCategory(categoryId);
@@ -53,10 +65,18 @@ class BrandController extends GetxController {
     }
   }
 
-  // Get Brand Specific Products from Firestore
-  Future<List<ProductModel>> getBrandProducts({required String brandId, int limit = -1}) async {
+  /// Fetches the products for a given brand.
+  ///
+  /// Returns a list of [ProductModel]s.
+  Future<List<ProductModel>> getBrandProducts({
+    required String brandId,
+    int limit = -1,
+  }) async {
     try {
-      final products = await ProductRepository.instance.getProductsForBrand(brandId: brandId, limit: limit);
+      final products = await ProductRepository.instance.getProductsForBrand(
+        brandId: brandId,
+        limit: limit,
+      );
       return products;
     } catch (e) {
       MagicLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());

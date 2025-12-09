@@ -10,14 +10,19 @@ import 'package:magic_hardware/utils/helpers/helper_functions.dart';
 
 import '../../../../../common/widgets/custom_shapes/containers/rounded_container.dart';
 
+/// A widget that displays a single address with an option to delete.
 class MagicSingleAddress extends StatelessWidget {
+  /// Creates a [MagicSingleAddress] widget.
   const MagicSingleAddress({
     super.key,
     required this.address,
     required this.onTap,
   });
 
+  /// The address to display.
   final AddressModel address;
+
+  /// The callback function to be called when the address is tapped.
   final VoidCallback onTap;
 
   @override

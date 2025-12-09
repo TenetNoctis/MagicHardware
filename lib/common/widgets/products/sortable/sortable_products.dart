@@ -8,9 +8,14 @@ import '../../../../utils/constants/sizes.dart';
 import '../../layouts/grid_layout.dart';
 import '../product_cards/product_card_vertical.dart';
 
+/// A widget that provides a sortable list of products.
 class MagicSortableProducts extends StatelessWidget {
+  /// Creates a [MagicSortableProducts] widget.
+  ///
+  /// The [products] are required to be displayed.
   const MagicSortableProducts({super.key, required this.products});
 
+  /// The list of products to be sorted.
   final List<ProductModel> products;
 
   @override

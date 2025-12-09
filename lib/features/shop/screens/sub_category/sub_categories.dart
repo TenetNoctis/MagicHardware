@@ -12,9 +12,19 @@ import '../../../../common/widgets/shimmers/horizontal_product_shimmer.dart';
 import '../../../../utils/helpers/cloud_helper_functions.dart';
 import '../../models/category_model.dart';
 
+/// A screen that displays the sub-categories for a given category.
+///
+/// This screen shows a banner image (if available) for the main category,
+/// followed by a list of its sub-categories. For each sub-category, it displays
+/// a heading and a horizontal list of its products.
 class SubCategoriesScreen extends StatelessWidget {
+  /// Creates a [SubCategoriesScreen].
+  ///
+  /// The [category] parameter is required and represents the parent category
+  /// for which to display the sub-categories.
   const SubCategoriesScreen({super.key, required this.category});
 
+  /// The parent category.
   final CategoryModel category;
 
   @override
@@ -28,7 +38,8 @@ class SubCategoriesScreen extends StatelessWidget {
           child: Column(
             children: [
               // Banner - Only show if bannerImage is not null
-              if (category.bannerImage != null && category.bannerImage!.isNotEmpty) ...[
+              if (category.bannerImage != null &&
+                  category.bannerImage!.isNotEmpty) ...[
                 MagicRoundedImage(
                   imageUrl: category.bannerImage!,
                   isNetworkImage: true,
@@ -44,10 +55,10 @@ class SubCategoriesScreen extends StatelessWidget {
                 builder: (context, snapshot) {
                   const loader = MagicHorizontalProductShimmer();
                   final widget =
-                  MagicCloudHelperFunctions.checkMultiRecordState(
-                    snapshot: snapshot,
-                    loader: loader,
-                  );
+                      MagicCloudHelperFunctions.checkMultiRecordState(
+                        snapshot: snapshot,
+                        loader: loader,
+                      );
                   if (widget != null) return widget;
                   final subCategories = snapshot.data!;
                   return ListView.builder(
@@ -62,10 +73,10 @@ class SubCategoriesScreen extends StatelessWidget {
                         ),
                         builder: (context, snapshot) {
                           final widget =
-                          MagicCloudHelperFunctions.checkMultiRecordState(
-                            snapshot: snapshot,
-                            loader: loader,
-                          );
+                              MagicCloudHelperFunctions.checkMultiRecordState(
+                                snapshot: snapshot,
+                                loader: loader,
+                              );
                           if (widget != null) return widget;
                           final products = snapshot.data!;
                           return Column(
@@ -74,13 +85,13 @@ class SubCategoriesScreen extends StatelessWidget {
                               MagicSectionHeading(
                                 title: subCategory.name,
                                 onPressed: () => Get.to(
-                                      () => AllProductsScreen(
+                                  () => AllProductsScreen(
                                     title: subCategory.name,
                                     futureMethod: controller
                                         .getCategoryProducts(
-                                      categoryId: subCategory.id,
-                                      limit: -1,
-                                    ),
+                                          categoryId: subCategory.id,
+                                          limit: -1,
+                                        ),
                                   ),
                                 ),
                               ),
@@ -94,9 +105,9 @@ class SubCategoriesScreen extends StatelessWidget {
                                   itemCount: products.length,
                                   scrollDirection: Axis.horizontal,
                                   separatorBuilder: (context, index) =>
-                                  const SizedBox(
-                                    width: MagicSizes.spaceBtwItems,
-                                  ),
+                                      const SizedBox(
+                                        width: MagicSizes.spaceBtwItems,
+                                      ),
                                   itemBuilder: (context, index) =>
                                       MagicProductCardHorizontal(
                                         product: products[index],

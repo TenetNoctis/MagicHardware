@@ -6,7 +6,6 @@ import 'package:magic_hardware/utils/constants/sizes.dart';
 import 'package:magic_hardware/utils/constants/text_strings.dart';
 import 'package:magic_hardware/utils/validators/validation.dart';
 
-
 class ReAuthLoginForm extends StatelessWidget {
   const ReAuthLoginForm({super.key});
 

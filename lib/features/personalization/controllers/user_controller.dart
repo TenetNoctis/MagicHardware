@@ -16,18 +16,36 @@ import '../../../utils/constants/colors.dart';
 import '../../../utils/helpers/helper_functions.dart';
 import '../models/user_model.dart';
 
+/// Controller for managing user-related operations.
 class UserController extends GetxController {
+  /// Singleton instance of [UserController].
   static UserController get instance => Get.find();
 
+  /// Observable for profile loading state.
   final profileLoading = false.obs;
+
+  /// Observable for the current user.
   Rx<UserModel?> user = UserModel.empty().obs;
 
+  /// Observable for password visibility.
   final hidePassword = false.obs;
+
+  /// Observable for image uploading state.
   final imageUploading = false.obs;
+
+  /// Controller for the verify email text field.
   final verifyEmail = TextEditingController();
+
+  /// Controller for the verify password text field.
   final verifyPassword = TextEditingController();
+
+  /// Repository for user-related database operations.
   final userRepository = Get.put(UserRepository());
+
+  /// Global key for the re-authentication form.
   GlobalKey<FormState> reAuthFormKey = GlobalKey<FormState>();
+
+  /// Flag to determine if the current theme is dark mode.
   final dark = MagicHelperFunctions.isDarkMode(Get.context!);
 
   @override
@@ -36,7 +54,7 @@ class UserController extends GetxController {
     fetchUserRecord();
   }
 
-  // Fetch User Record
+  /// Fetches the user record from the database.
   Future<void> fetchUserRecord() async {
     try {
       profileLoading.value = true;
@@ -49,7 +67,7 @@ class UserController extends GetxController {
     }
   }
 
-  // Save user record from any registration provider
+  /// Saves the user record from any registration provider.
   Future<void> saveUserRecord(UserCredential? userCredentials) async {
     try {
       // Refresh User Record
@@ -59,7 +77,7 @@ class UserController extends GetxController {
       if (user.value!.id.isEmpty) {
         if (userCredentials != null) {
           // Convert Name to First and Last Name
-          final nameparts = UserModel.nameParts(
+          final nameParts = UserModel.nameParts(
             userCredentials.user!.displayName ?? '',
           );
           final username = UserModel.generateUsername(
@@ -69,9 +87,9 @@ class UserController extends GetxController {
           // Map Data
           final user = UserModel(
             id: userCredentials.user!.uid,
-            firstName: nameparts[0],
-            lastName: nameparts.length > 1
-                ? nameparts.sublist(1).join(' ')
+            firstName: nameParts[0],
+            lastName: nameParts.length > 1
+                ? nameParts.sublist(1).join(' ')
                 : '',
             username: username,
             email: userCredentials.user!.email ?? '',
@@ -93,7 +111,7 @@ class UserController extends GetxController {
     }
   }
 
-  // Delete Account Warning
+  /// Displays a popup to confirm account deletion.
   void deleteAccountWarningPopup() {
     Get.defaultDialog(
       contentPadding: EdgeInsets.all(MagicSizes.md),
@@ -108,7 +126,7 @@ class UserController extends GetxController {
     );
   }
 
-  // Delete User Account
+  /// Deletes the user account.
   void deleteUserAccount() async {
     try {
       MagicFullScreenLoader.openLoadingDialog(
@@ -142,7 +160,7 @@ class UserController extends GetxController {
     }
   }
 
-  // Re-Authenticate User before deleting
+  /// Re-authenticates the user with email and password.
   void reAuthenticateEmailAndPasswordUser() async {
     try {
       MagicFullScreenLoader.openLoadingDialog(
@@ -176,7 +194,7 @@ class UserController extends GetxController {
     }
   }
 
-  // Upload Profile Image
+  /// Uploads the user's profile picture.
   Future<void> uploadUserProfilePicture() async {
     try {
       final image = await ImagePicker().pickImage(

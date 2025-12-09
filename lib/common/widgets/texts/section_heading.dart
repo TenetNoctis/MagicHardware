@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// A widget for displaying a section heading with an optional action button.
 class MagicSectionHeading extends StatelessWidget {
+  /// Creates a [MagicSectionHeading] widget.
   const MagicSectionHeading({
     super.key,
     this.onPressed,
@@ -10,9 +12,19 @@ class MagicSectionHeading extends StatelessWidget {
     this.showActionButton = true,
   });
 
+  /// The color of the heading text.
   final Color? textColor;
+
+  /// Whether to show the action button.
   final bool showActionButton;
-  final String title, buttonTitle;
+
+  /// The title of the section.
+  final String title;
+
+  /// The text to display on the action button.
+  final String buttonTitle;
+
+  /// The callback function to be executed when the action button is pressed.
   final void Function()? onPressed;
 
   @override

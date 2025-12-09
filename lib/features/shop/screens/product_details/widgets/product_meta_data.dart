@@ -12,9 +12,15 @@ import '../../../../../common/widgets/custom_shapes/containers/rounded_container
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 
+/// A widget that displays the metadata for a product, including price, title,
+/// stock status, and brand.
 class MagicProductMetaData extends StatelessWidget {
+  /// Creates a [MagicProductMetaData] widget.
+  ///
+  /// The [product] parameter is required.
   const MagicProductMetaData({super.key, required this.product});
 
+  /// The product for which to display the metadata.
   final ProductModel product;
 
   @override
@@ -72,7 +78,7 @@ class MagicProductMetaData extends StatelessWidget {
         // Stock Status
         Row(
           children: [
-            MagicProductTitleText(title: 'Status:'),
+            const MagicProductTitleText(title: 'Status:'),
             const SizedBox(width: MagicSizes.spaceBtwItems),
             Text(
               controller.getProductStockStatus(product.stock),

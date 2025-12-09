@@ -3,16 +3,19 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:magic_hardware/features/shop/models/banner_model.dart';
 
+import '../../../utils/constants/text_strings.dart';
 import '../../../utils/exceptions/firebase_exceptions.dart';
 import '../../../utils/exceptions/platform_exceptions.dart';
 
+/// Repository for fetching and managing banner data from Firestore.
 class BannerRepository extends GetxController {
+  /// A static getter for the [BannerRepository] instance.
   static BannerRepository get instance => Get.find();
 
   // Variables
   final _db = FirebaseFirestore.instance;
 
-  // Get All Banners
+  /// Fetches all active banners from the Firestore database.
   Future<List<BannerModel>> getAllBanners() async {
     try {
       final snapshot = await _db
@@ -27,7 +30,7 @@ class BannerRepository extends GetxController {
     } on PlatformException catch (e) {
       throw MagicPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw MagicTexts.somethingWentWrong;
     }
   }
 }

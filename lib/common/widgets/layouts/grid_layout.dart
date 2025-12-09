@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../utils/constants/sizes.dart';
 
+/// A widget that displays a grid of items with a specified count and builder.
 class MagicGridLayout extends StatelessWidget {
+  /// Creates a grid layout.
   const MagicGridLayout({
     super.key,
     required this.itemCount,
@@ -10,8 +12,13 @@ class MagicGridLayout extends StatelessWidget {
     this.mainAxisExtent = 288,
   });
 
+  /// The number of items in the grid.
   final int itemCount;
+
+  /// The extent of the main axis.
   final double? mainAxisExtent;
+
+  /// A builder function to create the items in the grid.
   final Widget? Function(BuildContext, int) itemBuilder;
 
   @override

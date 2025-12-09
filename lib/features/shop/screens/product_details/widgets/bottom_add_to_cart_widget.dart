@@ -9,9 +9,12 @@ import 'package:magic_hardware/utils/constants/enums.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 import 'package:magic_hardware/utils/helpers/helper_functions.dart';
 
+/// A widget that displays a bottom navigation bar with an "Add to Cart" button.
 class MagicBottomAddToCart extends StatelessWidget {
+  /// Creates a [MagicBottomAddToCart] widget.
   const MagicBottomAddToCart({super.key, required this.product});
 
+  /// The product to be added to the cart.
   final ProductModel product;
 
   @override
@@ -35,61 +38,60 @@ class MagicBottomAddToCart extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Obx(
-                () {
-              // Get available stock based on product type
-              final availableStock = product.productType == ProductType.variable.toString()
-                  ? controller.variationController.selectedVariation.value.stock
-                  : product.stock;
+          Obx(() {
+            // Get available stock based on product type
+            final availableStock =
+                product.productType == ProductType.variable.toString()
+                ? controller.variationController.selectedVariation.value.stock
+                : product.stock;
 
-              final currentQuantity = controller.productQuantityInCart.value;
-              final canIncrement = currentQuantity < availableStock;
+            final currentQuantity = controller.productQuantityInCart.value;
+            final canIncrement = currentQuantity < availableStock;
 
-              return Row(
-                children: [
-                  // Minus Button
-                  MagicCircularIcon(
-                    icon: Iconsax.minus,
-                    backgroundColor: currentQuantity < 1
-                        ? MagicColors.darkGrey
-                        : MagicColors.black,
-                    width: 40,
-                    height: 40,
-                    color: MagicColors.white,
-                    onPressed: currentQuantity < 1
-                        ? null
-                        : () => controller.productQuantityInCart.value -= 1,
-                  ),
-                  const SizedBox(width: MagicSizes.spaceBtwItems),
+            return Row(
+              children: [
+                // Minus Button
+                MagicCircularIcon(
+                  icon: Iconsax.minus,
+                  backgroundColor: currentQuantity < 1
+                      ? MagicColors.darkGrey
+                      : MagicColors.black,
+                  width: 40,
+                  height: 40,
+                  color: MagicColors.white,
+                  onPressed: currentQuantity < 1
+                      ? null
+                      : () => controller.productQuantityInCart.value -= 1,
+                ),
+                const SizedBox(width: MagicSizes.spaceBtwItems),
 
-                  // Quantity Display
-                  Text(
-                    currentQuantity.toString(),
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                  const SizedBox(width: MagicSizes.spaceBtwItems),
+                // Quantity Display
+                Text(
+                  currentQuantity.toString(),
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+                const SizedBox(width: MagicSizes.spaceBtwItems),
 
-                  // Plus Button
-                  MagicCircularIcon(
-                    icon: Iconsax.add,
-                    backgroundColor: canIncrement
-                        ? MagicColors.black
-                        : MagicColors.darkGrey,
-                    width: 40,
-                    height: 40,
-                    color: MagicColors.white,
-                    onPressed: canIncrement
-                        ? () => controller.productQuantityInCart.value += 1
-                        : null,
-                  ),
-                ],
-              );
-            },
-          ),
+                // Plus Button
+                MagicCircularIcon(
+                  icon: Iconsax.add,
+                  backgroundColor: canIncrement
+                      ? MagicColors.black
+                      : MagicColors.darkGrey,
+                  width: 40,
+                  height: 40,
+                  color: MagicColors.white,
+                  onPressed: canIncrement
+                      ? () => controller.productQuantityInCart.value += 1
+                      : null,
+                ),
+              ],
+            );
+          }),
 
           // Add to Cart Button
           Obx(
-                () => ElevatedButton(
+            () => ElevatedButton(
               onPressed: controller.productQuantityInCart.value < 1
                   ? null
                   : () => controller.addToCart(product),

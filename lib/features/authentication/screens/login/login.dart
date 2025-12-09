@@ -10,7 +10,9 @@ import '../../../../common/styles/spacing_styles.dart';
 import '../../../../common/widgets/login_signup/form_divider.dart';
 import '../../../../common/widgets/login_signup/social_buttons.dart';
 
+/// A screen that allows users to log in to their account.
 class LoginScreen extends StatelessWidget {
+  /// Creates a [LoginScreen].
   const LoginScreen({super.key});
 
   @override
@@ -26,14 +28,16 @@ class LoginScreen extends StatelessWidget {
               MagicLoginHeader(dark: dark),
 
               // Form
-              MagicLoginForm(),
+              const MagicLoginForm(),
 
               // Divider
-              MagicFormDivider(dividerText: MagicTexts.orSignInWith.capitalize!),
+              MagicFormDivider(
+                dividerText: MagicTexts.orSignInWith.capitalize!,
+              ),
               const SizedBox(height: MagicSizes.spaceBtwSections),
 
               // Footer
-              MagicSocialButtons(),
+              const MagicSocialButtons(),
             ],
           ),
         ),
@@ -41,11 +45,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-

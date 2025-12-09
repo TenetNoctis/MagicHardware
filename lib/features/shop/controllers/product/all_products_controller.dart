@@ -5,13 +5,23 @@ import 'package:magic_hardware/data/repositories/products/product_repository.dar
 import '../../../../utils/popups/loaders.dart';
 import '../../models/product_model.dart';
 
+/// A controller for managing all products.
 class AllProductsController extends GetxController {
+  /// A static getter for the instance of [AllProductsController].
   static AllProductsController get instance => Get.find();
 
+  /// The product repository.
   final repository = ProductRepository.instance;
+
+  /// The currently selected sort option.
   final RxString selectedSortOption = 'Name'.obs;
+
+  /// The list of products.
   final RxList<ProductModel> products = <ProductModel>[].obs;
 
+  /// Fetches products by a given query.
+  ///
+  /// Returns a list of [ProductModel]s.
   Future<List<ProductModel>> fetchProductsByQuery(Query? query) async {
     try {
       if (query == null) return [];
@@ -23,6 +33,7 @@ class AllProductsController extends GetxController {
     }
   }
 
+  /// Sorts the products based on a given sort option.
   void sortProducts(String sortOption) {
     selectedSortOption.value = sortOption;
     switch (sortOption) {
@@ -51,9 +62,9 @@ class AllProductsController extends GetxController {
     }
   }
 
+  /// Assigns a list of products to the `products` list.
   void assignProducts(List<ProductModel> products) {
     this.products.assignAll(products);
     sortProducts('Name');
   }
-
 }

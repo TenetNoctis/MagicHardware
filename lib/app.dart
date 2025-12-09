@@ -5,7 +5,9 @@ import 'package:magic_hardware/routes/app_routes.dart';
 import 'package:magic_hardware/utils/constants/colors.dart';
 import 'package:magic_hardware/utils/theme/theme.dart';
 
+/// The root widget of the Magic Hardware application.
 class App extends StatelessWidget {
+  /// Creates the [App] widget.
   const App({super.key});
 
   @override

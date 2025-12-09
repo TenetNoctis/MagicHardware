@@ -7,10 +7,10 @@ import '../../../../../utils/device/device_utility.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
 import '../../../controllers/onboarding/onboarding_controller.dart';
 
+/// A widget that displays a row of dots to indicate the current page of the onboarding screen.
 class OnBoardingDotNavigation extends StatelessWidget {
-  const OnBoardingDotNavigation({
-    super.key,
-  });
+  /// Creates an [OnBoardingDotNavigation] widget.
+  const OnBoardingDotNavigation({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,10 @@ class OnBoardingDotNavigation extends StatelessWidget {
         controller: controller.pageController,
         onDotClicked: controller.dotNavigationClick,
         count: 3,
-        effect: ExpandingDotsEffect(activeDotColor: dark ? MagicColors.light: MagicColors.dark, dotHeight: 6),
+        effect: ExpandingDotsEffect(
+          activeDotColor: dark ? MagicColors.light : MagicColors.dark,
+          dotHeight: 6,
+        ),
       ),
     );
   }

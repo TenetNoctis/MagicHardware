@@ -3,14 +3,15 @@ import 'package:get/get.dart';
 import 'package:magic_hardware/utils/helpers/helper_functions.dart';
 
 import '../../../utils/constants/colors.dart';
-import '../../../utils/constants/text_strings.dart';
 
+/// A widget that displays a divider with text in the middle.
 class MagicFormDivider extends StatelessWidget {
-  const MagicFormDivider({
-    super.key,
-    required this.dividerText,
-  });
+  /// Creates a form divider.
+  ///
+  /// The [dividerText] is the text to be displayed in the middle of the divider.
+  const MagicFormDivider({super.key, required this.dividerText});
 
+  /// The text to be displayed in the middle of the divider.
   final String dividerText;
 
   @override
@@ -28,7 +29,7 @@ class MagicFormDivider extends StatelessWidget {
           ),
         ),
         Text(
-          MagicTexts.orSignInWith.capitalize!,
+          dividerText.capitalize!,
           style: Theme.of(context).textTheme.labelMedium,
         ),
         Flexible(

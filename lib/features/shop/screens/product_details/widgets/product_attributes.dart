@@ -12,9 +12,12 @@ import 'package:magic_hardware/utils/helpers/helper_functions.dart';
 
 import '../../../../../common/widgets/chips/choice_chip.dart';
 
+/// A widget that displays the product attributes.
 class MagicProductAttributes extends StatelessWidget {
+  /// Creates a [MagicProductAttributes] widget.
   const MagicProductAttributes({super.key, required this.product});
 
+  /// The product to display the attributes for.
   final ProductModel product;
 
   @override

@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:magic_hardware/common/widgets/shimmers/shimmer.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 
+/// A widget that displays a horizontal list of shimmering product placeholders.
 class MagicHorizontalProductShimmer extends StatelessWidget {
+  /// Creates a [MagicHorizontalProductShimmer] widget.
   const MagicHorizontalProductShimmer({super.key, this.itemCount = 4});
 
+  /// The number of product placeholders to display.
   final int itemCount;
 
   @override

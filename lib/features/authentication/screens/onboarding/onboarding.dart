@@ -8,7 +8,9 @@ import 'package:magic_hardware/features/authentication/screens/onboarding/widget
 import 'package:magic_hardware/utils/constants/image_strings.dart';
 import 'package:magic_hardware/utils/constants/text_strings.dart';
 
+/// A screen that provides a guided introduction to the app's features.
 class OnBoardingScreen extends StatelessWidget {
+  /// Creates an [OnBoardingScreen].
   const OnBoardingScreen({super.key});
 
   @override
@@ -28,13 +30,11 @@ class OnBoardingScreen extends StatelessWidget {
                 title: MagicTexts.onBoardingTitle1,
                 subTitle: MagicTexts.onBoardingSubTitle1,
               ),
-
               OnBoardingPage(
                 image: MagicImages.onBoardingImage2,
                 title: MagicTexts.onBoardingTitle2,
                 subTitle: MagicTexts.onBoardingSubTitle2,
               ),
-
               OnBoardingPage(
                 image: MagicImages.onBoardingImage3,
                 title: MagicTexts.onBoardingTitle3,
@@ -50,7 +50,7 @@ class OnBoardingScreen extends StatelessWidget {
           const OnBoardingDotNavigation(),
 
           // Circular Button
-          OnBoardingNextButton(),
+          const OnBoardingNextButton(),
         ],
       ),
     );

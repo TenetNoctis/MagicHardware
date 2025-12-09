@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:magic_hardware/common/widgets/shimmers/shimmer.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 
+/// A widget that displays a shimmering list of category placeholders.
 class MagicCategoryShimmer extends StatelessWidget {
+  /// Creates a [MagicCategoryShimmer] widget.
   const MagicCategoryShimmer({super.key, this.itemCount = 6});
 
+  /// The number of category placeholders to display.
   final int itemCount;
 
   @override

@@ -16,14 +16,22 @@ import '../../../../utils/helpers/pricing_calculator.dart';
 import '../../controllers/product/cart_controller.dart';
 import '../../controllers/product/order_controller.dart';
 
+/// A screen for reviewing the order and proceeding to checkout.
 class CheckoutScreen extends StatelessWidget {
+  /// Creates a [CheckoutScreen].
   const CheckoutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final cartController = CartController.instance;
-    final subTotal = MagicPricingCalculator.calculateSubTotal(cartController.totalCartPrice.value, 'Maldives');
-    final totalAmount = MagicPricingCalculator.calculateTotalPrice(subTotal, 'Maldives');
+    final subTotal = MagicPricingCalculator.calculateSubTotal(
+      cartController.totalCartPrice.value,
+      'Maldives',
+    );
+    final totalAmount = MagicPricingCalculator.calculateTotalPrice(
+      subTotal,
+      'Maldives',
+    );
     final orderController = Get.put(OrderController());
 
     final dark = MagicHelperFunctions.isDarkMode(context);
@@ -83,9 +91,12 @@ class CheckoutScreen extends StatelessWidget {
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.all(MagicSizes.defaultSpace),
           child: ElevatedButton(
-            onPressed: subTotal > 0 ?
-            () => orderController.processOrder(totalAmount) :
-            () => MagicLoaders.warningSnackBar(title: 'Empty Cart', message: 'Add items in the cart in order to proceed'),
+            onPressed: subTotal > 0
+                ? () => orderController.processOrder(totalAmount)
+                : () => MagicLoaders.warningSnackBar(
+                    title: 'Empty Cart',
+                    message: 'Add items in the cart in order to proceed',
+                  ),
             child: Text('Checkout MVR ${totalAmount.toStringAsFixed(2)}'),
           ),
         ),

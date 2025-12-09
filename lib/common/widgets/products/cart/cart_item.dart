@@ -8,11 +8,19 @@ import '../../images/magic_rounded_image.dart';
 import '../../texts/brand_title_text_with_verified_icon.dart';
 import '../../texts/product_title_text.dart';
 
+/// A widget that represents an item in the shopping cart.
 class MagicCartItem extends StatelessWidget {
-  const MagicCartItem(
-      {super.key, required this.cartItem, this.showQuantity = false});
+  /// Creates a [MagicCartItem] widget.
+  const MagicCartItem({
+    super.key,
+    required this.cartItem,
+    this.showQuantity = false,
+  });
 
+  /// The cart item to display.
   final CartItemModel cartItem;
+
+  /// Whether to show the quantity of the cart item.
   final bool showQuantity;
 
   @override
@@ -43,27 +51,22 @@ class MagicCartItem extends StatelessWidget {
               // Attributes
               Text.rich(
                 TextSpan(
-                  children: (cartItem.selectedVariation ?? {}).entries.map(
-                        (e) =>
-                        TextSpan(
+                  children: (cartItem.selectedVariation ?? {}).entries
+                      .map(
+                        (e) => TextSpan(
                           children: [
                             TextSpan(
                               text: '${e.key} ',
-                              style: Theme
-                                  .of(context)
-                                  .textTheme
-                                  .bodySmall,
+                              style: Theme.of(context).textTheme.bodySmall,
                             ),
                             TextSpan(
                               text: '${e.value} ',
-                              style: Theme
-                                  .of(context)
-                                  .textTheme
-                                  .bodyLarge,
+                              style: Theme.of(context).textTheme.bodyLarge,
                             ),
                           ],
                         ),
-                  ).toList(),
+                      )
+                      .toList(),
                 ),
               ),
               if (showQuantity) ...[
@@ -74,7 +77,7 @@ class MagicCartItem extends StatelessWidget {
                       'Qty: ${cartItem.quantity}',
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
-                    Text('MVR ${cartItem.price.toStringAsFixed(2)}')
+                    Text('MVR ${cartItem.price.toStringAsFixed(2)}'),
                   ],
                 ),
               ],

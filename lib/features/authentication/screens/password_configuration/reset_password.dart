@@ -9,9 +9,12 @@ import '../../../../utils/constants/text_strings.dart';
 import '../../../../utils/helpers/helper_functions.dart';
 import '../login/login.dart';
 
+/// A screen for users to reset their password.
 class ResetPasswordScreen extends StatelessWidget {
+  /// Creates a [ResetPasswordScreen].
   const ResetPasswordScreen({super.key, required this.email});
 
+  /// The user's email address.
   final String email;
 
   @override
@@ -34,13 +37,19 @@ class ResetPasswordScreen extends StatelessWidget {
             children: [
               // Image
               Image(
-                image: AssetImage(dark ? MagicImages.darkAppLogo : MagicImages.lightAppLogo),
+                image: AssetImage(
+                  dark ? MagicImages.darkAppLogo : MagicImages.lightAppLogo,
+                ),
                 width: MagicHelperFunctions.screenWidth() * 0.6,
               ),
               const SizedBox(height: MagicSizes.spaceBtwSections),
 
               // Email, Title & Subtitle
-              Text(email, style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
+              Text(
+                email,
+                style: Theme.of(context).textTheme.bodyMedium,
+                textAlign: TextAlign.center,
+              ),
               const SizedBox(height: MagicSizes.spaceBtwItems),
               Text(
                 MagicTexts.changeYourPasswordTitle,
@@ -67,7 +76,8 @@ class ResetPasswordScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  onPressed: () => ForgetPasswordController.instance.resendPasswordResetEmail(email),
+                  onPressed: () => ForgetPasswordController.instance
+                      .resendPasswordResetEmail(email),
                   child: const Text(MagicTexts.resendEmail),
                 ),
               ),

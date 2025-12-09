@@ -4,12 +4,14 @@ import '../../../../../utils/constants/image_strings.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/text_strings.dart';
 
+/// A widget that displays the login screen's header, including the app logo and titles.
 class MagicLoginHeader extends StatelessWidget {
-  const MagicLoginHeader({
-    super.key,
-    required this.dark,
-  });
+  /// Creates a [MagicLoginHeader].
+  ///
+  /// The [dark] parameter determines which app logo to display.
+  const MagicLoginHeader({super.key, required this.dark});
 
+  /// Whether the current theme is dark or not.
   final bool dark;
 
   @override

@@ -8,7 +8,15 @@ import '../../../../../common/widgets/shimmers/list_tile_shimmer.dart';
 import '../../../../../utils/helpers/cloud_helper_functions.dart';
 import '../../../models/category_model.dart';
 
+/// A widget that displays the brands associated with a specific category.
+///
+/// This widget uses a [FutureBuilder] to fetch the brands for the given [category].
+/// It then displays a list of [MagicBrandShowcase] widgets, each showing the products
+/// for a particular brand.
 class CategoryBrands extends StatelessWidget {
+  /// Creates a [CategoryBrands] widget.
+  ///
+  /// The [category] parameter is required.
   const CategoryBrands({super.key, required this.category});
 
   final CategoryModel category;

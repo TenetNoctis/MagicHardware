@@ -19,7 +19,9 @@ import '../../controllers/brand_controller.dart';
 import '../brand/brand_products.dart';
 import '../search/product_search_screen.dart';
 
+/// The main store screen, which displays a search bar, featured brands, and a tabbed view of categories.
 class StoreScreen extends StatelessWidget {
+  /// Creates a [StoreScreen].
   const StoreScreen({super.key});
 
   @override
@@ -96,7 +98,10 @@ class StoreScreen extends StatelessWidget {
                           return Center(
                             child: Text(
                               'No Data Found!',
-                              style: Theme.of(context).textTheme.bodyMedium,
+                              style: Theme
+                                  .of(context)
+                                  .textTheme
+                                  .bodyMedium,
                             ),
                           );
                         }

@@ -14,15 +14,26 @@ import '../../models/order_model.dart';
 import 'cart_controller.dart';
 import 'checkout_controller.dart';
 
+/// A controller for managing user orders.
 class OrderController extends GetxController {
+  /// An instance of the [OrderController].
   static OrderController get instance => Get.find();
 
+  /// The cart controller.
   final cartController = CartController.instance;
+
+  /// The address controller.
   final addressController = AddressController.instance;
+
+  /// The checkout controller.
   final checkoutController = CheckoutController.instance;
+
+  /// The order repository.
   final orderRepository = Get.put(OrderRepository());
 
-  // Fetch user's order history
+  /// Fetches the user's order history.
+  ///
+  /// Returns a list of [OrderModel]s.
   Future<List<OrderModel>> fetchUserOrders() async {
     try {
       final userOrders = await orderRepository.fetchUserOrders();
@@ -33,7 +44,7 @@ class OrderController extends GetxController {
     }
   }
 
-  // Process Order
+  /// Processes the user's order.
   void processOrder(double totalAmount) async {
     try {
       // Start Loader

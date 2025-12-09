@@ -6,7 +6,9 @@ import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/device/device_utility.dart';
 import '../../../../utils/helpers/helper_functions.dart';
 
+/// A customizable search container widget.
 class MagicSearchContainer extends StatelessWidget {
+  /// Creates a search container.
   const MagicSearchContainer({
     super.key,
     required this.text,
@@ -14,13 +16,27 @@ class MagicSearchContainer extends StatelessWidget {
     this.showBackground = true,
     this.showBorder = true,
     this.onTap,
-    this.padding = const EdgeInsets.symmetric(horizontal: MagicSizes.defaultSpace,),
+    this.padding = const EdgeInsets.symmetric(
+      horizontal: MagicSizes.defaultSpace,
+    ),
   });
 
+  /// The text to display in the search container.
   final String text;
+
+  /// The icon to display in the search container.
   final IconData? icon;
-  final bool showBackground, showBorder;
+
+  /// Whether to show the background.
+  final bool showBackground;
+
+  /// Whether to show a border.
+  final bool showBorder;
+
+  /// Callback function when the container is tapped.
   final VoidCallback? onTap;
+
+  /// The padding for the container.
   final EdgeInsetsGeometry padding;
 
   @override

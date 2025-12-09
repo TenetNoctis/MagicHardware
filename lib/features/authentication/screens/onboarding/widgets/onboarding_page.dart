@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
 
+/// A widget that represents a single page in the onboarding screen.
 class OnBoardingPage extends StatelessWidget {
+  /// Creates an [OnBoardingPage] with the given [image], [title], and [subTitle].
   const OnBoardingPage({
     super.key,
     required this.image,
@@ -11,7 +14,14 @@ class OnBoardingPage extends StatelessWidget {
     required this.subTitle,
   });
 
-  final String image, title, subTitle;
+  /// The path to the Lottie animation file.
+  final String image;
+
+  /// The main title of the page.
+  final String title;
+
+  /// The subtitle of the page.
+  final String subTitle;
 
   @override
   Widget build(BuildContext context) {

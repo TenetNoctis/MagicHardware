@@ -8,14 +8,18 @@ import 'package:magic_hardware/utils/popups/loaders.dart';
 
 import '../../../../utils/constants/image_strings.dart';
 
+/// Controller for handling the forget password functionality.
 class ForgetPasswordController extends GetxController {
+  /// Provides a singleton instance of the [ForgetPasswordController].
   static ForgetPasswordController get instance => Get.find();
 
-  // Variables
+  /// Text controller for the email input field.
   final email = TextEditingController();
+
+  /// A global key for the forget password form.
   GlobalKey<FormState> forgetPasswordFormKey = GlobalKey<FormState>();
 
-  // Send Reset Password Email
+  /// Sends a password reset email to the user.
   Future<void> sendPasswordResetEmail() async {
     try {
       // Start Loading
@@ -60,6 +64,7 @@ class ForgetPasswordController extends GetxController {
     }
   }
 
+  /// Resends a password reset email.
   Future<void> resendPasswordResetEmail(String email) async {
     try {
       // Start Loading

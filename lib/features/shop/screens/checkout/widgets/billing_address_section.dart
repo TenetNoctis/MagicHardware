@@ -6,7 +6,9 @@ import 'package:magic_hardware/features/personalization/controllers/user_control
 import 'package:magic_hardware/utils/constants/colors.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 
+/// A widget that displays the billing address section in the checkout screen.
 class MagicBillingAddressSection extends StatelessWidget {
+  /// Creates a [MagicBillingAddressSection] widget.
   const MagicBillingAddressSection({super.key});
 
   @override
@@ -46,7 +48,6 @@ class MagicBillingAddressSection extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: MagicSizes.spaceBtwItems / 2),
-
                     Row(
                       children: [
                         const Icon(

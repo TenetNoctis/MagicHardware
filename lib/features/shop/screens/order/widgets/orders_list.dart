@@ -13,7 +13,9 @@ import 'package:magic_hardware/utils/helpers/helper_functions.dart';
 import '../../../controllers/product/product_controller.dart';
 import '../../all_products/all_products.dart';
 
+/// A widget that displays a list of orders.
 class MagicOrderListItems extends StatelessWidget {
+  /// Creates a [MagicOrderListItems] widget.
   const MagicOrderListItems({super.key});
 
   @override

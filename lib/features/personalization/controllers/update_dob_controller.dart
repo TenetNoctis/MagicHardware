@@ -9,24 +9,36 @@ import '../../../utils/helpers/network_manager.dart';
 import '../../../utils/popups/full_screen_loader.dart';
 import '../../../utils/popups/loaders.dart';
 
+/// Controller for updating the user's date of birth.
 class UpdateDobController extends GetxController {
+  /// Provides a singleton instance of the [UpdateDobController].
   static UpdateDobController get instance => Get.find();
 
+  /// Text controller for the date of birth input field.
   final dateOfBirth = TextEditingController();
+
+  /// The user controller instance.
   final userController = UserController.instance;
+
+  /// The user repository instance.
   final userRepository = Get.put(UserRepository());
+
+  /// A global key for the update date of birth form.
   GlobalKey<FormState> updateDobFormKey = GlobalKey<FormState>();
 
+  /// Initializes the controller and sets the initial date of birth value.
   @override
   void onInit() {
     initializeDateOfBirth();
     super.onInit();
   }
 
+  /// Initializes the date of birth text field with the user's current date of birth.
   Future<void> initializeDateOfBirth() async {
     dateOfBirth.text = userController.user.value!.dateOfBirth;
   }
 
+  /// Displays a date picker and updates the text field with the selected date.
   Future<void> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -40,6 +52,7 @@ class UpdateDobController extends GetxController {
     }
   }
 
+  /// Updates the user's date of birth in the backend and locally.
   Future<void> updateDateOfBirth() async {
     try {
       // Start Loading
@@ -63,9 +76,7 @@ class UpdateDobController extends GetxController {
       }
 
       // Update user's date of birth in backend
-      Map<String, dynamic> dob = {
-        'DateOfBirth': dateOfBirth.text.trim(),
-      };
+      Map<String, dynamic> dob = {'DateOfBirth': dateOfBirth.text.trim()};
       await userRepository.updateSingleField(dob);
 
       // Update the Rx User Value
@@ -88,7 +99,6 @@ class UpdateDobController extends GetxController {
         title: 'Congratulations',
         message: 'Your date of birth has been updated.',
       );
-
     } catch (e) {
       MagicFullScreenLoader.stopLoading();
       MagicLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());

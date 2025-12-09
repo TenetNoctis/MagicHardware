@@ -4,7 +4,9 @@ import 'package:magic_hardware/features/authentication/controllers/onboarding/on
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/device/device_utility.dart';
 
+/// A widget that displays a "Skip" button to bypass the onboarding process.
 class OnBoardingSkip extends StatelessWidget {
+  /// Creates an [OnBoardingSkip] widget.
   const OnBoardingSkip({super.key});
 
   @override

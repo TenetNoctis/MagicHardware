@@ -12,9 +12,17 @@ import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
 import '../../../models/product_model.dart';
 
+/// A widget that displays a slider of product images.
+///
+/// This widget includes a main image, a slider for additional images, and an app bar
+/// with a back arrow and a favorite icon.
 class MagicProductImageSlider extends StatelessWidget {
+  /// Creates a [MagicProductImageSlider].
+  ///
+  /// The [product] parameter is required.
   const MagicProductImageSlider({super.key, required this.product});
 
+  /// The product to display the images for.
   final ProductModel product;
 
   @override
@@ -96,9 +104,7 @@ class MagicProductImageSlider extends StatelessWidget {
               padding: EdgeInsets.only(right: MagicSizes.defaultSpace / 2),
               child: MagicAppBar(
                 showBackArrow: true,
-                actions: [
-                  MagicFavoriteIcon(productId: product.id),
-                ],
+                actions: [MagicFavoriteIcon(productId: product.id)],
               ),
             ),
           ],

@@ -1,13 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+/// Represents a category in the application.
 class CategoryModel {
+  /// The ID of the category.
   String id;
+
+  /// The name of the category.
   String name;
+
+  /// The URL of the category's image.
   String image;
+
+  /// The ID of the parent category, if any.
   String parentId;
+
+  /// Whether the category is featured.
   bool isFeatured;
+
+  /// The URL of the category's banner image, if any.
   String? bannerImage;
 
+  /// Creates a [CategoryModel].
   CategoryModel({
     required this.id,
     required this.name,
@@ -17,11 +30,11 @@ class CategoryModel {
     this.bannerImage,
   });
 
-  // Empty Helper Function
+  /// Creates an empty [CategoryModel].
   static CategoryModel empty() =>
       CategoryModel(id: '', name: '', image: '', isFeatured: false);
 
-  // Convert Model to JSON structure to store in Firebase
+  /// Converts the [CategoryModel] to a JSON object.
   Map<String, dynamic> toJson() {
     return {
       'Name': name,
@@ -32,12 +45,13 @@ class CategoryModel {
     };
   }
 
-  // Map JSON oriented document snapshot from Firebase to CategoryModel
-  factory CategoryModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
+  /// Creates a [CategoryModel] from a Firestore [DocumentSnapshot].
+  factory CategoryModel.fromSnapshot(
+    DocumentSnapshot<Map<String, dynamic>> document,
+  ) {
     if (document.data() != null) {
       final data = document.data()!;
 
-      // Map JSON to CategoryModel
       return CategoryModel(
         id: document.id,
         name: data['Name'] ?? '',

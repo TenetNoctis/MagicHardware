@@ -6,7 +6,9 @@ import 'package:magic_hardware/utils/constants/sizes.dart';
 
 import '../../../controllers/update_gender_controller.dart';
 
+/// A screen that allows the user to change their gender.
 class ChangeGender extends StatelessWidget {
+  /// Creates a [ChangeGender] widget.
   const ChangeGender({super.key});
 
   @override
@@ -21,7 +23,7 @@ class ChangeGender extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(MagicSizes.defaultSpace),
+        padding: const EdgeInsets.all(MagicSizes.defaultSpace),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

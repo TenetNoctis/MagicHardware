@@ -4,7 +4,9 @@ import 'package:shimmer/shimmer.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/helpers/helper_functions.dart';
 
+/// A widget that displays a shimmering effect, used as a placeholder while loading data.
 class MagicShimmerEffect extends StatelessWidget {
+  /// Creates a [MagicShimmerEffect] widget.
   const MagicShimmerEffect({
     super.key,
     required this.width,
@@ -13,7 +15,16 @@ class MagicShimmerEffect extends StatelessWidget {
     this.color,
   });
 
-  final double width, height, radius;
+  /// The width of the shimmer effect.
+  final double width;
+
+  /// The height of the shimmer effect.
+  final double height;
+
+  /// The border radius of the shimmer effect.
+  final double radius;
+
+  /// The color of the container. If not provided, it will be determined by the theme.
   final Color? color;
 
   @override

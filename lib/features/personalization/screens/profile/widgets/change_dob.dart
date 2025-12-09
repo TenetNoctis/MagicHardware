@@ -7,7 +7,9 @@ import 'package:magic_hardware/utils/validators/validation.dart';
 
 import '../../../controllers/update_dob_controller.dart';
 
+/// A screen for changing the user's date of birth.
 class ChangeDob extends StatelessWidget {
+  /// Creates a [ChangeDob] screen.
   const ChangeDob({super.key});
 
   @override

@@ -1,4 +1,5 @@
-
+/// A class that contains all the image asset paths used in the app.
+/// This class provides static constants for each image path, making it easy to reference them throughout the app.
 class MagicImages {
   // App Logos
   static const String darkAppLogo = "assets/logos/magic-dark.png";
@@ -13,8 +14,8 @@ class MagicImages {
 
   // Onboarding Images
   static const String onBoardingImage1 = "assets/images/on_boarding_images/shopping.json";
-  static const String onBoardingImage2 = "assets/images/on_boarding_images/shopping.json";
-  static const String onBoardingImage3 = "assets/images/on_boarding_images/shopping.json";
+  static const String onBoardingImage2 = "assets/images/on_boarding_images/payment.json";
+  static const String onBoardingImage3 = "assets/images/on_boarding_images/delivery.json";
 
   // Animations
   static const String processingAnimation = "assets/images/animations/processing.json";

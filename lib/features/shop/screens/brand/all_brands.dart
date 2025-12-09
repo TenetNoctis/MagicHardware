@@ -10,27 +10,32 @@ import '../../../../common/widgets/shimmers/brands_shimmer.dart';
 import '../../controllers/brand_controller.dart';
 import 'brand_products.dart';
 
+/// A screen that displays all brands.
 class AllBrandsScreen extends StatelessWidget {
+  /// Creates an [AllBrandsScreen].
   const AllBrandsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final brandController = BrandController.instance;
     return Scaffold(
-      appBar: MagicAppBar(title: Text('All Brands'), showBackArrow: true),
+      appBar: const MagicAppBar(title: Text('All Brands'), showBackArrow: true),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(MagicSizes.defaultSpace),
+          padding: const EdgeInsets.all(MagicSizes.defaultSpace),
           child: Column(
             children: [
               // Title
-              MagicSectionHeading(title: 'Brands', showActionButton: false),
-              SizedBox(height: MagicSizes.spaceBtwItems),
+              const MagicSectionHeading(
+                title: 'Brands',
+                showActionButton: false,
+              ),
+              const SizedBox(height: MagicSizes.spaceBtwItems),
 
               // Brands
               Obx(() {
                 if (brandController.isLoading.value) {
-                  return MagicBrandsShimmer();
+                  return const MagicBrandsShimmer();
                 }
 
                 if (brandController.allBrands.isEmpty) {

@@ -9,37 +9,41 @@ import 'package:magic_hardware/utils/helpers/cloud_helper_functions.dart';
 import '../../controllers/brand_controller.dart';
 import '../../models/brand_model.dart';
 
+/// A screen that displays the products of a specific brand.
 class BrandProducts extends StatelessWidget {
+  /// Creates a [BrandProducts] screen.
   const BrandProducts({super.key, required this.brand});
 
+  /// The brand whose products are to be displayed.
   final BrandModel brand;
 
   @override
   Widget build(BuildContext context) {
     final controller = BrandController.instance;
     return Scaffold(
-      appBar: MagicAppBar(title: Text(brand.name), showBackArrow: true,),
+      appBar: MagicAppBar(title: Text(brand.name), showBackArrow: true),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(MagicSizes.defaultSpace),
+          padding: const EdgeInsets.all(MagicSizes.defaultSpace),
           child: Column(
             children: [
               // Brand Detail
-              MagicBrandCard(
-                brand: brand,
-                showBorder: true,
-              ),
-              SizedBox(height: MagicSizes.spaceBtwSections),
+              MagicBrandCard(brand: brand, showBorder: true),
+              const SizedBox(height: MagicSizes.spaceBtwSections),
 
               FutureBuilder(
                 future: controller.getBrandProducts(brandId: brand.id),
                 builder: (context, snapshot) {
                   const loader = MagicVerticalProductShimmer();
-                  final widget = MagicCloudHelperFunctions.checkMultiRecordState(snapshot: snapshot, loader: loader);
+                  final widget =
+                      MagicCloudHelperFunctions.checkMultiRecordState(
+                        snapshot: snapshot,
+                        loader: loader,
+                      );
                   if (widget != null) return widget;
                   final brandProducts = snapshot.data!;
                   return MagicSortableProducts(products: brandProducts);
-                }
+                },
               ),
             ],
           ),

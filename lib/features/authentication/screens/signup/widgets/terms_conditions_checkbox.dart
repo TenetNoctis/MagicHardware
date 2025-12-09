@@ -7,7 +7,9 @@ import '../../../../../utils/constants/text_strings.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
 import '../../../controllers/signup/signup_controller.dart';
 
+/// A widget that provides a checkbox for the user to accept the terms and conditions.
 class MagicTermsAndConditionsCheckbox extends StatelessWidget {
+  /// Creates a [MagicTermsAndConditionsCheckbox].
   const MagicTermsAndConditionsCheckbox({super.key});
 
   @override
@@ -19,7 +21,13 @@ class MagicTermsAndConditionsCheckbox extends StatelessWidget {
         SizedBox(
           width: 24,
           height: 24,
-          child: Obx(() => Checkbox(value: controller.privacyPolicy.value, onChanged: (value) => controller.privacyPolicy.value = !controller.privacyPolicy.value)),
+          child: Obx(
+            () => Checkbox(
+              value: controller.privacyPolicy.value,
+              onChanged: (value) => controller.privacyPolicy.value =
+                  !controller.privacyPolicy.value,
+            ),
+          ),
         ),
         const SizedBox(width: MagicSizes.spaceBtwItems),
         Text.rich(

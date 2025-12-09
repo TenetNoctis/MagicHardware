@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:magic_hardware/common/widgets/shimmers/shimmer.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 
+/// A widget that displays a shimmering banner, used as a placeholder while loading data.
 class MagicBannerShimmer extends StatelessWidget {
+  /// Creates a [MagicBannerShimmer] widget.
   const MagicBannerShimmer({super.key});
 
-  // Shimmer Effect for Banner
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,7 +24,6 @@ class MagicBannerShimmer extends StatelessWidget {
           ),
         ),
         const SizedBox(height: MagicSizes.spaceBtwItems * 2),
-
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(

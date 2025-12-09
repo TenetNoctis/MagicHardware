@@ -4,16 +4,22 @@ import 'package:magic_hardware/features/shop/controllers/product/images_controll
 import 'package:magic_hardware/features/shop/models/product_model.dart';
 import 'package:magic_hardware/features/shop/models/product_variation_model.dart';
 
+/// A controller for managing product variations.
 class VariationController extends GetxController {
+  /// An instance of the [VariationController].
   static VariationController get instance => Get.find();
 
-  // Variables
+  /// A map of the selected attributes.
   RxMap selectedAttributes = {}.obs;
+
+  /// The stock status of the selected variation.
   RxString variationStockStatus = ''.obs;
+
+  /// The selected product variation.
   Rx<ProductVariationModel> selectedVariation =
       ProductVariationModel.empty().obs;
 
-  // Select Attribute and Variation
+  /// Selects an attribute and updates the selected variation.
   void onAttributeSelected(
     ProductModel product,
     attributeName,
@@ -52,7 +58,7 @@ class VariationController extends GetxController {
     getProductVariationStockStatus();
   }
 
-  // Check if selected attributes matches any variation attributes
+  /// Checks if the selected attributes match any variation attributes.
   bool _isSameAttributeValues(
     Map<String, dynamic> variationAttributes,
     Map<String, dynamic> selectedAttributes,
@@ -66,7 +72,7 @@ class VariationController extends GetxController {
     return true;
   }
 
-  // Check Attribute availability / stock in variation
+  /// Checks the attribute availability/stock in a variation.
   Set<String?> getAttributesAvailabilityInVariation(
     List<ProductVariationModel> variations,
     String attributeName,
@@ -83,6 +89,7 @@ class VariationController extends GetxController {
     return availableVariationAttributeValues;
   }
 
+  /// Returns the price of the selected variation.
   String getVariationPrice() {
     return (selectedVariation.value.salePrice! > 0
             ? selectedVariation.value.salePrice
@@ -90,14 +97,14 @@ class VariationController extends GetxController {
         .toString();
   }
 
-  // Check Variation Stock Status
+  /// Gets the stock status of the selected product variation.
   void getProductVariationStockStatus() {
     variationStockStatus.value = selectedVariation.value.stock > 0
         ? 'In Stock'
         : 'Out of Stock';
   }
 
-  // Reset Selected Attributes and Variation when switching products
+  /// Resets the selected attributes and variation when switching products.
   void resetSelectedAttributes() {
     selectedAttributes.clear();
     variationStockStatus.value = '';

@@ -14,9 +14,14 @@ import 'package:readmore/readmore.dart';
 
 import '../../models/product_model.dart';
 
+/// The screen that displays the details of a single product.
 class ProductDetailScreen extends StatelessWidget {
+  /// Creates a [ProductDetailScreen].
+  ///
+  /// The [product] parameter is required.
   const ProductDetailScreen({super.key, required this.product});
 
+  /// The product to display.
   final ProductModel product;
 
   @override
@@ -43,13 +48,14 @@ class ProductDetailScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Rating and Share
-                    MagicRatingsAndShare(),
+                    const MagicRatingsAndShare(),
 
                     // Title, Price, Stock and Brand
                     MagicProductMetaData(product: product),
 
                     // Attributes
-                    if (product.productType == ProductType.variable.toString()) ...[
+                    if (product.productType ==
+                        ProductType.variable.toString()) ...[
                       MagicProductAttributes(product: product),
                       const SizedBox(height: MagicSizes.spaceBtwSections),
                     ],
@@ -92,7 +98,7 @@ class ProductDetailScreen extends StatelessWidget {
 
                     // Reviews
                     const Divider(),
-                    SizedBox(height: MagicSizes.spaceBtwItems),
+                    const SizedBox(height: MagicSizes.spaceBtwItems),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -102,12 +108,13 @@ class ProductDetailScreen extends StatelessWidget {
                           showActionButton: false,
                         ),
                         IconButton(
-                          onPressed: () => Get.to(const ProductReviewsScreen()),
+                          onPressed: () =>
+                              Get.to(() => const ProductReviewsScreen()),
                           icon: const Icon(Iconsax.arrow_right_3),
                         ),
                       ],
                     ),
-                    SizedBox(height: MagicSizes.spaceBtwSections),
+                    const SizedBox(height: MagicSizes.spaceBtwSections),
                   ],
                 ),
               ),

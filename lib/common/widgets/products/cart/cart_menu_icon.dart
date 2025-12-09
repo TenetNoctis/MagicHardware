@@ -7,7 +7,9 @@ import 'package:magic_hardware/utils/helpers/helper_functions.dart';
 import '../../../../features/shop/screens/cart/cart.dart';
 import '../../../../utils/constants/colors.dart';
 
+/// A widget that displays a cart icon with a counter that navigates to the cart screen.
 class MagicCartCounterIcon extends StatelessWidget {
+  /// Creates a [MagicCartCounterIcon] widget.
   const MagicCartCounterIcon({
     super.key,
     this.iconColor,
@@ -15,7 +17,14 @@ class MagicCartCounterIcon extends StatelessWidget {
     this.counterBgColor,
   });
 
-  final Color? iconColor, counterTextColor, counterBgColor;
+  /// The color of the cart icon.
+  final Color? iconColor;
+
+  /// The color of the counter's text.
+  final Color? counterTextColor;
+
+  /// The background color of the counter.
+  final Color? counterBgColor;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +34,8 @@ class MagicCartCounterIcon extends StatelessWidget {
     return Stack(
       children: [
         IconButton(
-          onPressed: () => Get.to(const CartScreen()),
-          icon: Icon(Iconsax.shopping_bag),
+          onPressed: () => Get.to(() => const CartScreen()),
+          icon: const Icon(Iconsax.shopping_bag),
           color: iconColor,
         ),
         Positioned(

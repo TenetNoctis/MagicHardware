@@ -5,9 +5,13 @@ import 'package:iconsax/iconsax.dart';
 import '../constants/colors.dart';
 import '../helpers/helper_functions.dart';
 
+/// A utility class for displaying various types of loaders and snackbars.
 class MagicLoaders {
-  static void hideSnackBar() => ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();
+  /// Hides the currently displayed snackbar.
+  static void hideSnackBar() =>
+      ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();
 
+  /// Closes all open snackbars, including both GetX and Flutter native snackbars.
   static void closeAllSnackBars() {
     // Close GetX SnackBars
     if (Get.isSnackbarOpen) {
@@ -17,6 +21,9 @@ class MagicLoaders {
     ScaffoldMessenger.of(Get.context!).clearSnackBars();
   }
 
+  /// Displays a custom toast message.
+  ///
+  /// - [message]: The message to be displayed in the toast.
   static void customToast({required String message}) {
     ScaffoldMessenger.of(Get.context!).showSnackBar(
       SnackBar(
@@ -28,15 +35,31 @@ class MagicLoaders {
           margin: const EdgeInsets.symmetric(horizontal: 30),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
-            color: MagicHelperFunctions.isDarkMode(Get.context!) ? MagicColors.darkerGrey.withValues(alpha: 0.9) : MagicColors.grey.withValues(alpha: 0.9),
+            color: MagicHelperFunctions.isDarkMode(Get.context!)
+                ? MagicColors.darkerGrey.withValues(alpha: 0.9)
+                : MagicColors.grey.withValues(alpha: 0.9),
           ),
-          child: Center(child: Text(message, style: Theme.of(Get.context!).textTheme.bodySmall)),
+          child: Center(
+            child: Text(
+              message,
+              style: Theme.of(Get.context!).textTheme.bodySmall,
+            ),
+          ),
         ),
       ),
     );
   }
 
-  static void successSnackBar({required String title, String message = '', duration = 3}) {
+  /// Displays a success snackbar.
+  ///
+  /// - [title]: The title of the snackbar.
+  /// - [message]: The message to be displayed (optional).
+  /// - [duration]: The duration for which the snackbar is visible (in seconds).
+  static void successSnackBar({
+    required String title,
+    String message = '',
+    duration = 3,
+  }) {
     Get.snackbar(
       title,
       message,
@@ -51,6 +74,10 @@ class MagicLoaders {
     );
   }
 
+  /// Displays a warning snackbar.
+  ///
+  /// - [title]: The title of the snackbar.
+  /// - [message]: The message to be displayed (optional).
   static void warningSnackBar({required String title, String message = ''}) {
     Get.snackbar(
       title,
@@ -66,6 +93,10 @@ class MagicLoaders {
     );
   }
 
+  /// Displays an error snackbar.
+  ///
+  /// - [title]: The title of the snackbar.
+  /// - [message]: The message to be displayed (optional).
   static void errorSnackBar({required String title, String message = ''}) {
     Get.snackbar(
       title,

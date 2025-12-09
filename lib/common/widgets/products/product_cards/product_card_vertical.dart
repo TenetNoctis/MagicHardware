@@ -17,9 +17,12 @@ import '../../texts/brand_title_text_with_verified_icon.dart';
 import '../../texts/product_price_text.dart';
 import 'add_to_cart_button.dart';
 
+/// A widget that displays a product card with a vertical layout.
 class MagicProductCardVertical extends StatelessWidget {
+  /// Creates a [MagicProductCardVertical].
   const MagicProductCardVertical({super.key, required this.product});
 
+  /// The product to display.
   final ProductModel product;
 
   @override
@@ -164,5 +167,3 @@ class MagicProductCardVertical extends StatelessWidget {
     );
   }
 }
-
-

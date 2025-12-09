@@ -9,15 +9,27 @@ import '../../../../utils/helpers/network_manager.dart';
 import '../../../../utils/popups/full_screen_loader.dart';
 import '../../../personalization/controllers/user_controller.dart';
 
-class LoginController extends GetxController{
-
-  // Variables
+/// Controller for handling user login.
+class LoginController extends GetxController {
+  /// Indicates whether the user wants their email to be remembered.
   final rememberMe = false.obs;
+
+  /// Indicates whether the password should be hidden or visible.
   final hidePassword = true.obs;
+
+  /// A handle to the device's local storage.
   final localStorage = GetStorage();
+
+  /// Text controller for the email input field.
   final email = TextEditingController();
+
+  /// Text controller for the password input field.
   final password = TextEditingController();
+
+  /// A global key for the login form.
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+
+  /// Controller for managing user-related data.
   final userController = Get.put(UserController());
 
   @override
@@ -26,7 +38,7 @@ class LoginController extends GetxController{
     super.onInit();
   }
 
-  // Email and Password SignIn
+  /// Handles the email and password sign-in process.
   Future<void> emailAndPasswordSignIn() async {
     try {
       // Start Loading
@@ -74,7 +86,7 @@ class LoginController extends GetxController{
     }
   }
 
-  // Google SignIn Authentication
+  /// Handles the Google sign-in process.
   Future<void> googleSignIn() async {
     try {
       // Start Loading
@@ -92,7 +104,8 @@ class LoginController extends GetxController{
       }
 
       // Google Authentication
-      final userCredentials = await AuthenticationRepository.instance.signInWithGoogle();
+      final userCredentials = await AuthenticationRepository.instance
+          .signInWithGoogle();
 
       // Save User Record
       await userController.saveUserRecord(userCredentials);

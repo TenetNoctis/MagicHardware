@@ -5,7 +5,9 @@ import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
 import '../../../utils/helpers/helper_functions.dart';
 
+/// A widget that displays a vertical image and text.
 class MagicVerticalImageText extends StatelessWidget {
+  /// Creates a vertical image text widget.
   const MagicVerticalImageText({
     super.key,
     this.onTap,
@@ -16,10 +18,22 @@ class MagicVerticalImageText extends StatelessWidget {
     this.backgroundColor,
   });
 
-  final String image, title;
+  /// The path to the image asset.
+  final String image;
+
+  /// The title text.
+  final String title;
+
+  /// The color of the title text. Defaults to `MagicColors.white`.
   final Color textColor;
+
+  /// The background color of the image container.
   final Color? backgroundColor;
+
+  /// Whether the image is a network image. Defaults to `true`.
   final bool isNetworkImage;
+
+  /// Callback to be executed when the widget is tapped.
   final void Function()? onTap;
 
   @override

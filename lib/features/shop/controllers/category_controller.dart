@@ -6,12 +6,21 @@ import 'package:magic_hardware/utils/popups/loaders.dart';
 
 import '../models/product_model.dart';
 
+/// A controller for managing categories.
 class CategoryController extends GetxController {
+  /// An instance of the [CategoryController].
   static CategoryController get instance => Get.find();
 
+  /// Whether the controller is currently loading data.
   final isLoading = false.obs;
+
+  /// The category repository.
   final _categoryRepository = Get.put(CategoryRepository());
+
+  /// A list of all categories.
   final RxList<CategoryModel> allCategories = <CategoryModel>[].obs;
+
+  /// A list of featured categories.
   final RxList<CategoryModel> featuredCategories = <CategoryModel>[].obs;
 
   @override
@@ -20,7 +29,7 @@ class CategoryController extends GetxController {
     super.onInit();
   }
 
-  // Load category data
+  /// Fetches all categories.
   Future<void> fetchCategories() async {
     try {
       // Show loader while loading categories
@@ -33,7 +42,14 @@ class CategoryController extends GetxController {
       allCategories.assignAll(categories);
 
       // Filter featured categories
-      featuredCategories.assignAll(allCategories.where((category) => category.isFeatured && category.parentId.isEmpty).take(8).toList());
+      featuredCategories.assignAll(
+        allCategories
+            .where(
+              (category) => category.isFeatured && category.parentId.isEmpty,
+            )
+            .take(8)
+            .toList(),
+      );
     } catch (e) {
       MagicLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
     } finally {
@@ -42,10 +58,14 @@ class CategoryController extends GetxController {
     }
   }
 
-  // Load selected category data
+  /// Fetches the subcategories for a given category.
+  ///
+  /// Returns a list of [CategoryModel]s.
   Future<List<CategoryModel>> getSubCategories(String categoryId) async {
     try {
-      final subCategories = await _categoryRepository.getSubCategories(categoryId);
+      final subCategories = await _categoryRepository.getSubCategories(
+        categoryId,
+      );
       return subCategories;
     } catch (e) {
       MagicLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
@@ -53,15 +73,22 @@ class CategoryController extends GetxController {
     }
   }
 
-  // Get category or sub-category products
-  Future<List<ProductModel>> getCategoryProducts({required String categoryId, int limit = 4}) async {
+  /// Fetches the products for a given category.
+  ///
+  /// Returns a list of [ProductModel]s.
+  Future<List<ProductModel>> getCategoryProducts({
+    required String categoryId,
+    int limit = 4,
+  }) async {
     try {
-      final products = await ProductRepository.instance.getProductsForCategory(categoryId: categoryId, limit: limit);
+      final products = await ProductRepository.instance.getProductsForCategory(
+        categoryId: categoryId,
+        limit: limit,
+      );
       return products;
     } catch (e) {
       MagicLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
       return [];
     }
   }
-
 }

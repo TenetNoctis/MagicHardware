@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:magic_hardware/common/widgets/appbar/appbar.dart';
 import 'package:magic_hardware/common/widgets/layouts/grid_layout.dart';
 import 'package:magic_hardware/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:magic_hardware/common/widgets/shimmers/vertical_product_shimmer.dart';
 import 'package:magic_hardware/features/shop/controllers/product/product_search_controller.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
-import 'package:iconsax/iconsax.dart';
 
+/// A screen that allows users to search for products.
+///
+/// This screen includes a search bar and displays search results in a grid layout.
+/// It also handles different states, such as loading, no search query, and no results found.
 class ProductSearchScreen extends StatelessWidget {
+  /// Creates a [ProductSearchScreen].
   const ProductSearchScreen({super.key});
 
   @override
@@ -17,10 +22,7 @@ class ProductSearchScreen extends StatelessWidget {
     final searchController = TextEditingController();
 
     return Scaffold(
-      appBar: MagicAppBar(
-        showBackArrow: true,
-        title: Text('Search Products'),
-      ),
+      appBar: MagicAppBar(showBackArrow: true, title: Text('Search Products')),
       body: Column(
         children: [
           // Search Bar
@@ -36,12 +38,12 @@ class ProductSearchScreen extends StatelessWidget {
                 suffixIcon: Obx(() {
                   return controller.searchQuery.value.isNotEmpty
                       ? IconButton(
-                    icon: const Icon(Iconsax.close_circle),
-                    onPressed: () {
-                      searchController.clear();
-                      controller.clearSearch();
-                    },
-                  )
+                          icon: const Icon(Iconsax.close_circle),
+                          onPressed: () {
+                            searchController.clear();
+                            controller.clearSearch();
+                          },
+                        )
                       : const SizedBox.shrink();
                 }),
                 border: OutlineInputBorder(

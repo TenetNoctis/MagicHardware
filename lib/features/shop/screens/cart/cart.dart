@@ -11,7 +11,9 @@ import '../../controllers/product/cart_controller.dart';
 import '../../controllers/product/product_controller.dart';
 import '../all_products/all_products.dart';
 
+/// A screen that displays the contents of the user's shopping cart.
 class CartScreen extends StatelessWidget {
+  /// Creates a [CartScreen] widget.
   const CartScreen({super.key});
 
   @override
@@ -62,8 +64,9 @@ class CartScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () => Get.to(() => const CheckoutScreen()),
                   child: Obx(
-                    () =>
-                        Text('Checkout MVR ${controller.totalCartPrice.value.toStringAsFixed(2)}'),
+                    () => Text(
+                      'Checkout MVR ${controller.totalCartPrice.value.toStringAsFixed(2)}',
+                    ),
                   ),
                 ),
               ),

@@ -5,8 +5,9 @@ import 'package:magic_hardware/features/personalization/controllers/address_cont
 import 'package:magic_hardware/utils/constants/sizes.dart';
 import 'package:magic_hardware/utils/validators/validation.dart';
 
-
+/// A screen for adding a new address.
 class AddNewAddressScreen extends StatelessWidget {
+  /// Creates an [AddNewAddressScreen].
   const AddNewAddressScreen({super.key});
 
   @override
@@ -24,7 +25,8 @@ class AddNewAddressScreen extends StatelessWidget {
               children: [
                 TextFormField(
                   controller: controller.address,
-                  validator: (value) => MagicValidator.validateEmptyText('Address', value),
+                  validator: (value) =>
+                      MagicValidator.validateEmptyText('Address', value),
                   decoration: InputDecoration(
                     labelText: 'Address',
                     prefixIcon: Icon(Iconsax.user),
@@ -33,7 +35,8 @@ class AddNewAddressScreen extends StatelessWidget {
                 const SizedBox(height: MagicSizes.spaceBtwInputFields),
                 TextFormField(
                   controller: controller.phoneNumber,
-                  validator: (value) => MagicValidator.validatePhoneNumberFormat(value),
+                  validator: (value) =>
+                      MagicValidator.validatePhoneNumberFormat(value),
                   decoration: InputDecoration(
                     labelText: 'Phone Number',
                     prefixIcon: Icon(Iconsax.mobile),
@@ -45,7 +48,8 @@ class AddNewAddressScreen extends StatelessWidget {
                     Expanded(
                       child: TextFormField(
                         controller: controller.street,
-                        validator: (value) => MagicValidator.validateEmptyText('Street', value),
+                        validator: (value) =>
+                            MagicValidator.validateEmptyText('Street', value),
                         decoration: InputDecoration(
                           labelText: 'Street',
                           prefixIcon: Icon(Iconsax.building),
@@ -56,7 +60,8 @@ class AddNewAddressScreen extends StatelessWidget {
                     Expanded(
                       child: TextFormField(
                         controller: controller.postalCode,
-                        validator: (value) => MagicValidator.validatePostalCode(value),
+                        validator: (value) =>
+                            MagicValidator.validatePostalCode(value),
                         decoration: InputDecoration(
                           labelText: 'Postal Code',
                           prefixIcon: Icon(Iconsax.signpost),
@@ -71,7 +76,8 @@ class AddNewAddressScreen extends StatelessWidget {
                     Expanded(
                       child: TextFormField(
                         controller: controller.island,
-                        validator: (value) => MagicValidator.validateEmptyText('Island', value),
+                        validator: (value) =>
+                            MagicValidator.validateEmptyText('Island', value),
                         decoration: InputDecoration(
                           labelText: 'Island',
                           prefixIcon: Icon(Iconsax.map_1),
@@ -82,7 +88,8 @@ class AddNewAddressScreen extends StatelessWidget {
                     Expanded(
                       child: TextFormField(
                         controller: controller.atoll,
-                        validator: (value) => MagicValidator.validateEmptyText('Atoll', value),
+                        validator: (value) =>
+                            MagicValidator.validateEmptyText('Atoll', value),
                         decoration: InputDecoration(
                           labelText: 'Atoll',
                           prefixIcon: Icon(Iconsax.routing),

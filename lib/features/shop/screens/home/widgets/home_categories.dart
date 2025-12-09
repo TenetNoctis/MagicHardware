@@ -6,16 +6,27 @@ import 'package:magic_hardware/features/shop/screens/sub_category/sub_categories
 
 import '../../../../../common/widgets/image_text_widgets/vertical_image_text.dart';
 
+/// A widget that displays a horizontal list of featured categories for the home screen.
 class MagicHomeCategories extends StatelessWidget {
+  /// Creates a new [MagicHomeCategories] widget.
   const MagicHomeCategories({super.key});
 
   @override
   Widget build(BuildContext context) {
     final categoryController = Get.put(CategoryController());
     return Obx(() {
-      if (categoryController.isLoading.value) return const MagicCategoryShimmer();
+      if (categoryController.isLoading.value) {
+        return const MagicCategoryShimmer();
+      }
       if (categoryController.featuredCategories.isEmpty) {
-        return Center(child: Text('No Data Found!', style: Theme.of(context).textTheme.bodyMedium!.apply(color: Colors.white)));
+        return Center(
+          child: Text(
+            'No Data Found!',
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium!.apply(color: Colors.white),
+          ),
+        );
       }
 
       return SizedBox(
@@ -29,7 +40,8 @@ class MagicHomeCategories extends StatelessWidget {
             return MagicVerticalImageText(
               image: category.image,
               title: category.name,
-              onTap: () => Get.to(() => SubCategoriesScreen(category: category)),
+              onTap: () =>
+                  Get.to(() => SubCategoriesScreen(category: category)),
             );
           },
         ),

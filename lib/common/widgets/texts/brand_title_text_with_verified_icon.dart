@@ -6,7 +6,9 @@ import '../../../utils/constants/enums.dart';
 import '../../../utils/constants/sizes.dart';
 import 'brand_title_text.dart';
 
+/// A widget that displays a brand title with a verified icon.
 class MagicBrandTitleWithVerifiedIcon extends StatelessWidget {
+  /// Creates a [MagicBrandTitleWithVerifiedIcon] widget.
   const MagicBrandTitleWithVerifiedIcon({
     super.key,
     this.textColor,
@@ -17,10 +19,22 @@ class MagicBrandTitleWithVerifiedIcon extends StatelessWidget {
     this.brandTextSize = TextSizes.small,
   });
 
+  /// The title of the brand.
   final String title;
+
+  /// The maximum number of lines for the title.
   final int maxLines;
-  final Color? textColor, iconColor;
+
+  /// The color of the text.
+  final Color? textColor;
+
+  /// The color of the icon.
+  final Color? iconColor;
+
+  /// The alignment of the text.
   final TextAlign? textAlign;
+
+  /// The size of the brand text.
   final TextSizes brandTextSize;
 
   @override

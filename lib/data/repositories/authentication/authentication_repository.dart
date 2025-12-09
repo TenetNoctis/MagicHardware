@@ -12,19 +12,25 @@ import 'package:magic_hardware/features/authentication/screens/signup/verify_ema
 import 'package:magic_hardware/navigation_menu.dart';
 import 'package:magic_hardware/utils/local_storage/storage_utility.dart';
 
+import '../../../utils/constants/text_strings.dart';
 import '../../../utils/exceptions/firebase_auth_exceptions.dart';
 import '../../../utils/exceptions/firebase_exceptions.dart';
 import '../../../utils/exceptions/format_exceptions.dart';
 import '../../../utils/exceptions/platform_exceptions.dart';
 
+/// A repository for handling user authentication.
 class AuthenticationRepository extends GetxController {
+  /// A static getter for the [AuthenticationRepository] instance.
   static AuthenticationRepository get instance => Get.find();
 
+  /// A handle to the device's local storage.
   final deviceStorage = GetStorage();
+
   final _auth = FirebaseAuth.instance;
   final _googleSignIn = GoogleSignIn.instance;
   bool _isGoogleSignInInitialized = false;
 
+  /// Gets the current authenticated user.
   User? get authUser => _auth.currentUser;
 
   @override
@@ -33,7 +39,7 @@ class AuthenticationRepository extends GetxController {
     screenRedirect();
   }
 
-  // Function to redirect user to the proper screen
+  /// Redirects the user to the appropriate screen based on their authentication status.
   Future<void> screenRedirect() async {
     User? user = _auth.currentUser;
 
@@ -55,8 +61,11 @@ class AuthenticationRepository extends GetxController {
 
   /* ----------------------------------- Email & Password sign-in ----------------------------------- */
 
-  // [EmailAuthentication] - SignIn
-  Future<UserCredential> signInWithEmailAndPassword(String email, String password) async {
+  /// Signs in a user with their email and password.
+  Future<UserCredential> signInWithEmailAndPassword(
+    String email,
+    String password,
+  ) async {
     try {
       return await _auth.signInWithEmailAndPassword(
         email: email,
@@ -71,12 +80,15 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw MagicPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw MagicTexts.somethingWentWrong;
     }
   }
 
-  // [EmailAuthentication] - Register
-  Future<UserCredential> registerWithEmailAndPassword(String email, String password) async {
+  /// Registers a new user with their email and password.
+  Future<UserCredential> registerWithEmailAndPassword(
+    String email,
+    String password,
+  ) async {
     try {
       return await _auth.createUserWithEmailAndPassword(
         email: email,
@@ -91,12 +103,15 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw MagicPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw MagicTexts.somethingWentWrong;
     }
   }
 
-  // [ReAuthenticate] - ReAuthenticate User
-  Future<void> reAuthenticateWithEmailAndPassword(String email, String password) async {
+  /// Re-authenticates the current user with their email and password.
+  Future<void> reAuthenticateWithEmailAndPassword(
+    String email,
+    String password,
+  ) async {
     try {
       AuthCredential credential = EmailAuthProvider.credential(
         email: email,
@@ -112,11 +127,11 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw MagicPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw MagicTexts.somethingWentWrong;
     }
   }
 
-  // [EmailVerification] - Email Verification
+  /// Sends an email verification link to the current user.
   Future<void> sendEmailVerification() async {
     try {
       await _auth.currentUser?.sendEmailVerification();
@@ -129,11 +144,11 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw MagicPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw MagicTexts.somethingWentWrong;
     }
   }
 
-  // [PasswordReset] - Password Reset
+  /// Sends a password reset email to the given email address.
   Future<void> sendPasswordResetEmail(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
@@ -146,16 +161,15 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw MagicPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw MagicTexts.somethingWentWrong;
     }
   }
 
   /* ----------------------------------- Federated identity & Social sign-in ----------------------------------- */
 
-  // [GoogleAuthentication] - Google
+  /// Signs in a user with their Google account.
   Future<UserCredential?> signInWithGoogle() async {
     try {
-
       // Initialize Google Sign In
       if (!_isGoogleSignInInitialized) {
         try {
@@ -204,7 +218,7 @@ class AuthenticationRepository extends GetxController {
 
   /* ----------------------------------- ./end Federated identity & Social sign-in ----------------------------------- */
 
-  // [LogoutUser] - Valid for all authentication
+  /// Logs out the current user.
   Future<void> logout() async {
     try {
       MagicLocalStorage.reset();
@@ -220,11 +234,11 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw MagicPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw MagicTexts.somethingWentWrong;
     }
   }
 
-  // [DeleteUser] - Remove user Auth and Firestore Account
+  /// Deletes the current user's account.
   Future<void> deleteAccount() async {
     try {
       await UserRepository.instance.removeUserRecord(_auth.currentUser!.uid);
@@ -238,7 +252,7 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw MagicPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw MagicTexts.somethingWentWrong;
     }
   }
 }

@@ -14,12 +14,14 @@ import 'package:magic_hardware/utils/helpers/helper_functions.dart';
 
 import '../../../../common/widgets/list_tiles/user_profile_tile.dart';
 import '../../../../data/repositories/authentication/authentication_repository.dart';
-import '../../../../data/repositories/products/product_dummy_data.dart';
+import '../../../../data/dummy_data/products/product_dummy_data.dart';
 import '../../../../data/repositories/products/product_repository.dart';
 import '../../controllers/user_controller.dart';
 import '../profile/profile.dart';
 
+/// A screen that provides settings options to the user.
 class SettingsScreen extends StatelessWidget {
+  /// Creates a [SettingsScreen] widget.
   const SettingsScreen({super.key});
 
   @override

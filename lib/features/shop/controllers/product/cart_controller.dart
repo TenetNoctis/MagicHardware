@@ -9,13 +9,24 @@ import 'package:magic_hardware/utils/popups/loaders.dart';
 import '../../../../utils/local_storage/storage_utility.dart';
 import '../../models/cart_item_model.dart';
 
+/// Controller for cart functionality.
 class CartController extends GetxController {
+  /// Singleton instance of [CartController].
   static CartController get instance => Get.find();
 
+  /// Observable for the number of items in the cart.
   RxInt noOfCartItems = 0.obs;
+
+  /// Observable for the total price of the cart.
   RxDouble totalCartPrice = 0.0.obs;
+
+  /// Observable for the quantity of a product in the cart.
   RxInt productQuantityInCart = 0.obs;
+
+  /// Observable list of cart items.
   RxList<CartItemModel> cartItems = <CartItemModel>[].obs;
+
+  /// Variation controller instance.
   final variationController = VariationController.instance;
 
   @override
@@ -24,6 +35,7 @@ class CartController extends GetxController {
     super.onInit();
   }
 
+  /// Adds a product to the cart.
   void addToCart(ProductModel product) {
     // Quantity Check
     if (productQuantityInCart < 1) {
@@ -82,8 +94,8 @@ class CartController extends GetxController {
 
     // Check if item already exists in cart
     int index = cartItems.indexWhere(
-          (cartItem) =>
-      cartItem.productId == selectedCartItem.productId &&
+      (cartItem) =>
+          cartItem.productId == selectedCartItem.productId &&
           cartItem.variationId == selectedCartItem.variationId,
     );
 
@@ -101,16 +113,18 @@ class CartController extends GetxController {
     );
   }
 
+  /// Adds one item to the cart.
   void addOneToCart(CartItemModel item, {int? availableStock}) {
     int index = cartItems.indexWhere(
-          (cartItem) =>
-      cartItem.productId == item.productId &&
+      (cartItem) =>
+          cartItem.productId == item.productId &&
           cartItem.variationId == item.variationId,
     );
 
     if (index >= 0) {
       // Check stock before incrementing
-      if (availableStock != null && cartItems[index].quantity >= availableStock) {
+      if (availableStock != null &&
+          cartItems[index].quantity >= availableStock) {
         MagicLoaders.warningSnackBar(
           title: 'Oh Snap!',
           message: 'Only $availableStock items available in stock.',
@@ -124,6 +138,7 @@ class CartController extends GetxController {
     updateCart();
   }
 
+  /// Removes one item from the cart.
   void removeOneFromCart(CartItemModel item) {
     int index = cartItems.indexWhere(
       (cartItem) =>
@@ -140,6 +155,7 @@ class CartController extends GetxController {
     }
   }
 
+  /// Displays a dialog to remove an item from the cart.
   void removeFromCartDialog(int index) {
     Get.defaultDialog(
       title: 'Remove Item',
@@ -156,19 +172,24 @@ class CartController extends GetxController {
     );
   }
 
+  /// Updates the quantity of a product already in the cart.
   void updateAlreadyAddedProductCount(ProductModel product) {
     if (product.productType == ProductType.single.toString()) {
       productQuantityInCart.value = getProductQuantityInCart(product.id);
     } else {
       final variationId = variationController.selectedVariation.value.id;
       if (variationId.isNotEmpty) {
-        productQuantityInCart.value = getVariationQuantityInCart(product.id, variationId);
+        productQuantityInCart.value = getVariationQuantityInCart(
+          product.id,
+          variationId,
+        );
       } else {
         productQuantityInCart.value = 0;
       }
     }
   }
 
+  /// Converts a [ProductModel] to a [CartItemModel].
   CartItemModel convertToCartItem(ProductModel product, int quantity) {
     if (product.productType == ProductType.single.toString()) {
       variationController.resetSelectedAttributes();
@@ -196,12 +217,14 @@ class CartController extends GetxController {
     );
   }
 
+  /// Updates the cart totals and saves the cart.
   void updateCart() {
     updateCartTotals();
     saveCartItems();
     cartItems.refresh();
   }
 
+  /// Updates the cart totals.
   void updateCartTotals() {
     double calculatedTotalPrice = 0.0;
     int calculatedNoOfItems = 0;
@@ -215,11 +238,13 @@ class CartController extends GetxController {
     noOfCartItems.value = calculatedNoOfItems;
   }
 
+  /// Saves the cart items to local storage.
   void saveCartItems() {
     final cartItemStrings = cartItems.map((item) => item.toJson()).toList();
     MagicLocalStorage.instance().saveData('cartItems', cartItemStrings);
   }
 
+  /// Loads the cart items from local storage.
   void loadCartItems() {
     final cartItemStrings = MagicLocalStorage.instance()
         .readData<List<dynamic>>('cartItems');
@@ -233,6 +258,7 @@ class CartController extends GetxController {
     }
   }
 
+  /// Gets the quantity of a product in the cart.
   int getProductQuantityInCart(String productId) {
     final foundItem = cartItems
         .where((item) => item.productId == productId)
@@ -240,6 +266,7 @@ class CartController extends GetxController {
     return foundItem;
   }
 
+  /// Gets the quantity of a variation in the cart.
   int getVariationQuantityInCart(String productId, String variationId) {
     final foundItem = cartItems.firstWhere(
       (item) => item.productId == productId && item.variationId == variationId,
@@ -248,6 +275,7 @@ class CartController extends GetxController {
     return foundItem.quantity;
   }
 
+  /// Clears the cart.
   void clearCart() {
     productQuantityInCart.value = 0;
     cartItems.clear();

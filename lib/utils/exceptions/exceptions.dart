@@ -1,12 +1,13 @@
-/// Exception class for handling various errors.
+/// A custom exception class to handle various generic exceptions.
 class MagicExceptions implements Exception {
-  /// The associated error message.
+  /// The error message associated with the exception.
   final String message;
 
-  /// Default constructor with a generic error message.
+  /// Creates a [MagicExceptions] with an optional error [message].
+  /// If no message is provided, a default message is used.
   const MagicExceptions([this.message = 'An unexpected error occurred. Please try again.']);
 
-  /// Create an authentication exception from a Firebase authentication exception code.
+  /// Creates a [MagicExceptions] from a specific error code.
   factory MagicExceptions.fromCode(String code) {
     switch (code) {
       case 'email-already-in-use':

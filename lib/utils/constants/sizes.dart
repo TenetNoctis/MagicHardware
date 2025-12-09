@@ -1,3 +1,5 @@
+/// A class containing constants for various sizes used throughout the application.
+/// This helps maintain a consistent and scalable UI.
 class MagicSizes {
   // Padding and margin sizes
   static const double xs = 4.0;
@@ -57,6 +59,7 @@ class MagicSizes {
   static const double cardRadiusSm = 10.0;
   static const double cardRadiusXs = 6.0;
   static const double cardElevation = 2.0;
+
   // Image carousel height
   static const double imageCarouselHeight = 200.00;
 

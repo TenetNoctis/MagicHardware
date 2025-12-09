@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'data/repositories/authentication/authentication_repository.dart';
 import 'firebase_options.dart';
 
+/// The main entry point for the application.
 Future<void> main() async {
   // Widgets Binding
   final WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +25,3 @@ Future<void> main() async {
 
   runApp(const App());
 }
-
-
-
-

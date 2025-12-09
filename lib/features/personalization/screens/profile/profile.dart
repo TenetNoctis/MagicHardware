@@ -17,7 +17,9 @@ import 'package:magic_hardware/utils/constants/sizes.dart';
 
 import '../../../../utils/popups/loaders.dart';
 
+/// A screen that displays the user's profile information.
 class ProfileScreen extends StatelessWidget {
+  /// Creates a [ProfileScreen] widget.
   const ProfileScreen({super.key});
 
   @override
@@ -124,21 +126,26 @@ class ProfileScreen extends StatelessWidget {
               MagicProfileMenu(
                 title: 'Phone Number',
                 icon: Iconsax.arrow_right_34,
-                value: controller.user.value!.phoneNumber.isEmpty ? 'Not Set' : controller.user.value!.phoneNumber,
+                value: controller.user.value!.phoneNumber.isEmpty
+                    ? 'Not Set'
+                    : controller.user.value!.phoneNumber,
                 onPressed: () => Get.to(() => const ChangePhone()),
               ),
-
 
               MagicProfileMenu(
                 title: 'Gender',
                 icon: Iconsax.arrow_right_34,
-                value: controller.user.value!.gender.isEmpty ? 'Not set' : controller.user.value!.gender,
+                value: controller.user.value!.gender.isEmpty
+                    ? 'Not set'
+                    : controller.user.value!.gender,
                 onPressed: () => Get.to(() => const ChangeGender()),
               ),
               MagicProfileMenu(
                 title: 'Date of Birth',
                 icon: Iconsax.arrow_right_34,
-                value: controller.user.value!.dateOfBirth.isEmpty ? 'Not set' : controller.user.value!.dateOfBirth,
+                value: controller.user.value!.dateOfBirth.isEmpty
+                    ? 'Not set'
+                    : controller.user.value!.dateOfBirth,
                 onPressed: () => Get.to(() => const ChangeDob()),
               ),
 

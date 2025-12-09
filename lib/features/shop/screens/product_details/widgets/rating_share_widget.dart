@@ -3,7 +3,9 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../../../utils/constants/sizes.dart';
 
+/// A widget that displays the rating and share button for a product.
 class MagicRatingsAndShare extends StatelessWidget {
+  /// Creates a [MagicRatingsAndShare] widget.
   const MagicRatingsAndShare({super.key});
 
   @override
@@ -14,8 +16,8 @@ class MagicRatingsAndShare extends StatelessWidget {
         // Rating
         Row(
           children: [
-            Icon(Iconsax.star5, color: Colors.amber, size: 24),
-            SizedBox(width: MagicSizes.spaceBtwItems / 2),
+            const Icon(Iconsax.star5, color: Colors.amber, size: 24),
+            const SizedBox(width: MagicSizes.spaceBtwItems / 2),
             Text.rich(
               TextSpan(
                 children: [
@@ -23,7 +25,7 @@ class MagicRatingsAndShare extends StatelessWidget {
                     text: '5.0 ',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  TextSpan(text: '(199)'),
+                  const TextSpan(text: '(199)'),
                 ],
               ),
             ),
@@ -33,7 +35,7 @@ class MagicRatingsAndShare extends StatelessWidget {
         // Share
         IconButton(
           onPressed: () {},
-          icon: Icon(Icons.share, size: MagicSizes.iconMd),
+          icon: const Icon(Icons.share, size: MagicSizes.iconMd),
         ),
       ],
     );

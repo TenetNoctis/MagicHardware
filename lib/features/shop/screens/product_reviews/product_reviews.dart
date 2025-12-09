@@ -6,7 +6,9 @@ import 'package:magic_hardware/utils/constants/sizes.dart';
 import '../../../../common/widgets/appbar/appbar.dart';
 import '../../../../common/widgets/products/ratings/rating_indicator.dart';
 
+/// A screen that displays the reviews and ratings for a product.
 class ProductReviewsScreen extends StatelessWidget {
+  /// Creates a [ProductReviewsScreen].
   const ProductReviewsScreen({super.key});
 
   @override
@@ -48,5 +50,3 @@ class ProductReviewsScreen extends StatelessWidget {
     );
   }
 }
-
-

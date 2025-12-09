@@ -7,9 +7,12 @@ import '../../../../../common/widgets/products/cart/cart_item.dart';
 import '../../../../../common/widgets/texts/product_price_text.dart';
 import '../../../../../utils/constants/sizes.dart';
 
+/// A widget that displays all items in the cart.
 class MagicAllCartItems extends StatelessWidget {
+  /// Creates a [MagicAllCartItems] widget.
   const MagicAllCartItems({super.key, this.showAddRemoveButtons = true});
 
+  /// Whether to show the add and remove buttons.
   final bool showAddRemoveButtons;
 
   @override
@@ -25,9 +28,10 @@ class MagicAllCartItems extends StatelessWidget {
           final item = cartController.cartItems[index];
           return Column(
             children: [
-              MagicCartItem(cartItem: item, showQuantity: !showAddRemoveButtons),
-
-
+              MagicCartItem(
+                cartItem: item,
+                showQuantity: !showAddRemoveButtons,
+              ),
               if (showAddRemoveButtons) ...[
                 const SizedBox(height: MagicSizes.spaceBtwItems),
                 Row(
@@ -48,10 +52,12 @@ class MagicAllCartItems extends StatelessWidget {
                     ),
 
                     // Product Total Price
-                    MagicProductPriceText(price: (item.price * item.quantity).toStringAsFixed(2)),
+                    MagicProductPriceText(
+                      price: (item.price * item.quantity).toStringAsFixed(2),
+                    ),
                   ],
                 ),
-              ]
+              ],
             ],
           );
         }),

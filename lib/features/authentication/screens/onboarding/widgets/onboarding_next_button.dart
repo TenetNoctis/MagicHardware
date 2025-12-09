@@ -5,7 +5,9 @@ import 'package:magic_hardware/features/authentication/controllers/onboarding/on
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/device/device_utility.dart';
 
+/// A widget that provides a button to navigate to the next page of the onboarding screen.
 class OnBoardingNextButton extends StatelessWidget {
+  /// Creates an [OnBoardingNextButton] widget.
   const OnBoardingNextButton({super.key});
 
   @override
@@ -15,9 +17,7 @@ class OnBoardingNextButton extends StatelessWidget {
       bottom: MagicDeviceUtils.getBottomNavigationBarHeight(),
       child: ElevatedButton(
         onPressed: () => OnBoardingController.instance.nextPage(),
-        style: ElevatedButton.styleFrom(
-          shape: const CircleBorder(),
-        ),
+        style: ElevatedButton.styleFrom(shape: const CircleBorder()),
         child: const Icon(Iconsax.arrow_right_3),
       ),
     );

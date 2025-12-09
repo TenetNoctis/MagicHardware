@@ -10,9 +10,12 @@ import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/popups/loaders.dart';
 
+/// A button that adds a product to the cart, showing the quantity if it's already in the cart.
 class ProductCardAddToCartButton extends StatelessWidget {
+  /// Creates a [ProductCardAddToCartButton].
   const ProductCardAddToCartButton({super.key, required this.product});
 
+  /// The product associated with this button.
   final ProductModel product;
 
   @override
@@ -21,7 +24,9 @@ class ProductCardAddToCartButton extends StatelessWidget {
     return InkWell(
       onTap: () {
         if (product.productType == ProductType.single.toString()) {
-          final currentQuantity = cartController.getProductQuantityInCart(product.id);
+          final currentQuantity = cartController.getProductQuantityInCart(
+            product.id,
+          );
           if (currentQuantity >= product.stock) {
             MagicLoaders.warningSnackBar(
               title: 'Oh Snap!',
@@ -44,7 +49,7 @@ class ProductCardAddToCartButton extends StatelessWidget {
             color: productQuantityInCart > 0
                 ? MagicColors.primary
                 : MagicColors.darkestGrey,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(MagicSizes.cardRadiusMd),
               bottomRight: Radius.circular(MagicSizes.productImageRadius),
             ),

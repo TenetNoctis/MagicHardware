@@ -7,7 +7,9 @@ import 'package:magic_hardware/features/authentication/screens/signup/widgets/si
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/constants/text_strings.dart';
 
+/// A screen that allows users to create a new account.
 class SignupScreen extends StatelessWidget {
+  /// Creates a [SignupScreen].
   const SignupScreen({super.key});
 
   @override
@@ -46,5 +48,3 @@ class SignupScreen extends StatelessWidget {
     );
   }
 }
-
-

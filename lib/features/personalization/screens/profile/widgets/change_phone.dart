@@ -8,7 +8,9 @@ import 'package:magic_hardware/utils/validators/validation.dart';
 import '../../../../../utils/constants/text_strings.dart';
 import '../../../controllers/update_phone_controller.dart';
 
+/// A screen that allows a user to change their phone number.
 class ChangePhone extends StatelessWidget {
+  /// Creates a [ChangePhone] screen.
   const ChangePhone({super.key});
 
   @override
@@ -23,7 +25,7 @@ class ChangePhone extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(MagicSizes.defaultSpace),
+        padding: const EdgeInsets.all(MagicSizes.defaultSpace),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

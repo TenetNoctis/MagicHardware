@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/constants/enums.dart';
 
+/// A text widget for displaying brand titles with customizable styling.
 class MagicBrandTitleText extends StatelessWidget {
+  /// Creates a [MagicBrandTitleText] widget.
   const MagicBrandTitleText({
     super.key,
     this.color,
@@ -12,10 +14,19 @@ class MagicBrandTitleText extends StatelessWidget {
     this.brandTextSize = TextSizes.small,
   });
 
+  /// The color of the text.
   final Color? color;
+
+  /// The brand title to display.
   final String title;
+
+  /// The maximum number of lines for the text.
   final int maxLines;
+
+  /// The alignment of the text.
   final TextAlign? textAlign;
+
+  /// The size of the brand text, as defined by [TextSizes].
   final TextSizes brandTextSize;
 
   @override

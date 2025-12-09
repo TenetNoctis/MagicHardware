@@ -8,14 +8,19 @@ import 'package:magic_hardware/common/widgets/loaders/animation_loader.dart';
 import 'package:magic_hardware/features/shop/controllers/product/favorites_controller.dart';
 import 'package:magic_hardware/features/shop/controllers/product/product_controller.dart';
 import 'package:magic_hardware/features/shop/screens/all_products/all_products.dart';
-import 'package:magic_hardware/features/shop/screens/home/home.dart';
 import 'package:magic_hardware/utils/constants/image_strings.dart';
 import 'package:magic_hardware/utils/constants/sizes.dart';
 import 'package:magic_hardware/utils/helpers/cloud_helper_functions.dart';
 
 import '../../../../common/widgets/products/product_cards/product_card_vertical.dart';
+import '../../../../navigation_menu.dart';
 
+/// A screen that displays the user's wishlist of favorite products.
+///
+/// This screen shows a grid of products that the user has marked as favorites.
+/// If the wishlist is empty, it displays a message with a button to explore products.
 class WishlistScreen extends StatelessWidget {
+  /// Creates a [WishlistScreen].
   const WishlistScreen({super.key});
 
   @override
@@ -31,8 +36,10 @@ class WishlistScreen extends StatelessWidget {
           MagicCircularIcon(
             backgroundColor: Colors.transparent,
             icon: Iconsax.add,
-            onPressed: () =>
-                Get.to(NavigationBar(destinations: [HomeScreen()])),
+            onPressed: () {
+              final navController = Get.find<NavigationController>();
+              navController.selectedIndex.value = 0;
+            },
           ),
         ],
       ),

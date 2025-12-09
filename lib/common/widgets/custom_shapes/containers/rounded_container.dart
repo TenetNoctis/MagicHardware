@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
 
+/// A rounded container widget with customizable properties.
 class MagicRoundedContainer extends StatelessWidget {
+  /// Creates a rounded container.
   const MagicRoundedContainer({
     super.key,
     this.child,
@@ -17,14 +19,31 @@ class MagicRoundedContainer extends StatelessWidget {
     this.borderColor = MagicColors.borderPrimary,
   });
 
+  /// The width of the container.
   final double? width;
+
+  /// The height of the container.
   final double? height;
+
+  /// The border radius of the container.
   final double radius;
+
+  /// The child widget to display inside the container.
   final Widget? child;
+
+  /// Whether to show a border around the container.
   final bool showBorder;
+
+  /// The color of the border.
   final Color borderColor;
+
+  /// The background color of the container.
   final Color backgroundColor;
+
+  /// The padding of the container.
   final EdgeInsetsGeometry? padding;
+
+  /// The margin of the container.
   final EdgeInsetsGeometry? margin;
 
   @override

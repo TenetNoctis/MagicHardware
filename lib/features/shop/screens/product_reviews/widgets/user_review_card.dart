@@ -7,7 +7,10 @@ import 'package:magic_hardware/utils/constants/sizes.dart';
 import 'package:magic_hardware/utils/helpers/helper_functions.dart';
 import 'package:readmore/readmore.dart';
 
+/// A card that displays a user review, including the user's name, avatar,
+/// rating, review text, and the company's reply.
 class UserReviewCard extends StatelessWidget {
+  /// Creates a [UserReviewCard].
   const UserReviewCard({super.key});
 
   @override
